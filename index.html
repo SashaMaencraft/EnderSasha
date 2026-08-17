@@ -335,6 +335,25 @@
             gap: 4px;
         }
 
+        /* ===== НОВЫЙ СТИЛЬ ДЛЯ СЕМЕЙНОГО СТАТУСА ===== */
+        .status-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(255, 107, 107, 0.08);
+            padding: 0.15rem 0.9rem;
+            border-radius: 40px;
+            font-size: clamp(0.7rem, 1.3vw, 0.8rem);
+            color: #ff9a9e;
+            border: 1px solid rgba(255, 107, 107, 0.15);
+            white-space: nowrap;
+        }
+
+        .status-item i {
+            color: #ff6b6b;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+        }
+
         .grid-2col {
             display: grid;
             grid-template-columns: 1fr;
@@ -503,7 +522,7 @@
             transform: scale(0.95);
         }
 
-        /* ===== НОВЫЕ КНОПКИ МАРКЕТПЛЕЙСОВ ===== */
+        /* ===== КНОПКИ МАРКЕТПЛЕЙСОВ ===== */
         .marketplace-grid {
             display: flex;
             flex-wrap: wrap;
@@ -611,7 +630,6 @@
             border: 1px solid rgba(0, 212, 255, 0.1);
         }
 
-        /* Стили для разных маркетплейсов */
         .market-btn.wb i { color: #9b59b6; }
         .market-btn.wb:hover { border-color: #9b59b6; background: rgba(155, 89, 182, 0.1); }
 
@@ -2209,6 +2227,7 @@
         body.light .market-btn:hover { color: #1a1f2e; }
         body.light .market-btn .tooltip { background: rgba(255, 255, 255, 0.95); color: #1a1f2e; border-color: rgba(0,0,0,0.1); }
         body.light .market-btn .tooltip::after { border-top-color: rgba(255, 255, 255, 0.95); }
+        body.light .status-item { background: rgba(255, 107, 107, 0.06); color: #d06060; border-color: rgba(255, 107, 107, 0.15); }
         body.light .donate-container .bio { color: #3a4a5e; }
         body.light .donate-container .stat-label { color: #5a6a7a; }
         body.light .donate-container .platform-name p { color: #4a5a6a; }
@@ -2393,8 +2412,12 @@
                             <span>EnderSasha ютюбер/Разработчик · блогер</span>
                             <span class="badge"><i class="fas fa-bolt"></i> NEON</span>
                         </div>
-                        <div class="tagline" style="margin-top: 0.2rem; font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: #6a7fa0;">
-                            <i class="fas fa-map-pin"></i> Россия · 23 года
+                        <div class="tagline" style="margin-top: 0.2rem; font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: #6a7fa0; flex-wrap: wrap; gap: 0.4rem 0.8rem;">
+                            <span><i class="fas fa-map-pin"></i> Россия · 23 года</span>
+                            <!-- ===== НОВЫЙ ПУНКТ: СЕМЕЙНОЕ ПОЛОЖЕНИЕ ===== -->
+                            <span class="status-item">
+                                <i class="fas fa-heart"></i> Не женат, детей не имеет
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -2423,14 +2446,14 @@
                             <li><i class="fas fa-gamepad"></i> Топ-50 игроков <strong>tube-based II</strong> (RU)</li>
                         </ul>
 
-                        <!-- ===== НОВЫЕ КНОПКИ МАРКЕТПЛЕЙСОВ ===== -->
+                        <!-- ===== КНОПКИ МАРКЕТПЛЕЙСОВ ===== -->
                         <div class="marketplace-grid">
                             <div class="market-btn wb">
                                 <i class="fas fa-shopping-bag"></i> Wildberries
                                 <span class="badge-mp">WB</span>
                                 <span class="tooltip">
-                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году я ущол с этого маркетплейса<br>
-                                    <span class="highlight">И За БПЛА на данный маркетплейс</span>
+                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году уже меньше<br>
+                                    <span class="highlight">За БПЛА на данный маркетплейс</span>
                                 </span>
                             </div>
 
@@ -2438,8 +2461,8 @@
                                 <i class="fas fa-box-open"></i> Ozon
                                 <span class="badge-mp">OZON</span>
                                 <span class="tooltip">
-                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году<br>
-                                    <span class="highlight">заменяет мне Wildberries</span>
+                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году заменяет Wildberries<br>
+                                    <span class="highlight">За БПЛА на данный маркетплейс</span>
                                 </span>
                             </div>
 
@@ -2448,7 +2471,7 @@
                                 <span class="badge-mp">ЯМ</span>
                                 <span class="tooltip">
                                     <i class="fas fa-calendar-alt"></i> Заказываю товары в 2026–2027 и по 2030 году<br>
-                                    <span class="highlight">Заказываю здесь, но не так часто</span>
+                                    <span class="highlight">Заказываю там, но не так часто</span>
                                 </span>
                             </div>
                         </div>
@@ -2509,6 +2532,7 @@
 
             <!-- ===== ВКЛАДКА 2: ДОНАТЫ ===== -->
             <div class="tab-content" id="tab-donate" role="tabpanel">
+                <!-- Содержимое вкладки Донаты (без изменений) -->
                 <div class="donate-container">
                     <div class="header">
                         <div class="avatar" aria-hidden="true">✍️</div>
@@ -2634,6 +2658,7 @@
 
             <!-- ===== ВКЛАДКА 3: ifo ===== -->
             <div class="tab-content" id="tab-ifo" role="tabpanel">
+                <!-- Содержимое вкладки ifo (без изменений) -->
                 <div class="ifo-container">
                     <div class="header-minimal">
                         <div class="logo-line">
@@ -2734,6 +2759,7 @@
 
             <!-- ===== ВКЛАДКА 4: MAX ===== -->
             <div class="tab-content" id="tab-max" role="tabpanel">
+                <!-- Содержимое вкладки MAX (без изменений) -->
                 <div class="max-container">
                     <div class="header">
                         <div class="header-icon">
@@ -3477,6 +3503,7 @@
         console.log('🥚 Пасхалка на аватаре (5 кликов)');
         console.log('📱 Усиленная адаптивная типографика');
         console.log('🛒 Кнопки маркетплейсов с подсказками');
+        console.log('💑 Добавлен статус "Не женат, детей не имеет"');
     </script>
 
 </body>
