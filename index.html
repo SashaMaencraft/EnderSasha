@@ -1,0 +1,3483 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="telegram:channel" content="@EnderSasha">
+    <meta name="telegram:bot" content="@EnderSashabot">
+    <title>EnderSasha · Биография + Донаты + ifo + MAX</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== ГЛОБАЛЬНЫЕ СТИЛИ ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-gradient-start: #0b0d15;
+            --bg-gradient-end: #13161f;
+            --card-bg: rgba(19, 22, 31, 0.92);
+            --text-primary: #eaeef2;
+            --text-secondary: #8899bb;
+            --text-muted: #5a6f8a;
+            --border-light: rgba(0, 255, 255, 0.1);
+            --border-hover: #00d4ff;
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            --tab-bg: rgba(255, 255, 255, 0.04);
+            --tab-active: rgba(0, 212, 255, 0.15);
+            --platform-bg: rgba(255, 255, 255, 0.04);
+            --platform-hover: rgba(0, 212, 255, 0.08);
+            --stats-bg: rgba(255, 255, 255, 0.03);
+            --badge-bg: rgba(255, 255, 255, 0.06);
+            --footer-bg: rgba(255, 255, 255, 0.02);
+            --verified-color: #00d4ff;
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --tg-viewport-height: 100vh;
+            --tg-safe-area-inset-top: env(safe-area-inset-top, 0px);
+            --tg-safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+            --bottom-nav-height: 60px;
+        }
+
+        /* ===== НОВОЕ: ЧАСТИЦЫ ФОН ===== */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.4;
+        }
+
+        body {
+            background: linear-gradient(145deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 16px;
+            padding-top: calc(16px + var(--safe-top));
+            padding-bottom: calc(16px + var(--safe-bottom) + var(--bottom-nav-height));
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            width: 100%;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            min-height: stretch;
+            position: relative;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== ОСНОВНАЯ КАРТОЧКА ===== */
+        .bio-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: clamp(1.5rem, 5vw, 3rem);
+            padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2.2rem) clamp(1rem, 2.5vw, 1.8rem);
+            box-shadow: 0 30px 60px var(--shadow-color), 0 0 0 1px var(--border-light);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bio-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 60%);
+            animation: pulseGradient 8s ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes pulseGradient {
+            0% { transform: translate(0%, 0%) scale(1); opacity: 0.3; }
+            100% { transform: translate(10%, -10%) scale(1.2); opacity: 0.6; }
+        }
+
+        .bio-card > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== НАВИГАЦИЯ (ТАБЫ) ===== */
+        .tabs-nav {
+            display: flex;
+            gap: 4px;
+            margin-bottom: clamp(16px, 4vw, 28px);
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 60px;
+            padding: 4px;
+            border: 1px solid var(--border-light);
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            width: 100%;
+        }
+
+        .tabs-nav::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+
+        .tab-btn {
+            flex: 1 0 auto;
+            min-width: 70px;
+            min-height: 44px;
+            padding: clamp(8px, 2vw, 12px) clamp(8px, 1.5vw, 16px);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: clamp(11px, 1.8vw, 14px);
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+
+        .tab-btn i {
+            font-size: clamp(12px, 1.8vw, 15px);
+        }
+
+        .tab-btn:active {
+            transform: scale(0.95);
+        }
+
+        .tab-btn.active {
+            background: var(--tab-active);
+            color: #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        /* ===== BOTTOM NAVIGATION BAR ===== */
+        .bottom-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-light);
+            padding: 6px 8px;
+            padding-bottom: calc(6px + var(--safe-bottom));
+            z-index: 999;
+            justify-content: space-around;
+            align-items: center;
+            height: var(--bottom-nav-height);
+        }
+
+        .bottom-nav .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: clamp(8px, 1.2vw, 10px);
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            padding: 4px 8px;
+            min-height: 44px;
+            min-width: 44px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            touch-action: manipulation;
+            flex: 1;
+        }
+
+        .bottom-nav .nav-item i {
+            font-size: clamp(18px, 3vw, 22px);
+        }
+
+        .bottom-nav .nav-item.active {
+            color: #00d4ff;
+            background: var(--tab-active);
+        }
+
+        .bottom-nav .nav-item:active {
+            transform: scale(0.9);
+        }
+
+        @media (max-width: 768px) {
+            .bottom-nav {
+                display: flex;
+            }
+            body {
+                padding-bottom: calc(16px + var(--safe-bottom) + var(--bottom-nav-height) + 10px);
+            }
+        }
+
+        /* ===== КОНТЕНТ ВКЛАДОК ===== */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+            width: 100%;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== СТИЛИ ДЛЯ ВКЛАДКИ "БИОГРАФИЯ" ===== */
+        .header-bio {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: clamp(1rem, 3vw, 2rem);
+            margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+            border-bottom: 1px dashed var(--border-light);
+            padding-bottom: clamp(1rem, 3vw, 2rem);
+        }
+
+        .avatar {
+            width: clamp(80px, 18vw, 120px);
+            height: clamp(80px, 18vw, 120px);
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            color: #0b0d15;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            flex-shrink: 0;
+            user-select: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .avatar:active {
+            transform: scale(0.95);
+        }
+
+        .title-group h1 {
+            font-size: clamp(2rem, 6vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to right, #b7f0ff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            word-break: break-word;
+        }
+
+        .title-group .tagline {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.3rem;
+        }
+
+        .title-group .tagline i {
+            color: #00d4ff;
+        }
+
+        .badge {
+            background: rgba(0, 212, 255, 0.12);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+            font-weight: 600;
+            color: #9bdaff;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(1.2rem, 3vw, 2.5rem);
+            margin: clamp(1.5rem, 3vw, 2.5rem) 0;
+        }
+
+        @media (min-width: 768px) {
+            .grid-2col {
+                grid-template-columns: 1.2fr 0.8fr;
+            }
+        }
+
+        .info-block {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border-radius: clamp(1.2rem, 3vw, 2rem);
+            padding: clamp(1rem, 2.5vw, 1.8rem) clamp(1rem, 2.5vw, 2rem);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+        }
+
+        .block-title {
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #7b8aa8;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 0.7rem;
+        }
+
+        .block-title i {
+            color: #00d4ff;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            width: 1.8rem;
+        }
+
+        .bio-text p {
+            margin-bottom: 1rem;
+            color: #cfdbe9;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            line-height: 1.6;
+        }
+
+        .bio-text strong {
+            color: #b7e4ff;
+            font-weight: 600;
+        }
+
+        .highlight-list {
+            list-style: none;
+            margin-top: 1.2rem;
+        }
+
+        .highlight-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 0.9rem;
+            color: #cbd7e8;
+            font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+        }
+
+        .highlight-list li i {
+            color: #00d4ff;
+            width: 1.6rem;
+            font-size: clamp(1rem, 1.6vw, 1.1rem);
+            margin-top: 2px;
+        }
+
+        .timeline-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.08);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+            white-space: nowrap;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .timeline-desc {
+            color: #cbd7e8;
+            font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+            flex: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        @media (max-width: 400px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+            font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+            color: #b3c7e0;
+        }
+
+        .stat-item span:first-child {
+            font-weight: 300;
+            color: #7b8aa8;
+            font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+        }
+
+        .stat-item strong {
+            color: #d6e6ff;
+            font-weight: 600;
+        }
+
+        .social-links-bio {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.2rem;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            color: #b3c7e0;
+            text-decoration: none;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.2s;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .social-btn i {
+            font-size: clamp(1rem, 1.6vw, 1.1rem);
+            color: #00d4ff;
+        }
+
+        .social-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== НОВЫЕ КНОПКИ МАРКЕТПЛЕЙСОВ ===== */
+        .marketplace-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 1.2rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .market-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 0.5rem 1.2rem;
+            border-radius: 60px;
+            color: #b3c7e0;
+            text-decoration: none;
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            min-height: 44px;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .market-btn i {
+            font-size: clamp(1rem, 1.5vw, 1.1rem);
+            color: #00d4ff;
+        }
+
+        .market-btn:active {
+            transform: scale(0.95);
+        }
+
+        .market-btn:hover {
+            background: rgba(0, 212, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .market-btn .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            width: 260px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--text-primary);
+            text-align: center;
+            padding: 10px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 8px 30px var(--shadow-color);
+            position: absolute;
+            z-index: 10;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            font-weight: 400;
+            font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+            line-height: 1.5;
+            pointer-events: none;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .market-btn .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--card-bg);
+        }
+
+        .market-btn:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .market-btn .tooltip i {
+            color: #fbbf24;
+            margin-right: 4px;
+        }
+
+        .market-btn .tooltip .highlight {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .market-btn .badge-mp {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 0.1rem 0.6rem;
+            border-radius: 30px;
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            color: #9bdaff;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        /* Стили для разных маркетплейсов */
+        .market-btn.wb i { color: #9b59b6; }
+        .market-btn.wb:hover { border-color: #9b59b6; background: rgba(155, 89, 182, 0.1); }
+
+        .market-btn.ozon i { color: #3498db; }
+        .market-btn.ozon:hover { border-color: #3498db; background: rgba(52, 152, 219, 0.1); }
+
+        .market-btn.ym i { color: #f1c40f; }
+        .market-btn.ym:hover { border-color: #f1c40f; background: rgba(241, 196, 15, 0.1); }
+
+        /* ===== ОСТАЛЬНЫЕ СТИЛИ (без изменений) ===== */
+        .footer-note {
+            margin-top: clamp(1.5rem, 4vw, 2.8rem);
+            text-align: center;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+            color: #3d4b66;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: clamp(1rem, 2.5vw, 1.8rem);
+            letter-spacing: 0.3px;
+            line-height: 1.8;
+        }
+
+        .footer-note i {
+            color: #00d4ff;
+        }
+
+        /* ===== СТИЛИ ДЛЯ ВКЛАДКИ "ДОНАТЫ" ===== */
+        .donate-container {
+            padding: 4px 0;
+            width: 100%;
+        }
+
+        .donate-container .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .donate-container .avatar {
+            width: clamp(70px, 15vw, 90px);
+            height: clamp(70px, 15vw, 90px);
+            background: linear-gradient(135deg, #f97316, #fb923c);
+            border-radius: clamp(20px, 5vw, 32px);
+            font-size: clamp(32px, 6vw, 42px);
+            margin: 0 auto 16px;
+            box-shadow: 0 15px 25px -8px #f97316;
+            cursor: default;
+        }
+
+        .donate-container h1 {
+            font-size: clamp(22px, 5vw, 28px);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .donate-container .bio {
+            color: var(--text-secondary);
+            font-size: clamp(13px, 2vw, 15px);
+            max-width: 400px;
+            margin: 0 auto 20px;
+        }
+
+        .donate-container .stats {
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 2vw, 16px);
+            margin-bottom: 24px;
+            padding: clamp(10px, 2vw, 16px) clamp(8px, 1.5vw, 12px);
+            background: var(--stats-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-radius: 50px;
+            border: 1px solid var(--border-light);
+            flex-wrap: wrap;
+        }
+
+        .donate-container .stat-item {
+            text-align: center;
+            min-width: 60px;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .donate-container .stat-value {
+            font-weight: 700;
+            font-size: clamp(16px, 3vw, 20px);
+            color: var(--text-primary);
+        }
+
+        .donate-container .stat-label {
+            color: var(--text-secondary);
+            font-size: clamp(10px, 1.5vw, 12px);
+        }
+
+        .donate-container .section-title {
+            font-size: clamp(16px, 2.5vw, 18px);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .donate-container .platform-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .donate-container .platform-card {
+            background: var(--platform-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid var(--border-light);
+            border-radius: clamp(16px, 3vw, 24px);
+            padding: clamp(12px, 2vw, 16px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            min-height: 60px;
+            touch-action: manipulation;
+        }
+
+        .donate-container .platform-card:active {
+            transform: scale(0.98);
+        }
+
+        .donate-container .platform-info {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 2vw, 14px);
+            flex: 1;
+            min-width: 0;
+        }
+
+        .donate-container .platform-icon {
+            width: clamp(36px, 8vw, 48px);
+            height: clamp(36px, 8vw, 48px);
+            background: var(--badge-bg);
+            border-radius: clamp(12px, 2.5vw, 18px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(18px, 4vw, 24px);
+            border: 1px solid var(--border-light);
+            flex-shrink: 0;
+        }
+
+        .donate-container .platform-name h3 {
+            font-size: clamp(14px, 2.5vw, 18px);
+            font-weight: 600;
+            margin-bottom: 2px;
+            color: var(--text-primary);
+        }
+
+        .donate-container .platform-name p {
+            color: var(--text-secondary);
+            font-size: clamp(11px, 1.5vw, 13px);
+            line-height: 1.3;
+        }
+
+        .donate-container .arrow {
+            color: var(--text-muted);
+            font-size: clamp(18px, 3vw, 22px);
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+
+        .donate-container .divider {
+            text-align: center;
+            margin: 16px 0;
+            color: var(--text-muted);
+            font-size: clamp(12px, 1.5vw, 14px);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .donate-container .divider::before,
+        .donate-container .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-light);
+        }
+
+        .donate-container .social-links {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .donate-container .social-link {
+            background: var(--badge-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: clamp(6px, 1.5vw, 8px) clamp(12px, 2vw, 18px);
+            border-radius: 40px;
+            font-size: clamp(12px, 1.5vw, 14px);
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            min-height: 40px;
+            touch-action: manipulation;
+        }
+
+        .donate-container .social-link:active {
+            transform: scale(0.95);
+        }
+
+        .donate-container .glass-footer {
+            margin-top: 24px;
+            padding: clamp(14px, 2.5vw, 20px) clamp(12px, 2vw, 16px);
+            background: var(--footer-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: clamp(20px, 4vw, 28px);
+            border: 1px solid var(--border-light);
+            font-size: clamp(11px, 1.5vw, 13px);
+            color: var(--text-secondary);
+        }
+
+        .donate-container .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .donate-container .footer-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 50px;
+            font-size: clamp(11px, 1.3vw, 13px);
+        }
+
+        .donate-container .footer-value {
+            color: var(--text-primary);
+            background: var(--badge-bg);
+            padding: 4px 10px;
+            border-radius: 40px;
+            border: 1px solid var(--border-light);
+            font-family: monospace;
+            word-break: break-all;
+            font-size: clamp(10px, 1.2vw, 12px);
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .donate-container .footer-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #f97316, transparent);
+            margin: 14px 0;
+        }
+
+        .donate-container .footer-links {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .donate-container .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: clamp(10px, 1.2vw, 12px);
+            transition: 0.2s;
+            padding: 6px 12px;
+            border-radius: 40px;
+            background: var(--badge-bg);
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            min-height: 36px;
+            touch-action: manipulation;
+        }
+
+        .donate-container .footer-links a:active {
+            transform: scale(0.95);
+        }
+
+        .donate-container .footer-email {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: var(--badge-bg);
+            padding: 6px 14px;
+            border-radius: 40px;
+            width: fit-content;
+            margin: 10px auto 0;
+            border: 1px solid var(--border-light);
+            font-size: clamp(10px, 1.2vw, 12px);
+        }
+
+        .donate-container .footer-email a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .donate-container .copyright {
+            text-align: center;
+            margin-top: 10px;
+            color: var(--text-muted);
+            font-size: clamp(10px, 1.2vw, 11px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .donate-container .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: help;
+        }
+
+        .donate-container .verified-icon {
+            color: var(--verified-color);
+            font-size: clamp(12px, 1.8vw, 14px);
+            filter: drop-shadow(0 2px 4px rgba(0, 212, 255, 0.3));
+        }
+
+        .donate-container .verified-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 5px 15px var(--shadow-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .donate-container .verified-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--card-bg) transparent transparent transparent;
+        }
+
+        .donate-container .verified-badge:hover .verified-tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: calc(100% + 8px);
+        }
+
+        /* ===== СТИЛИ ДЛЯ ВКЛАДКИ "ifo" ===== */
+        .ifo-container {
+            padding: 4px 0;
+            width: 100%;
+        }
+
+        .ifo-container .header-minimal {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .ifo-container .logo-min {
+            font-size: clamp(2rem, 7vw, 3.8rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, #b0d4ff, #6a9fff, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .ifo-container .descriptor {
+            font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+            font-weight: 400;
+            color: #9abfff;
+            background: rgba(20, 50, 100, 0.3);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            border: 0.5px solid rgba(80, 180, 255, 0.15);
+        }
+
+        .ifo-container .status-micro {
+            padding: 0.5rem 1.2rem;
+            background: rgba(10, 30, 70, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 60px;
+            display: inline-block;
+            font-weight: 400;
+            color: #b0d0ff;
+            border: 0.5px solid rgba(80, 180, 255, 0.1);
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            letter-spacing: 0.3px;
+            margin-bottom: 1.2rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .ifo-container .section-title {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: #b8d6ff;
+            margin: clamp(1.2rem, 3vw, 2rem) 0 clamp(0.8rem, 2vw, 1.2rem) 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(60, 140, 220, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .ifo-container .grid-links {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @media (min-width: 480px) {
+            .ifo-container .grid-links {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        .ifo-container .glass-tile {
+            background: rgba(8, 16, 40, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(60, 160, 255, 0.15);
+            border-radius: clamp(20px, 3vw, 28px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(120, 200, 255, 0.04);
+            will-change: transform, box-shadow, border-color;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ifo-container .glass-tile:active {
+            transform: scale(0.98);
+        }
+
+        .ifo-container .glass-tile.important { border-left: 3px solid #ff4d7a; background: rgba(40, 8, 22, 0.55); }
+        .ifo-container .glass-tile.important:hover { border-color: #ff7b9f; background: rgba(60, 12, 32, 0.8); }
+        .ifo-container .glass-tile.primary { border-left: 3px solid #2f7be0; background: rgba(8, 24, 55, 0.5); }
+        .ifo-container .glass-tile.primary:hover { border-color: #5b9aff; background: rgba(16, 40, 80, 0.75); }
+        .ifo-container .glass-tile.secondary { border-left: 3px solid #4f7fbb; background: rgba(6, 16, 40, 0.45); }
+        .ifo-container .glass-tile.secondary:hover { border-color: #7aa9f0; background: rgba(14, 30, 65, 0.7); }
+
+        .ifo-container .link-card {
+            display: flex;
+            flex-direction: column;
+            padding: clamp(1rem, 2vw, 1.4rem) clamp(1rem, 2vw, 1.6rem) clamp(0.8rem, 1.5vw, 1.2rem) clamp(1rem, 2vw, 1.6rem);
+            text-decoration: none;
+            color: inherit;
+            word-break: break-word;
+            cursor: pointer;
+            border-radius: 28px;
+            min-height: 80px;
+            touch-action: manipulation;
+        }
+
+        .ifo-container .link-title {
+            font-weight: 650;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.2rem;
+            color: #f0f8ff;
+            gap: 8px;
+        }
+
+        .ifo-container .badge-light {
+            background: rgba(60, 160, 255, 0.08);
+            border: 0.5px solid rgba(80, 180, 255, 0.15);
+            border-radius: 40px;
+            padding: 0.1rem 0.6rem;
+            font-size: clamp(0.55rem, 1vw, 0.65rem);
+            font-weight: 400;
+            color: #b0d4ff;
+            white-space: nowrap;
+        }
+
+        .ifo-container .link-meta {
+            font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+            color: #7aa0cf;
+            margin-bottom: 0.4rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            border-bottom: 1px dashed rgba(60, 140, 220, 0.12);
+            padding-bottom: 0.4rem;
+            word-break: break-all;
+        }
+
+        .ifo-container .link-desc {
+            font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+            color: #c0daf5;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ifo-container .minitag {
+            background: rgba(60, 140, 220, 0.06);
+            border-radius: 40px;
+            padding: 0.1rem 0.6rem;
+            font-size: clamp(0.55rem, 1vw, 0.65rem);
+            font-weight: 500;
+            color: #b0d0f0;
+            border: 0.5px solid rgba(80, 180, 255, 0.1);
+        }
+
+        .ifo-container .search-section {
+            margin: 1rem 0 1.5rem 0;
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            align-items: center;
+            width: 100%;
+        }
+
+        .ifo-container .search-input {
+            flex: 1;
+            min-width: 150px;
+            padding: clamp(0.7rem, 1.5vw, 0.9rem) clamp(1rem, 2vw, 1.4rem);
+            border-radius: 60px;
+            border: 0.5px solid rgba(60, 160, 255, 0.15);
+            background: rgba(0, 0, 0, 0.3);
+            color: #e0f0ff;
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+            font-family: inherit;
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            min-height: 44px;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+        }
+
+        .ifo-container .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.08);
+        }
+
+        .ifo-container .search-input::placeholder { color: #5f7faf; }
+
+        .ifo-container .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(1rem, 2vw, 1.6rem);
+            border-radius: 60px;
+            border: 0.5px solid rgba(60, 160, 255, 0.15);
+            background: rgba(8, 16, 40, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #c0daf5;
+            font-size: clamp(0.75rem, 1.3vw, 0.9rem);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family: inherit;
+            white-space: nowrap;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .ifo-container .action-btn:active {
+            transform: scale(0.95);
+        }
+
+        .ifo-container .action-btn .icon { font-size: clamp(1rem, 1.8vw, 1.2rem); }
+
+        .ifo-container .bottom-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            justify-content: center;
+            margin: 1.5rem 0 1rem 0;
+            padding: clamp(0.8rem, 1.5vw, 1.2rem);
+            background: rgba(8, 16, 40, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: clamp(30px, 5vw, 60px);
+            border: 0.5px solid rgba(60, 160, 255, 0.08);
+        }
+
+        .ifo-container .bottom-actions .action-btn {
+            padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.8rem, 1.5vw, 1.4rem);
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+        }
+
+        .ifo-container .theme-toggle {
+            background: none;
+            border: 0.5px solid rgba(80, 180, 255, 0.15);
+            border-radius: 40px;
+            padding: 0.3rem 1rem;
+            color: #b0d4ff;
+            cursor: pointer;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            font-family: inherit;
+            min-height: 36px;
+            touch-action: manipulation;
+        }
+
+        .ifo-container .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .ifo-container .footer-min {
+            margin-top: clamp(1.5rem, 3vw, 2.5rem);
+            padding: clamp(1.2rem, 2vw, 2rem) clamp(1rem, 2vw, 2rem) clamp(1rem, 1.8vw, 1.8rem);
+            background: rgba(4, 10, 30, 0.6);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-top: 0.5px solid rgba(60, 140, 220, 0.12);
+            border-radius: clamp(28px, 5vw, 48px) clamp(28px, 5vw, 48px) clamp(20px, 4vw, 32px) clamp(20px, 4vw, 32px);
+            box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .ifo-container .footer-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .ifo-container .ip-block .ip-name {
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+            color: #d0e8ff;
+            letter-spacing: -0.3px;
+        }
+
+        .ifo-container .ip-block .ip-desc {
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            color: #8fb0da;
+            margin: 0.2rem 0 0.6rem 0;
+            border-left: 2px solid #3b82f6;
+            padding-left: 0.8rem;
+        }
+
+        .ifo-container .legal-numbers {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.5rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+            color: #6f8fbf;
+        }
+
+        .ifo-container .legal-numbers span { display: block; font-weight: 500; color: #a0c0f0; font-size: clamp(0.55rem, 1vw, 0.7rem); opacity: 0.8; }
+
+        .ifo-container .footer-end {
+            text-align: right;
+            color: #7f9fc9;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+        }
+
+        .ifo-container .footer-end strong { color: #b0d4ff; font-weight: 600; }
+
+        .ifo-container .action-links {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: flex-end;
+            margin-top: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .ifo-container .action-links a {
+            color: #7dabee;
+            text-decoration: none;
+            font-size: clamp(0.65rem, 1vw, 0.8rem);
+            border-bottom: 1px solid transparent;
+            cursor: pointer;
+            transition: 0.2s;
+            padding: 4px 0;
+            touch-action: manipulation;
+        }
+
+        .ifo-container .action-links a:active {
+            transform: scale(0.95);
+        }
+
+        .ifo-container hr {
+            border: none;
+            border-top: 0.5px solid rgba(60, 140, 220, 0.1);
+            margin: 1.2rem 0 0.6rem;
+        }
+
+        .ifo-container .search-result-item {
+            padding: 0.6rem 0.8rem;
+            margin: 0.4rem 0;
+            background: rgba(60, 140, 220, 0.06);
+            border-radius: 12px;
+            border-left: 2px solid #3b82f6;
+            cursor: pointer;
+            transition: 0.2s;
+            touch-action: manipulation;
+        }
+
+        .ifo-container .search-result-item:active {
+            transform: scale(0.98);
+        }
+
+        .ifo-container .search-result-item .s-title {
+            font-weight: 600;
+            color: #b0d4ff;
+            font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+        }
+
+        .ifo-container .search-result-item .s-desc {
+            font-size: clamp(0.7rem, 1.1vw, 0.8rem);
+            color: #8fb0da;
+        }
+
+        /* ===== СТИЛИ ДЛЯ ВКЛАДКИ "MAX" ===== */
+        .max-container {
+            padding: 4px 0;
+            width: 100%;
+        }
+
+        .max-container .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px solid #2a313a;
+            flex-wrap: wrap;
+        }
+
+        .max-container .header-icon {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            background: #1f272f;
+            width: clamp(44px, 10vw, 58px);
+            height: clamp(44px, 10vw, 58px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: clamp(14px, 3vw, 20px);
+            color: #ffb347;
+            flex-shrink: 0;
+        }
+
+        .max-container .header-text h1 {
+            font-weight: 700;
+            font-size: clamp(1.4rem, 4vw, 2.2rem);
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff 0%, #c0ccd9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .max-container .header-text .badge {
+            background: #232b33;
+            display: inline-block;
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+            font-weight: 500;
+            color: #a0b3c9;
+            border: 1px solid #31465c;
+            margin-top: 4px;
+        }
+
+        .max-container .max-logo {
+            background: linear-gradient(145deg, #1e2937, #0f1720);
+            border: 1px solid #3e556b;
+            border-radius: 40px;
+            padding: 0.3rem 1rem 0.3rem 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .max-container .max-logo .max-text {
+            font-weight: 800;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ffb347, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .max-container .max-logo .max-sub {
+            font-size: clamp(0.5rem, 1vw, 0.7rem);
+            color: #a5bfdd;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+            border-left: 1px solid #3e556b;
+            padding-left: 6px;
+        }
+
+        .max-container .last-updated {
+            text-align: right;
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            color: #4b5a6b;
+            margin-top: -5px;
+            margin-bottom: 15px;
+        }
+
+        .max-container h2 {
+            font-weight: 600;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            margin: 1.5rem 0 1rem 0;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ffffff;
+        }
+
+        .max-container h2 i {
+            color: #f59f3c;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+        }
+
+        .max-container h3 {
+            font-weight: 600;
+            font-size: clamp(1rem, 2.2vw, 1.25rem);
+            margin: 1.2rem 0 0.6rem 0;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .max-container p {
+            font-size: clamp(0.85rem, 1.4vw, 1rem);
+            line-height: 1.6;
+            color: #cfdbe9;
+            margin-bottom: 0.8rem;
+        }
+
+        .max-container .alert-box {
+            background: #1e1a1c;
+            border-left: 6px solid #f97316;
+            padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.5rem) clamp(0.8rem, 1.5vw, 1rem) clamp(1rem, 2vw, 1.5rem);
+            border-radius: clamp(16px, 3vw, 24px);
+            margin: 1.5rem 0 1.2rem 0;
+        }
+
+        .max-container .alert-box ul {
+            margin-left: 1rem;
+            list-style-type: disc;
+            color: #d4e0f0;
+            font-size: clamp(0.8rem, 1.3vw, 0.95rem);
+        }
+
+        .max-container .alert-box ul li {
+            margin-bottom: 4px;
+        }
+
+        .max-container .warning-title {
+            color: #f9a15c;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .max-container .warning-title i {
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+        }
+
+        .max-container .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin: 1.2rem 0 1rem 0;
+        }
+
+        .max-container .channel-item {
+            background: #1d252d;
+            padding: clamp(0.8rem, 1.5vw, 1rem) 0.6rem;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 6px;
+            border: 1px solid #2e3b48;
+            transition: all 0.15s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            min-height: 80px;
+            touch-action: manipulation;
+        }
+
+        .max-container .channel-item:active {
+            transform: scale(0.95);
+        }
+
+        .max-container .channel-item i {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+        }
+
+        .max-container .channel-item span {
+            font-weight: 600;
+            font-size: clamp(0.85rem, 1.4vw, 1rem);
+        }
+
+        .max-container .channel-item small {
+            font-size: clamp(0.6rem, 1vw, 0.75rem);
+            color: #9aaebf;
+        }
+
+        .max-container .tg { color: #2e96d8; }
+        .max-container .vk { color: #4c75a3; }
+
+        .max-container .bots-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin: 1.2rem 0 1rem 0;
+        }
+
+        @media (min-width: 480px) {
+            .max-container .bots-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+
+        .max-container .bot-item {
+            background: #1a2532;
+            padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(0.8rem, 1.5vw, 1rem);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #3a4e68;
+            transition: all 0.15s;
+            text-decoration: none;
+            color: inherit;
+            min-height: 60px;
+            touch-action: manipulation;
+        }
+
+        .max-container .bot-item:active {
+            transform: scale(0.98);
+        }
+
+        .max-container .bot-icon {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            color: #2e96d8;
+            background: #0f1a24;
+            width: clamp(40px, 8vw, 50px);
+            height: clamp(40px, 8vw, 50px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            flex-shrink: 0;
+        }
+
+        .max-container .bot-info h4 {
+            font-weight: 600;
+            font-size: clamp(0.85rem, 1.4vw, 1rem);
+            margin-bottom: 2px;
+            color: white;
+        }
+
+        .max-container .bot-info p {
+            font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+            color: #9bb5d4;
+            margin-bottom: 0;
+        }
+
+        .max-container .new-points,
+        .max-container .max-warning-points {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin: 1.2rem 0;
+        }
+
+        @media (min-width: 480px) {
+            .max-container .new-points,
+            .max-container .max-warning-points {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .max-container .point-card {
+            background: #1b2530;
+            border-radius: 16px;
+            padding: clamp(1rem, 2vw, 1.3rem) clamp(0.8rem, 1.5vw, 1.2rem);
+            border: 1px solid #314d6b;
+        }
+
+        .max-container .point-card i {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            color: #f9a15c;
+            margin-bottom: 8px;
+        }
+
+        .max-container .point-card h4 {
+            font-weight: 600;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            margin-bottom: 6px;
+            color: white;
+        }
+
+        .max-container .point-card p {
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            color: #b0c4de;
+            margin-bottom: 0;
+        }
+
+        .max-container .max-warning-card {
+            background: #2d1f2a;
+            border-radius: 16px;
+            padding: clamp(1rem, 2vw, 1.3rem) clamp(0.8rem, 1.5vw, 1.2rem);
+            border: 1px solid #a13a3a;
+            border-left: 4px solid #f97316;
+        }
+
+        .max-container .max-warning-card i {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            color: #ff7e5f;
+            margin-bottom: 8px;
+        }
+
+        .max-container .max-warning-card h4 {
+            font-weight: 600;
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            margin-bottom: 6px;
+            color: #ffb347;
+        }
+
+        .max-container .max-warning-card p {
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            color: #e0c8b0;
+            margin-bottom: 0;
+        }
+
+        .max-container .exposure-list {
+            background: #1a1f26;
+            border-radius: clamp(16px, 3vw, 24px);
+            padding: clamp(0.8rem, 1.5vw, 1.5rem);
+            margin: 1.2rem 0;
+            border: 1px solid #4a3a3a;
+            overflow-x: auto;
+        }
+
+        .max-container .exposure-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            padding: clamp(0.6rem, 1.2vw, 1rem);
+            border-bottom: 1px solid #2e3b48;
+        }
+
+        .max-container .exposure-item:last-child {
+            border-bottom: none;
+        }
+
+        .max-container .exposure-item i {
+            color: #f97316;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            flex-shrink: 0;
+        }
+
+        .max-container .exposure-content {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .max-container .exposure-title {
+            font-weight: 600;
+            color: white;
+            font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+            margin-bottom: 2px;
+        }
+
+        .max-container .exposure-desc {
+            font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+            color: #a0b3c9;
+        }
+
+        .max-container .exposure-link {
+            color: #ff7e5f;
+            text-decoration: none;
+            font-family: monospace;
+            background: #2d1f1f;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-size: clamp(0.65rem, 1vw, 0.8rem);
+            border: 1px solid #a13a3a;
+            word-break: break-all;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (min-width: 480px) {
+            .max-container .exposure-item {
+                flex-direction: row;
+                align-items: center;
+            }
+            .max-container .exposure-link {
+                width: auto;
+                white-space: nowrap;
+            }
+        }
+
+        .max-container .report-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #7c3a3a, #b13e3e);
+            color: white;
+            font-weight: 600;
+            padding: clamp(0.8rem, 1.5vw, 1.2rem);
+            border-radius: 40px;
+            text-decoration: none;
+            border: 1px solid #d45c5c;
+            transition: 0.2s;
+            width: 100%;
+            margin: 1.2rem 0;
+            min-height: 50px;
+            font-size: clamp(0.85rem, 1.3vw, 1rem);
+            touch-action: manipulation;
+        }
+
+        .max-container .report-button:active {
+            transform: scale(0.97);
+        }
+
+        .max-container .faq-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 1.2rem 0;
+        }
+
+        .max-container .faq-item {
+            background: #1d252d;
+            border-radius: 16px;
+            padding: 0;
+            border: 1px solid #2e3b48;
+            transition: 0.2s;
+        }
+
+        .max-container .faq-question {
+            padding: clamp(0.8rem, 1.5vw, 1.2rem) clamp(1rem, 1.5vw, 1.5rem);
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            font-size: clamp(0.85rem, 1.3vw, 1rem);
+            gap: 10px;
+            min-height: 50px;
+            touch-action: manipulation;
+        }
+
+        .max-container .faq-question:active {
+            transform: scale(0.99);
+        }
+
+        .max-container .faq-question i {
+            transition: transform 0.3s ease;
+            color: #ffb347;
+            font-size: clamp(0.8rem, 1.2vw, 1rem);
+            flex-shrink: 0;
+        }
+
+        .max-container .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .max-container .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            background: #161e26;
+            border-radius: 0 0 16px 16px;
+            border-top: 0px solid transparent;
+            color: #b0c4de;
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+            line-height: 1.5;
+        }
+
+        .max-container .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 clamp(1rem, 1.5vw, 1.5rem) clamp(0.8rem, 1.2vw, 1.2rem) clamp(1rem, 1.5vw, 1.5rem);
+            border-top: 1px solid #2e3b48;
+        }
+
+        .max-container .links-block {
+            background: #10161b;
+            border-radius: clamp(16px, 3vw, 24px);
+            padding: clamp(1.2rem, 2vw, 1.8rem) clamp(1rem, 2vw, 1.8rem) clamp(1rem, 1.5vw, 1.5rem) clamp(1rem, 2vw, 1.8rem);
+            margin: 1.5rem 0 1rem 0;
+            border: 1px solid #28323c;
+        }
+
+        .max-container .links-title {
+            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #d5dfe9;
+        }
+
+        .max-container .button-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: stretch;
+        }
+
+        @media (min-width: 480px) {
+            .max-container .button-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+        }
+
+        .max-container .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #202a33;
+            padding: clamp(0.6rem, 1.2vw, 0.8rem) clamp(0.8rem, 1.5vw, 1.3rem);
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+            color: #e0e8f0;
+            text-decoration: none;
+            border: 1px solid #354654;
+            transition: 0.15s;
+            cursor: pointer;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .max-container .button:active {
+            transform: scale(0.97);
+        }
+
+        .max-container .button i {
+            font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+        }
+
+        .max-container .button.bot-button {
+            background: #1a332a;
+            border-color: #2e6b4f;
+        }
+
+        .max-container .button.policy-button {
+            background: #1e3a5f;
+            border-color: #4a7db5;
+            font-weight: 600;
+            margin-top: 0.8rem;
+            width: 100%;
+            justify-content: center;
+            padding: clamp(0.8rem, 1.2vw, 1rem);
+        }
+
+        .max-container .button.copyright-button {
+            background: #7c2a2a;
+            border-color: #c06060;
+            font-weight: 600;
+            margin-top: 0.8rem;
+            width: 100%;
+            justify-content: center;
+            padding: clamp(0.8rem, 1.2vw, 1rem);
+        }
+
+        .max-container .steps {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .max-container .steps li {
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #1b2229;
+            padding: clamp(0.6rem, 1.2vw, 0.8rem) clamp(0.8rem, 1.2vw, 1.2rem);
+            border-radius: 30px;
+            border: 1px solid #2e3945;
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+            color: #cfdbe9;
+        }
+
+        .max-container .steps li i {
+            color: #f9a15c;
+            width: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .max-container .footer-info {
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+            color: #a5b9ce;
+            background: #0f1419;
+            border-radius: 16px;
+            padding: clamp(1rem, 1.5vw, 1.2rem) clamp(1rem, 1.8vw, 1.8rem);
+            margin: 1.5rem 0 1rem 0;
+            border: 1px solid #29323c;
+            line-height: 1.6;
+        }
+
+        .max-container hr {
+            border: none;
+            height: 1px;
+            background: #2a343f;
+            margin: 1.2rem 0;
+        }
+
+        .max-container .rkn-link {
+            margin-top: 8px;
+            font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+        }
+
+        .max-container .rkn-link a {
+            color: #7aaae0;
+            text-decoration: none;
+        }
+
+        .max-container .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 4px;
+            position: relative;
+            cursor: help;
+            flex-shrink: 0;
+        }
+
+        .max-container .verification-badge i {
+            font-size: clamp(1rem, 1.6vw, 1.2rem);
+            color: #3b82f6;
+            filter: drop-shadow(0 0 2px rgba(59, 130, 246, 0.5));
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .max-container .verification-badge .tooltip-text {
+            visibility: hidden;
+            opacity: 0;
+            width: 200px;
+            background: #1e2f3f;
+            color: #ecf3fa;
+            text-align: center;
+            border-radius: 20px;
+            padding: 6px 12px;
+            position: absolute;
+            z-index: 100;
+            bottom: 160%;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: opacity 0.2s ease, visibility 0.2s ease, bottom 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+            border: 1px solid #4f7ab3;
+            font-size: clamp(0.6rem, 1vw, 0.7rem);
+            font-weight: 400;
+            letter-spacing: 0.2px;
+            pointer-events: none;
+            white-space: normal;
+            line-height: 1.3;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            word-break: keep-all;
+        }
+
+        .max-container .verification-badge .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1e2f3f transparent transparent transparent;
+            filter: drop-shadow(0 1px 0 #4f7ab3);
+        }
+
+        .max-container .verification-badge:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            bottom: 170%;
+        }
+
+        .max-container .site-footer {
+            margin-top: 1.5rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #2a343f;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            color: #8da0b5;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+        }
+
+        @media (min-width: 480px) {
+            .max-container .site-footer {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
+        .max-container .footer-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .max-container .footer-contacts a {
+            color: #ffb347;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: clamp(0.7rem, 1.1vw, 0.8rem);
+            min-height: 36px;
+        }
+
+        /* ===== МОДАЛЬНЫЕ ОКНА ===== */
+        .policy-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 12px;
+            padding-top: calc(12px + var(--safe-top));
+            padding-bottom: calc(12px + var(--safe-bottom));
+        }
+
+        .policy-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: clamp(20px, 4vw, 28px);
+            padding: clamp(16px, 3vw, 24px) clamp(14px, 2.5vw, 20px);
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            max-height: -webkit-fill-available;
+            overflow-y: auto;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 30px 60px var(--shadow-color);
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .policy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            gap: 10px;
+        }
+
+        .policy-header h3 {
+            font-size: clamp(18px, 3vw, 22px);
+            color: var(--text-primary);
+        }
+
+        .close-policy {
+            background: none;
+            border: none;
+            font-size: clamp(24px, 4vw, 28px);
+            cursor: pointer;
+            color: var(--text-muted);
+            padding: 4px 8px;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .close-policy:active {
+            transform: scale(0.9);
+        }
+
+        .policy-body {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: clamp(13px, 1.8vw, 14px);
+        }
+
+        .policy-body p {
+            margin-bottom: 12px;
+        }
+
+        .policy-body ul {
+            margin-left: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .policy-body ul li {
+            margin-bottom: 4px;
+        }
+
+        /* ===== СВЕТЛАЯ ТЕМА ===== */
+        body.light {
+            --bg-gradient-start: #e8edf5;
+            --bg-gradient-end: #d0d8e5;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-primary: #1a1f2e;
+            --text-secondary: #4a5a7a;
+            --text-muted: #8a9ab0;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --tab-bg: rgba(0, 0, 0, 0.04);
+            --tab-active: rgba(0, 212, 255, 0.15);
+            --platform-bg: rgba(0, 0, 0, 0.03);
+            --platform-hover: rgba(0, 212, 255, 0.06);
+            --stats-bg: rgba(0, 0, 0, 0.02);
+            --badge-bg: rgba(0, 0, 0, 0.05);
+            --footer-bg: rgba(0, 0, 0, 0.02);
+        }
+
+        body.light .bio-text p { color: #3a4a5e; }
+        body.light .bio-text strong { color: #1a6a9a; }
+        body.light .highlight-list li { color: #3a4a5e; }
+        body.light .timeline-desc { color: #3a4a5e; }
+        body.light .stat-item { color: #3a4a5e; }
+        body.light .stat-item strong { color: #1a2a4a; }
+        body.light .block-title { color: #5a6a7a; }
+        body.light .social-btn { color: #3a4a5e; }
+        body.light .market-btn { color: #3a4a5e; }
+        body.light .market-btn:hover { color: #1a1f2e; }
+        body.light .market-btn .tooltip { background: rgba(255, 255, 255, 0.95); color: #1a1f2e; border-color: rgba(0,0,0,0.1); }
+        body.light .market-btn .tooltip::after { border-top-color: rgba(255, 255, 255, 0.95); }
+        body.light .donate-container .bio { color: #3a4a5e; }
+        body.light .donate-container .stat-label { color: #5a6a7a; }
+        body.light .donate-container .platform-name p { color: #4a5a6a; }
+        body.light .donate-container .footer-email a { color: #3a4a5e; }
+        body.light .donate-container .footer-value { color: #1a1f2e; }
+        body.light .ifo-container .link-meta { color: #5a7a9a; }
+        body.light .ifo-container .link-desc { color: #4a6a8a; }
+        body.light .ifo-container .descriptor { color: #4a7aaa; }
+        body.light .ifo-container .status-micro { color: #4a6a8a; }
+        body.light .ifo-container .section-title { color: #3a5a7a; }
+        body.light .ifo-container .ip-block .ip-name { color: #2a4a6a; }
+        body.light .ifo-container .footer-end { color: #5a7a9a; }
+        body.light .max-container .header-text h1 { background: linear-gradient(135deg, #1a2a3a 0%, #4a5a6a 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        body.light .max-container .point-card { background: #f0f4fa; border-color: #c0d0e0; }
+        body.light .max-container .point-card p { color: #3a4a5e; }
+        body.light .max-container .max-warning-card { background: #f5e8e8; }
+        body.light .max-container .max-warning-card p { color: #5a3a3a; }
+        body.light .max-container .exposure-list { background: #f0f2f5; border-color: #c0b0b0; }
+        body.light .max-container .exposure-desc { color: #4a5a6a; }
+        body.light .max-container .faq-item { background: #eef2f6; border-color: #c0d0e0; }
+        body.light .max-container .faq-question { color: #1a2a3a; }
+        body.light .max-container .faq-answer { background: #e8ecf0; color: #3a4a5e; }
+        body.light .max-container .links-block { background: #eef2f6; border-color: #c0d0e0; }
+        body.light .max-container .links-title { color: #2a3a4a; }
+        body.light .max-container .button { background: #e0e8f0; color: #2a3a4a; border-color: #c0d0e0; }
+        body.light .max-container .steps li { background: #eef2f6; border-color: #c0d0e0; color: #3a4a5e; }
+        body.light .max-container .footer-info { background: #eef2f6; border-color: #c0d0e0; color: #4a5a6a; }
+        body.light .max-container .site-footer { border-top-color: #c0d0e0; color: #5a6a7a; }
+        body.light .max-container .last-updated { color: #7a8a9a; }
+        body.light .max-container .verification-badge .tooltip-text { background: #eef2f6; color: #1a2a3a; border-color: #8a9aae; }
+        body.light .max-container .verification-badge .tooltip-text::after { border-color: #eef2f6 transparent transparent transparent; }
+        body.light .max-container .channel-item { background: #eef2f6; border-color: #c0d0e0; }
+        body.light .max-container .bot-item { background: #eef2f6; border-color: #b0c0d0; }
+        body.light .max-container .header-icon { background: #e0e8f0; }
+        body.light .max-container .max-logo { background: #eef2f6; border-color: #b0c0d0; }
+        body.light .max-container .max-logo .max-sub { border-left-color: #b0c0d0; color: #4a5a6a; }
+        body.light .max-container .header-text .badge { background: #e0e8f0; color: #4a5a6a; border-color: #b0c0d0; }
+        body.light .max-container .alert-box { background: #f5ece8; }
+        body.light .max-container .policy-content { background: rgba(255, 255, 255, 0.95); }
+        body.light .max-container .report-button { background: linear-gradient(135deg, #d06060, #e07070); border-color: #e08080; }
+        body.light .max-container .rkn-link a { color: #3a7aaa; }
+        body.light .max-container .max-warning-card h4 { color: #d06040; }
+        body.light .max-container .footer-contacts a { color: #d08040; }
+
+        body.light .ifo-container .glass-tile { background: rgba(240, 245, 255, 0.8); border-color: rgba(60, 160, 255, 0.2); }
+        body.light .ifo-container .glass-tile.important { background: rgba(240, 220, 225, 0.8); }
+        body.light .ifo-container .glass-tile.primary { background: rgba(220, 235, 255, 0.8); }
+        body.light .ifo-container .glass-tile.secondary { background: rgba(230, 240, 255, 0.7); }
+        body.light .ifo-container .link-title { color: #1a2a3a; }
+        body.light .ifo-container .search-input { background: rgba(255, 255, 255, 0.7); color: #1a2a3a; }
+        body.light .ifo-container .search-input::placeholder { color: #7a8a9a; }
+        body.light .ifo-container .action-btn { background: rgba(240, 245, 255, 0.7); color: #2a4a6a; border-color: rgba(60, 160, 255, 0.2); }
+        body.light .ifo-container .bottom-actions { background: rgba(240, 245, 255, 0.3); }
+        body.light .ifo-container .footer-min { background: rgba(240, 245, 255, 0.8); border-top-color: rgba(60, 140, 220, 0.2); }
+        body.light .ifo-container .search-result-item .s-title { color: #1a3a5a; }
+        body.light .ifo-container .search-result-item .s-desc { color: #4a6a8a; }
+        body.light .ifo-container .minitag { color: #3a5a7a; }
+        body.light .ifo-container .badge-light { color: #3a5a7a; }
+        body.light .ifo-container .theme-toggle { color: #3a5a7a; border-color: rgba(60, 160, 255, 0.2); }
+
+        body.light .donate-container .glass-footer { background: rgba(255, 255, 255, 0.8); }
+        body.light .donate-container .platform-card { background: rgba(255, 255, 255, 0.6); }
+        body.light .donate-container .social-link { background: rgba(255, 255, 255, 0.5); }
+        body.light .donate-container .stats { background: rgba(255, 255, 255, 0.5); }
+
+        /* ===== ДОПОЛНИТЕЛЬНЫЕ АДАПТИВЫ ===== */
+        @media (max-width: 380px) {
+            .bio-card { padding: 0.8rem; border-radius: 1.2rem; }
+            .header-bio { gap: 0.8rem; }
+            .social-btn { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+            .social-btn i { font-size: 0.9rem; }
+            .market-btn { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
+            .market-btn .tooltip { width: 200px; font-size: 0.7rem; }
+            .donate-container .platform-card { padding: 10px 12px; min-height: 50px; }
+            .donate-container .platform-name h3 { font-size: 13px; }
+            .donate-container .platform-name p { font-size: 10px; }
+            .tab-btn span {
+                display: none;
+            }
+            .tab-btn {
+                min-width: 50px;
+                padding: 8px 12px;
+            }
+            .tab-btn i {
+                font-size: 18px;
+            }
+            .bottom-nav .nav-item span {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .bio-card { padding: 1.8rem; }
+            .grid-2col { gap: 1.8rem; }
+            .ifo-container .grid-links { grid-template-columns: repeat(2, 1fr); }
+            .max-container .new-points,
+            .max-container .max-warning-points { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (min-width: 1024px) {
+            .bio-card { padding: 2.2rem 2.5rem 2rem; }
+            .grid-2col { grid-template-columns: 1.2fr 0.8fr; }
+            .ifo-container .grid-links { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        /* ===== ПОДДЕРЖКА SAFE AREA ДЛЯ iOS ===== */
+        @supports (padding: max(0px)) {
+            body {
+                padding-left: max(16px, env(safe-area-inset-left));
+                padding-right: max(16px, env(safe-area-inset-right));
+                padding-top: max(16px, env(safe-area-inset-top));
+                padding-bottom: max(16px, env(safe-area-inset-bottom) + var(--bottom-nav-height));
+            }
+        }
+
+        /* ===== УЛУЧШЕННАЯ ПРОКРУТКА ===== */
+        * {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* ===== Telegram WebView specific fixes ===== */
+        .tg-webview .bio-card {
+            border-radius: 0;
+            padding: 12px;
+        }
+
+        .tg-webview .tabs-nav {
+            border-radius: 30px;
+            padding: 3px;
+            gap: 3px;
+        }
+
+        .tg-webview .tab-btn {
+            min-height: 38px;
+            padding: 6px 10px;
+            font-size: 11px;
+            border-radius: 30px;
+        }
+
+        /* ===== ОТКЛЮЧЕНИЕ АНИМАЦИЙ ПРИ СНИЖЕННОЙ ПРОИЗВОДИТЕЛЬНОСТИ ===== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ЧАСТИЦЫ ФОН ===== -->
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="main-container">
+        <div class="bio-card">
+
+            <!-- ===== НАВИГАЦИЯ ===== -->
+            <div class="tabs-nav" role="tablist">
+                <button class="tab-btn active" data-tab="bio" role="tab" aria-selected="true">
+                    <i class="fas fa-user-astronaut"></i> <span>Биография</span>
+                </button>
+                <button class="tab-btn" data-tab="donate" role="tab" aria-selected="false">
+                    <i class="fas fa-heart"></i> <span>Донаты</span>
+                </button>
+                <button class="tab-btn" data-tab="ifo" role="tab" aria-selected="false">
+                    <i class="fas fa-globe"></i> <span>ifo</span>
+                </button>
+                <button class="tab-btn" data-tab="max" role="tab" aria-selected="false">
+                    <i class="fas fa-user-secret"></i> <span>MAX</span>
+                </button>
+            </div>
+
+            <!-- ===== ВКЛАДКА 1: БИОГРАФИЯ ===== -->
+            <div class="tab-content active" id="tab-bio" role="tabpanel">
+                <div class="header-bio">
+                    <div class="avatar" id="avatarEgg" aria-hidden="true">ES</div>
+                    <div class="title-group">
+                        <h1>EnderSasha</h1>
+                        <div class="tagline">
+                            <i class="fas fa-code"></i>
+                            <span>EnderSasha ютюбер/Разработчик · блогер</span>
+                            <span class="badge"><i class="fas fa-bolt"></i> NEON</span>
+                        </div>
+                        <div class="tagline" style="margin-top: 0.2rem; font-size: clamp(0.8rem, 1.5vw, 0.9rem); color: #6a7fa0;">
+                            <i class="fas fa-map-pin"></i> Россия · 23 года
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2col">
+                    <div class="info-block bio-text">
+                        <div class="block-title">
+                            <i class="fas fa-user-astronaut"></i> Биография
+                        </div>
+                        <p>
+                            <strong>EnderSasha</strong> (настоящее имя — Александр Канстантинович) родился в 2005 году
+                            в небольшом городе на снежнагорске. С раннего детства увлекался геймерством и
+                            стратегическими играми. В 14 лет создал свой первый мод для Minecraft.
+                        </p>
+                        <p>
+                            В 2026 году поступил в вуз, параллельно работая над <strong>OpenSource</strong>-проектами.
+                            Специализация — <strong>Go</strong>, <strong>React</strong> и облачные архитектуры.
+                            Активный участник CTF-соревнований и хакатонов.
+                        </p>
+                        <p>
+                            В свободное время — стримит игры, ведёт блог о игравом и мири. Мечтает запустить собственный фан-сообчество.
+                        </p>
+                        <ul class="highlight-list">
+                            <li><i class="fas fa-trophy"></i> 3-кратный победитель хакатона «Цифровой прорыв»</li>
+                            <li><i class="fas fa-rocket"></i> Автор библиотеки <strong>SashaMaencraft</strong> (1.0k ★ на GitHub)</li>
+                            <li><i class="fas fa-gamepad"></i> Топ-50 игроков <strong>tube-based II</strong> (RU)</li>
+                        </ul>
+
+                        <!-- ===== НОВЫЕ КНОПКИ МАРКЕТПЛЕЙСОВ ===== -->
+                        <div class="marketplace-grid">
+                            <div class="market-btn wb">
+                                <i class="fas fa-shopping-bag"></i> Wildberries
+                                <span class="badge-mp">WB</span>
+                                <span class="tooltip">
+                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году я ущол с этого маркетплейса<br>
+                                    <span class="highlight">И За БПЛА на данный маркетплейс</span>
+                                </span>
+                            </div>
+
+                            <div class="market-btn ozon">
+                                <i class="fas fa-box-open"></i> Ozon
+                                <span class="badge-mp">OZON</span>
+                                <span class="tooltip">
+                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году<br>
+                                    <span class="highlight">заменяет мне Wildberries</span>
+                                </span>
+                            </div>
+
+                            <div class="market-btn ym">
+                                <i class="fas fa-store"></i> Яндекс Маркет
+                                <span class="badge-mp">ЯМ</span>
+                                <span class="tooltip">
+                                    <i class="fas fa-calendar-alt"></i> Заказываю товары в 2026–2027 и по 2030 году<br>
+                                    <span class="highlight">Заказываю здесь, но не так часто</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="block-title">
+                            <i class="fas fa-flag-checkered"></i> Хронология
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">2019</span>
+                            <span class="timeline-desc"><strong>Первый контракт</strong> — разработка плагинов для сервера <strong>tube-based</strong></span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">2021</span>
+                            <span class="timeline-desc">Разработчик <strong>VK EnderSas</strong> для своего YouTube канала</span>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-year">2023</span>
+                            <span class="timeline-desc">Выпустил <strong>DragonCorp</strong> — создание сайта</span>
+                        </div>
+                        <div style="margin: 1.5rem 0 0.8rem;">
+                            <div class="block-title" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.8rem;">
+                                <i class="fas fa-chart-line"></i> Факты
+                            </div>
+                            <div class="stats-grid">
+                                <div class="stat-item"><span>🕹️ Игровой стаж</span> <strong>20 лет</strong></div>
+                                <div class="stat-item"><span>📁 Проектов</span> <strong>28</strong></div>
+                                <div class="stat-item"><span>🌍 Стран посещено</span> <strong>5</strong></div>
+                                <div class="stat-item"><span>☕ Кофе в день</span> <strong>≈ 10 чашек</strong></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <div class="block-title" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.8rem;">
+                                <i class="fas fa-share-alt"></i> Связь
+                            </div>
+                            <div class="social-links-bio">
+                                <a href="https://github.com/SashaMaencraft" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://t.me/HeadSupportbot" class="social-btn"><i class="fab fa-telegram"></i> Telegram</a>
+                                <a href="https://www.twitch.tv/youtube_cross124" class="social-btn"><i class="fab fa-twitch"></i> Twitch</a>
+                                <a href="https://www.youtube.com/@Dragan208" class="social-btn"><i class="fab fa-youtube"></i> YouTube</a>
+                            </div>
+                            <div style="margin-top: 1rem; color: #5a6f8a; font-size: clamp(0.8rem, 1.3vw, 0.9rem); word-break: break-word;">
+                                <i class="fas fa-envelope" style="color: #00d4ff; width: 1.6rem;"></i> drakon.karol@yandex.ru
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-note">
+                    <i class="fas fa-crown"></i> EnderSasha · вся биография в одной странице
+                    <i class="fas fa-circle" style="font-size: 0.3rem; vertical-align: middle; margin: 0 6px; color: #00d4ff;"></i>
+                    <i class="fas fa-code"></i> Сайт автора / 4-1
+                    <i class="fas fa-check-circle verified-icon"></i>
+                </div>
+            </div>
+
+            <!-- ===== ВКЛАДКА 2: ДОНАТЫ ===== -->
+            <div class="tab-content" id="tab-donate" role="tabpanel">
+                <div class="donate-container">
+                    <div class="header">
+                        <div class="avatar" aria-hidden="true">✍️</div>
+                        <h1>Александр Константинович</h1>
+                        <div class="bio">
+                            блогер, автор подкастов. Создаю каждый день
+                        </div>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <div class="stat-value">10</div>
+                                <div class="stat-label">подписчиков</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100</div>
+                                <div class="stat-label">доната</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">1.3K</div>
+                                <div class="stat-label">в месяц</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">
+                        <span>📱 Выберите способ поддержки</span>
+                    </div>
+
+                    <div class="platform-grid">
+                        <a href="https://boosty.to/the-cartel/single-payment/donation/749551/target?share=target_link" target="_blank" class="platform-card">
+                            <div class="platform-info">
+                                <div class="platform-icon">🚀</div>
+                                <div class="platform-name">
+                                    <h3>Boosty (Бусти)</h3>
+                                    <p>Разовый донат через платформу</p>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+
+                        <a href="https://dalink.to/minecraftmp_life" target="_blank" class="platform-card">
+                            <div class="platform-info">
+                                <div class="platform-icon">🎁</div>
+                                <div class="platform-name">
+                                    <h3>Donation Alerts</h3>
+                                    <p>Донаты с уведомлениями, поддержка стримов</p>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+
+                        <a href="https://pay.cloudtips.ru/p/832e3699" target="_blank" class="platform-card">
+                            <div class="platform-info">
+                                <div class="platform-icon">☁️</div>
+                                <div class="platform-name">
+                                    <h3>Cloudtips</h3>
+                                    <p>Чаевые по Т-Банку, картам, СБП</p>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+
+                        <a href="https://www.tinkoff.ru/rm/r_ZCBhQXGUtt.twPLRrzefk/4aCXQ33211" target="_blank" class="platform-card">
+                            <div class="platform-info">
+                                <div class="platform-icon">💳</div>
+                                <div class="platform-name">
+                                    <h3>Т-Банк (СБП)</h3>
+                                    <p>Прямой перевод по ссылке</p>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+                    </div>
+
+                    <div class="divider">другие способы</div>
+
+                    <div class="social-links">
+                        <a href="https://www.youtube.com/@Dragan208" target="_blank" class="social-link">
+                            <i class="fab fa-youtube" style="color: #ff0000;"></i> YouTube
+                        </a>
+                        <a href="https://t.me/VisualVertex" target="_blank" class="social-link">
+                            <i class="fab fa-telegram" style="color: #0088cc;"></i> Telegram
+                        </a>
+                        <a href="https://vk.com/visualvertex" target="_blank" class="social-link">
+                            <i class="fab fa-vk" style="color: #0077ff;"></i> ВКонтакте
+                        </a>
+                    </div>
+
+                    <div class="glass-footer">
+                        <div class="footer-row">
+                            <span class="footer-label">ИП:</span>
+                            <span class="footer-value">Александр.К.К</span>
+                        </div>
+                        <div class="footer-row">
+                            <span class="footer-label">ИНН:</span>
+                            <span class="footer-value">772512345678</span>
+                        </div>
+
+                        <div class="footer-divider"></div>
+
+                        <div style="text-align: center; margin-bottom: 14px; font-style: italic; color: var(--text-secondary); font-size: clamp(10px, 1.2vw, 12px);">
+                            ✦ Все права защищены. Использование материалов только с разрешения правообладателя.
+                        </div>
+
+                        <div class="footer-links">
+                            <a onclick="showPolicy('privacy')"><i class="fas fa-shield-alt"></i> Политика данных</a>
+                            <a onclick="showPolicy('terms')"><i class="fas fa-file-contract"></i> Пользовательское соглашение</a>
+                        </div>
+
+                        <div class="footer-email">
+                            <i class="fas fa-envelope"></i> <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a>
+                        </div>
+
+                        <div class="copyright">
+                            <span>© VisualVertex 2026–2027 · портал работает в стеклянном стиле</span>
+                            <div class="verified-badge">
+                                <i class="fas fa-check-circle verified-icon"></i>
+                                <span class="verified-tooltip">верифицированная страница dragoncorp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== ВКЛАДКА 3: ifo ===== -->
+            <div class="tab-content" id="tab-ifo" role="tabpanel">
+                <div class="ifo-container">
+                    <div class="header-minimal">
+                        <div class="logo-line">
+                            <span class="logo-min">ifo</span>
+                            <span class="descriptor">info · 5.1</span>
+                            <span class="descriptor">kinetic</span>
+                        </div>
+                        <button class="theme-toggle" onclick="toggleIfoTheme()" aria-label="Переключить тему">🌓 тема</button>
+                    </div>
+
+                    <div class="status-micro">✦ информационный портал ifo · быстрый поиск ✦</div>
+
+                    <div class="search-section">
+                        <input type="text" class="search-input" id="ifoSearch" placeholder="🔍 Поиск по сайту (название, описание, тег...)" onkeydown="if(event.key==='Enter') searchIfo()" inputmode="search" autocomplete="off">
+                        <button class="action-btn" onclick="searchIfo()">🔍 Найти</button>
+                    </div>
+
+                    <div class="section-title">⚡ Пульсар · первостепенное</div>
+                    <section class="grid-links">
+                        <a href="https://sashamaencraft.github.io/DragonCorp/" class="link-card glass-tile important" target="_blank" rel="noopener">
+                            <div class="link-title">🐉 DragonCorp <span class="badge-light">corp</span></div>
+                            <div class="link-meta">sashamaencraft.github.io/DragonCorp/</div>
+                            <div class="link-desc"><span class="minitag">лендинг</span> защита от угроз</div>
+                        </a>
+                        <a href="https://sashamaencraft.github.io/Wi-Fi-/" class="link-card glass-tile important" target="_blank" rel="noopener">
+                            <div class="link-title">📡 IFO Wi-Fi <span class="badge-light">сервис</span></div>
+                            <div class="link-meta">sashamaencraft.github.io/Wi-Fi-/</div>
+                            <div class="link-desc"><span class="minitag">доступ</span> безопасное соединение</div>
+                        </a>
+                        <a href="https://github.com/SashaMaencraft/Minecraft-Auto-Clicker" class="link-card glass-tile important" target="_blank" rel="noopener">
+                            <div class="link-title">🖱️ AutoClicker-Репазиторий <span class="badge-light">tool</span></div>
+                            <div class="link-meta">github.com/SashaMaencraft/Minecraft-Auto-Clicker</div>
+                            <div class="link-desc"><span class="minitag mc">autoclicker</span> удобные клики</div>
+                        </a>
+                    </section>
+
+                    <div class="section-title extra-margin-top">🌀 Проекты & инструменты</div>
+                    <section class="grid-links">
+                        <a href="https://sashamaencraft.github.io/Chernovik/" class="link-card glass-tile secondary" target="_blank" rel="noopener">
+                            <div class="link-title">📝 Черновик-Заметки <span class="badge-light">заметки</span></div>
+                            <div class="link-meta">sashamaencraft.github.io/Chernovik/</div>
+                            <div class="link-desc"><span class="minitag">тексты</span> черновики, идеи</div>
+                        </a>
+                        <a href="https://sashamaencraft.github.io/Information-system/" class="link-card glass-tile secondary" target="_blank" rel="noopener">
+                            <div class="link-title">📊 Информационная система <span class="badge-light">система</span></div>
+                            <div class="link-meta">sashamaencraft.github.io/Information-system/</div>
+                            <div class="link-desc"><span class="minitag info">данные</span> аналитика, портал</div>
+                        </a>
+                    </section>
+
+                    <div class="bottom-actions">
+                        <button class="action-btn" onclick="showIfoAbout()">
+                            <span class="icon">ℹ️</span> О портале
+                        </button>
+                        <button class="action-btn" onclick="showIfoHelp()">
+                            <span class="icon">🛟</span> Техподдержка
+                        </button>
+                        <button class="action-btn" onclick="showIfoTips()">
+                            <span class="icon">💡</span> Советы
+                        </button>
+                        <button class="action-btn" onclick="showIfoContacts()">
+                            <span class="icon">📬</span> Контакты
+                        </button>
+                        <button class="action-btn" onclick="scrollToTop()">
+                            <span class="icon">⬆</span> Наверх
+                        </button>
+                    </div>
+
+                    <footer class="footer-min" id="ifoFooter">
+                        <div class="footer-row">
+                            <div class="ip-block">
+                                <div class="ip-name">ИП Александр.К.К</div>
+                                <div class="ip-desc">Индивидуальный предприниматель Александр Константинович</div>
+                                <div class="legal-numbers">
+                                    <div><span>ОГРНИП</span> 324770001234567</div>
+                                    <div><span>ИНН</span> 772512345678</div>
+                                    <div><span>р/с</span> 4080281090000123456 <span style="opacity:0.6;">(Т‑Банк)</span></div>
+                                </div>
+                            </div>
+                            <div class="footer-end">
+                                <strong>© ifo</strong> 2026–2027<br>
+                                <span style="font-size:clamp(0.65rem, 1vw, 0.8rem);">информационная версия 5.1</span>
+                                <div class="action-links">
+                                    <a onclick="openIfoModal('privacy')">данные</a>
+                                    <a onclick="openIfoModal('terms')">соглашение</a>
+                                    <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div style="display: flex; justify-content: space-between; color: #5f7faf; font-size: clamp(0.65rem, 1vw, 0.8rem); padding-top: 0.2rem; flex-wrap: wrap; gap: 4px;">
+                            <span>кинетический информационный портал ifo <i class="fas fa-check-circle verified-icon"></i></span> 
+                            <span>⎔ v5.1</span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+            <!-- ===== ВКЛАДКА 4: MAX ===== -->
+            <div class="tab-content" id="tab-max" role="tabpanel">
+                <div class="max-container">
+                    <div class="header">
+                        <div class="header-icon">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="header-text">
+                            <h1>Меня нет МАКСЕ</h1>
+                            <span class="badge"><i class="far fa-eye-slash" style="margin-right: 4px;"></i> ㊙ ⸸קąﾓﾓ๏รッ ⸸👑</span>
+                        </div>
+                        <div class="max-logo">
+                            <span class="max-text">MAX</span>
+                            <span class="max-sub">российский<br>мессенджер</span>
+                        </div>
+                    </div>
+
+                    <div class="last-updated">
+                        <i class="far fa-calendar-alt"></i> Актуально на 24.02.2026
+                    </div>
+
+                    <h2><i class="fas fa-gavel"></i> Официальное заявление</h2>
+
+                    <h3><i class="fas fa-ban" style="color: #f44242;"></i> Уведомление о статусе присутствия в приложении MAX</h3>
+                    <p>Настоящим информируем, что наша организация <strong>никогда не имела и не имеет</strong> в настоящее время каких-либо аккаунтов, групп или сообществ в приложении MAX.</p>
+
+                    <div class="max-warning-points">
+                        <div class="max-warning-card">
+                            <i class="fas fa-user-slash"></i>
+                            <h4>Нет аккаунтов в MAX</h4>
+                            <p>Мы официально заявляем: у нашей организации <strong>нет и никогда не было</strong> ни одного аккаунта в мессенджере MAX. Любые найденные профили — фейковые.</p>
+                        </div>
+                        <div class="max-warning-card">
+                            <i class="fas fa-users-slash"></i>
+                            <h4>Нет групп и каналов</h4>
+                            <p>В мессенджере MAX <strong>отсутствуют</strong> какие-либо официальные группы, каналы или чаты, принадлежащие нашей организации.</p>
+                        </div>
+                        <div class="max-warning-card">
+                            <i class="fas fa-bot"></i>
+                            <h4>Нет ботов в MAX</h4>
+                            <p>Мы <strong>не создавали</strong> и не поддерживаем никаких ботов в платформе MAX. Все боты от нашего имени там — мошеннические.</p>
+                        </div>
+                        <div class="max-warning-card">
+                            <i class="fas fa-envelope"></i>
+                            <h4>Не ведитесь на обман</h4>
+                            <p>Если вам пишут в MAX от имени нашей организации — это 100% мошенники. Не отвечайте, не переходите по ссылкам.</p>
+                        </div>
+                    </div>
+
+                    <h3><i class="fas fa-skull" style="color: #f97316;"></i> История нарушений (фейковые каналы в MAX)</h3>
+                    <div class="exposure-list">
+                        <div class="exposure-item">
+                            <i class="fas fa-flag"></i>
+                            <div class="exposure-content">
+                                <div class="exposure-title">Фейковый канал "MP: Life MAX"</div>
+                                <div class="exposure-desc">Обнаружен 15.02.2026, копирует контент</div>
+                            </div>
+                            <span class="exposure-link">@visualvertex_max</span>
+                        </div>
+                        <div class="exposure-item">
+                            <i class="fas fa-flag"></i>
+                            <div class="exposure-content">
+                                <div class="exposure-title">Мошеннический бот "HeadSupport MAX"</div>
+                                <div class="exposure-desc">Собирает данные пользователей</div>
+                            </div>
+                            <span class="exposure-link">@HeadSupportMAX_bot</span>
+                        </div>
+                        <div class="exposure-item">
+                            <i class="fas fa-flag"></i>
+                            <div class="exposure-content">
+                                <div class="exposure-title">Группа "DragonCorp в MAX"</div>
+                                <div class="exposure-desc">Фейковое сообщество, просит донаты</div>
+                            </div>
+                            <span class="exposure-link">t.me/joinchat/XXXfakedragon</span>
+                        </div>
+                    </div>
+
+                    <a href="https://t.me/HeadSupportbot" target="_blank" class="report-button">
+                        <i class="fas fa-exclamation-triangle"></i> Сообщить о фейке в MAX
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                    <h3><i class="fas fa-check-circle" style="color: #4bb543;"></i> Официальные каналы коммуникации</h3>
+                    <p>Единственными легитимными платформами для взаимодействия с нашей организацией являются:</p>
+
+                    <div class="channels-grid">
+                        <a href="https://t.me/EnderSasha" target="_blank" class="channel-item">
+                            <i class="fab fa-telegram-plane tg"></i>
+                            <span>Telegram</span>
+                            <small>офиц. каналы и группы</small>
+                        </a>
+                        <a href="https://vk.ru/EnderSas0" target="_blank" class="channel-item">
+                            <i class="fab fa-vk vk"></i>
+                            <span>ВКонтакте</span>
+                            <small>верифицированные</small>
+                        </a>
+                    </div>
+
+                    <h3><i class="fas fa-robot" style="color: #2e96d8;"></i> Техническая поддержка (официальные боты)</h3>
+                    <p>Для оперативной помощи используйте наших официальных Telegram-ботов:</p>
+
+                    <div class="bots-grid">
+                        <a href="https://t.me/EnderSashabot" target="_blank" class="bot-item">
+                            <div class="bot-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="bot-info">
+                                <h4>@EnderSashabot</h4>
+                                <p>Бот поддержки канала • 24/7</p>
+                            </div>
+                        </a>
+                        <a href="https://t.me/HeadSupportbot" target="_blank" class="bot-item">
+                            <div class="bot-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="bot-info">
+                                <h4>@HeadSupportbot</h4>
+                                <p>Связь с владельцем • админ</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <h3><i class="fas fa-plus-circle" style="color: #4bb543;"></i> Дополнительные официальные разъяснения</h3>
+
+                    <div class="new-points">
+                        <div class="point-card">
+                            <i class="fas fa-shield-halved"></i>
+                            <h4>Политика конфиденциальности</h4>
+                            <p>Мы никогда не запрашиваем личные данные, пароли или финансовую информацию через личные сообщения. Остерегайтесь фишинга.</p>
+                        </div>
+                        <div class="point-card">
+                            <i class="fas fa-clock"></i>
+                            <h4>Режим работы поддержки</h4>
+                            <p>Официальная поддержка доступна ежедневно с 10:00 до 22:00 по МСК только в проверенных каналах.</p>
+                        </div>
+                        <div class="point-card">
+                            <i class="fas fa-copyright"></i>
+                            <h4>Авторские права</h4>
+                            <p>Любое использование названия, логотипов и материалов без согласия правообладателя преследуется по закону.</p>
+                        </div>
+                        <div class="point-card">
+                            <i class="fas fa-bell"></i>
+                            <h4>Оповещения о взломах</h4>
+                            <p>В случае компрометации аккаунтов мы оповещаем только через официальный Telegram-канал. Не верьте слухам.</p>
+                        </div>
+                    </div>
+
+                    <h3><i class="fas fa-question-circle" style="color: #ffb347;"></i> Часто задаваемые вопросы</h3>
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Почему меня нет в MAX?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                Мы принципиально не используем данный мессенджер из-за отсутствия верификации и высокого риска мошенничества.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Как отличить фейк от настоящего?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                Все настоящие каналы перечислены на этом сайте. Если ссылка не совпадает — это фейк.
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                Мне пишут из "вашей поддержки" в MAX. Что делать?
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                Это мошенники. Заблокируйте и сообщите нам через бота @HeadSupportbot.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert-box">
+                        <div class="warning-title">
+                            <i class="fas fa-exclamation-triangle"></i> ⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ
+                        </div>
+                        <p>Любые профили, группы или каналы, заявляющие о принадлежности к нашей организации в <strong>MAX</strong>:</p>
+                        <ul>
+                            <li><span style="color: #ff8a5c;">Являются фейковыми</span></li>
+                            <li>Не имеют к нам никакого отношения</li>
+                            <li>Могут представлять угрозу безопасности</li>
+                        </ul>
+                    </div>
+
+                    <h3><i class="fas fa-clipboard-list"></i> Порядок действий при обнаружении нарушений</h3>
+                    <p>При выявлении подозрительных аккаунтов рекомендуется:</p>
+                    <ul class="steps">
+                        <li><i class="fas fa-camera"></i> Зафиксировать доказательства (скриншоты, сообщения)</li>
+                        <li><i class="fas fa-flag"></i> Сообщить в службу поддержки платформы</li>
+                        <li><i class="fas fa-gavel"></i> При наличии признаков мошенничества — обратиться в правоохранительные органы</li>
+                        <li><i class="fas fa-users"></i> Предупредить других пользователей о возможной угрозе</li>
+                    </ul>
+
+                    <h3><i class="fas fa-scale-balanced"></i> Ответственность</h3>
+                    <p>Использование названия нашей организации в мошеннических целях является уголовно наказуемым деянием. Виновные лица будут привлечены к ответственности в соответствии с законодательством РФ.</p>
+
+                    <div class="rkn-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        <a href="https://rkn.gov.ru/" target="_blank">Пожаловаться в Роскомнадзор</a> на фейковые каналы
+                    </div>
+
+                    <div class="links-block">
+                        <div class="links-title"><i class="fas fa-link"></i> Официальные источники / проверенные ссылки</div>
+                        <div class="button-links">
+                            <a href="https://t.me/EnderSasha" target="_blank" class="button"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                            <a href="https://vk.ru/EnderSas0" target="_blank" class="button"><i class="fab fa-vk"></i> ВКонтакте</a>
+                            <a href="https://t.me/EnderSashabot" target="_blank" class="button bot-button"><i class="fas fa-robot"></i> Bot #1</a>
+                            <a href="https://t.me/HeadSupportbot" target="_blank" class="button bot-button"><i class="fas fa-crown"></i> Bot #2</a>
+                            <a href="https://sashamaencraft.github.io/DragonCorp/" target="_blank" class="button"><i class="fas fa-dragon"></i> DragonCorp</a>
+                        </div>
+                        <p style="margin-top: 1rem; font-size: clamp(0.75rem, 1.2vw, 0.85rem); color: #8da0b5;"><i class="far fa-shield-check"></i> Только эти каналы и боты являются подлинными. Не доверяйте другим.</p>
+                    </div>
+
+                    <button id="copyrightButtonMax" class="button copyright-button"><i class="fas fa-copyright"></i> Связаться с правообладателем</button>
+
+                    <button id="policyButtonMax" class="button policy-button"><i class="fas fa-shield-alt"></i> Политика конфиденциальности и правовая информация</button>
+
+                    <div class="footer-info">
+                        <i class="fas fa-circle-info" style="margin-right: 6px; color: #7aaae0;"></i>
+                        Для получения достоверной информации используйте только официальные каналы связи. Не доверяйте сообщениям от неизвестных источников и не предоставляйте конфиденциальные данные без верификации.
+                    </div>
+
+                    <div class="site-footer">
+                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
+                            © 2026 Dragonwor2000 · Все права защищены
+                            <span class="verification-badge">
+                                <i class="fas fa-check-circle"></i>
+                                <span class="tooltip-text">Верифицированная страница DragonCorp</span>
+                            </span>
+                        </div>
+                        <div class="footer-contacts">
+                            <a href="mailto:drakon.karol@yandex.ru"><i class="fas fa-envelope"></i> drakon.karol@yandex.ru</a>
+                            <a href="https://t.me/HeadSupportbot" target="_blank"><i class="fab fa-telegram"></i> Юрист</a>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div style="text-align: center; opacity: 0.5; font-size: clamp(0.7rem, 1.2vw, 0.9rem); letter-spacing: 1px;">
+                        ㊙ ⸸קąﾓﾓ๏รッ ⸸👑 · <i class="fas fa-skull"></i> · Меня нет МАКСЕ
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ===== BOTTOM NAVIGATION BAR ===== -->
+    <nav class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" data-tab="bio" aria-label="Биография">
+            <i class="fas fa-user-astronaut"></i>
+            <span>Био</span>
+        </button>
+        <button class="nav-item" data-tab="donate" aria-label="Донаты">
+            <i class="fas fa-heart"></i>
+            <span>Донаты</span>
+        </button>
+        <button class="nav-item" data-tab="ifo" aria-label="ifo">
+            <i class="fas fa-globe"></i>
+            <span>ifo</span>
+        </button>
+        <button class="nav-item" data-tab="max" aria-label="MAX">
+            <i class="fas fa-user-secret"></i>
+            <span>MAX</span>
+        </button>
+    </nav>
+
+    <!-- ===== МОДАЛЬНЫЕ ОКНА ===== -->
+    <div class="policy-modal" id="privacyModal" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3>📄 Политика данных</h3>
+                <button class="close-policy" onclick="closePolicy('privacy')" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body">
+                <p>Настоящая Политика конфиденциальности регулирует сбор, использование и защиту персональных данных, которые вы предоставляете при использовании сервиса поддержки автора.</p>
+                <p><strong>1. Какие данные собираем:</strong> Мы не собираем и не храним данные ваших банковских карт. Все платежи обрабатываются напрямую платёжными сервисами (Boosty, Donation Alerts, Cloudtips, Т-Банк), которые соответствуют стандартам безопасности PCI DSS.</p>
+                <p><strong>2. Использование данных:</strong> Ваш email может использоваться только для отправки уведомлений о поддержке (если вы его оставили). Мы не передаём данные третьим лицам.</p>
+                <p><strong>3. Файлы cookie:</strong> Сайт использует только технические cookie для работы.</p>
+                <p><strong>4. Согласие:</strong> Продолжая использование сайта, вы соглашаетесь с данной политикой.</p>
+                <p>Последнее обновление: 01.03.2026</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="policy-modal" id="termsModal" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3>⚖️ Пользовательское соглашение</h3>
+                <button class="close-policy" onclick="closePolicy('terms')" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body">
+                <p><strong>1. Общие положения:</strong> Используя сервис, вы подтверждаете, что ознакомлены и согласны с условиями настоящего соглашения.</p>
+                <p><strong>2. Платёжные операции:</strong> Все финансовые транзакции осуществляются через сторонние платёжные сервисы. Администрация сайта не несёт ответственности за работу этих сервисов.</p>
+                <p><strong>3. Возврат средств:</strong> Вопросы возврата регулируются правилами выбранной вами платформы (Boosty, Donation Alerts, Cloudtips, Т-Банк).</p>
+                <p><strong>4. Контент:</strong> Использование материалов сайта возможно только с письменного разрешения правообладателя.</p>
+                <p><strong>5. Возрастные ограничения:</strong> Сервис предназначен для лиц старше 18 лет.</p>
+                <p>© ИП Александр.К.К, 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ifo модалки ===== -->
+    <div id="ifoInfoModal" class="policy-modal" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3 id="ifoModalTitle">ℹ️ Информация</h3>
+                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body" id="ifoModalBody">
+                Содержимое
+            </div>
+        </div>
+    </div>
+
+    <div id="ifoSearchModal" class="policy-modal" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3 id="ifoSearchTitle">🔍 Результаты поиска</h3>
+                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body" id="ifoSearchResults"></div>
+        </div>
+    </div>
+
+    <div id="ifoPrivacyModal" class="policy-modal" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3>📋 данные</h3>
+                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body">
+                <p style="margin-top: 1rem;">Сбор персональных данных осуществляется в соответствии с 152-ФЗ. Мы не передаём информацию третьим лицам. Политика конфиденциальности действует на всех ресурсах ifo.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="ifoTermsModal" class="policy-modal" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3>⚖️ соглашение</h3>
+                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body">
+                <p style="margin-top: 1rem;">Используя портал, вы принимаете условия пользовательского соглашения. Запрещено копирование материалов без указания авторства. Все проекты предоставляются «как есть».</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAX модалки ===== -->
+    <div id="policyModalMax" class="policy-modal" style="display:none;" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3><i class="fas fa-shield-alt" style="margin-right: 8px;"></i> Политика конфиденциальности</h3>
+                <button class="close-policy" onclick="closeMaxModal('policyModalMax')" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body" id="policyBodyMax">
+                <div class="legal-section">
+                    <h4><i class="fas fa-balance-scale"></i> 1. Официальное заявление о статусе в MAX</h4>
+                    <p>Настоящим подтверждаем, что в соответствии с <a href="http://www.consultant.ru/document/cons_doc_LAW_61801/" target="_blank" class="legal-link"><strong>Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных»</strong></a> (актуальная редакция с изменениями от 24.06.2025) и <a href="https://digital.gov.ru/ru/documents/982/" target="_blank" class="legal-link"><strong>Приказом Минцифры России № 982 от 28.10.2025</strong></a>, наша организация официально заявляет:</p>
+                    <ul>
+                        <li>Мы <strong>НЕ ИМЕЕМ</strong> и <strong>НИКОГДА НЕ ИМЕЛИ</strong> никаких аккаунтов, групп, каналов или ботов в мессенджере MAX.</li>
+                        <li>Любые обнаруженные в MAX профили, использующие название/символику нашей организации, являются <strong>ФЕЙКОВЫМИ</strong> и действуют без нашего согласия.</li>
+                        <li>Верификация каналов в MAX нами <strong>НЕ ПРОВОДИЛАСЬ</strong> и не планируется.</li>
+                    </ul>
+                </div>
+                <div class="legal-section">
+                    <h4><i class="fas fa-file-contract"></i> 2. Отказ от ответственности</h4>
+                    <p>В соответствии со <a href="http://www.consultant.ru/document/cons_doc_LAW_64629/" target="_blank" class="legal-link"><strong>ст. 1253.1 Гражданского кодекса РФ</strong></a> (часть четвертая, ред. от 23.07.2025), регулирующей ответственность информационных посредников:</p>
+                    <ul>
+                        <li>Мы <strong>НЕ НЕСЕМ ОТВЕТСТВЕННОСТИ</strong> за действия третьих лиц, создающих фейковые аккаунты от нашего имени в MAX.</li>
+                        <li>Вся ответственность за мошеннические действия, совершенные через фейковые каналы в MAX, возлагается на злоумышленников в соответствии с <a href="http://www.consultant.ru/document/cons_doc_LAW_10699/" target="_blank" class="legal-link"><strong>Уголовным кодексом РФ (ст. 159 УК РФ «Мошенничество»)</strong></a>.</li>
+                        <li>Мы не компенсируем ущерб, причиненный в результате взаимодействия с неофициальными ресурсами.</li>
+                    </ul>
+                </div>
+                <div class="legal-footer-note">
+                    <i class="fas fa-clock"></i> Настоящая политика действует с 01.01.2026 и актуальна на 22.02.2026.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="copyrightModalMax" class="policy-modal" style="display:none;" role="dialog" aria-modal="true">
+        <div class="policy-content">
+            <div class="policy-header">
+                <h3><i class="fas fa-copyright" style="margin-right: 8px;"></i> Связаться с правообладателем</h3>
+                <button class="close-policy" onclick="closeMaxModal('copyrightModalMax')" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="policy-body">
+                <div class="legal-section">
+                    <h4><i class="fas fa-phone-alt"></i> Контакты для правообладателей</h4>
+                    <p>По вопросам нарушения авторских прав, использования товарных знаков и логотипов, а также для официальных запросов:</p>
+                    <ul style="list-style: none; margin-left: 0;">
+                        <li style="margin-bottom: 12px;"><i class="fas fa-envelope" style="color: #ffb347; margin-right: 10px;"></i> <strong>Email:</strong> <a href="mailto:drakon.karol@yandex.ru" class="legal-link">drakon.karol@yandex.ru</a></li>
+                        <li style="margin-bottom: 12px;"><i class="fab fa-telegram" style="color: #ffb347; margin-right: 10px;"></i> <strong>Telegram:</strong> <a href="https://t.me/HeadSupportbot" target="_blank" class="legal-link">@HeadSupportbot</a> (команда /start)</li>
+                    </ul>
+                </div>
+                <div class="legal-section">
+                    <h4><i class="fas fa-clock"></i> Часы работы</h4>
+                    <div class="schedule-table">
+                        <div class="schedule-row"><span class="schedule-day">Понедельник</span><span class="schedule-time">10:00 - 14:20</span></div>
+                        <div class="schedule-row"><span class="schedule-day">Вторник</span><span class="schedule-time">10:00 - 17:00</span></div>
+                        <div class="schedule-row"><span class="schedule-day">Среда</span><span class="schedule-time">10:00 - 17:00</span></div>
+                        <div class="schedule-row"><span class="schedule-day">Четверг</span><span class="schedule-time">10:00 - 00:30 (след. дня)</span></div>
+                        <div class="schedule-row"><span class="schedule-day">Пятница</span><span class="schedule-time">10:00 - 00:30 (след. дня)</span></div>
+                        <div class="schedule-row"><span class="schedule-day">Суббота</span><span class="schedule-time schedule-closed">закрыто</span></div>
+                        <div class="schedule-row"><span class="schedule-day">Воскресенье</span><span class="schedule-time schedule-closed">закрыто</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // 1. ЧАСТИЦЫ ФОНА
+        // ============================================================
+        (function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            const count = Math.min(60, Math.floor(window.innerWidth / 20));
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    r: Math.random() * 2 + 1,
+                    color: `hsla(${190 + Math.random() * 40}, 80%, 60%, ${0.3 + Math.random() * 0.4})`
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+
+                    particles.forEach(p2 => {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(0, 212, 255, ${0.05 * (1 - dist / 120)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    });
+                });
+
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        // ============================================================
+        // 2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+        // ============================================================
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-selected', 'false');
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+
+                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+                const tabId = this.dataset.tab;
+                document.getElementById('tab-' + tabId).classList.add('active');
+
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
+                    b.classList.toggle('active', b.dataset.tab === tabId);
+                });
+            });
+        });
+
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                document.querySelectorAll('.tab-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.tab === tabId);
+                    b.setAttribute('aria-selected', b.dataset.tab === tabId ? 'true' : 'false');
+                });
+                document.querySelectorAll('.tab-content').forEach(tc => {
+                    tc.classList.toggle('active', tc.id === 'tab-' + tabId);
+                });
+                document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
+                    b.classList.toggle('active', b.dataset.tab === tabId);
+                });
+            });
+        });
+
+        // ============================================================
+        // 3. МОДАЛЬНЫЕ ОКНА
+        // ============================================================
+        function showPolicy(type) {
+            if (type === 'privacy') {
+                document.getElementById('privacyModal').style.display = 'flex';
+            } else if (type === 'terms') {
+                document.getElementById('termsModal').style.display = 'flex';
+            }
+        }
+
+        function closePolicy(type) {
+            if (type === 'privacy') {
+                document.getElementById('privacyModal').style.display = 'none';
+            } else if (type === 'terms') {
+                document.getElementById('termsModal').style.display = 'none';
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('policy-modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.policy-modal').forEach(m => m.style.display = 'none');
+            }
+        });
+
+        // ============================================================
+        // 4. ifo ФУНКЦИИ
+        // ============================================================
+        function toggleIfoTheme() {
+            document.body.classList.toggle('light');
+            localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
+        }
+
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light');
+        }
+
+        function openIfoModal(type) {
+            const map = {
+                'privacy': 'ifoPrivacyModal',
+                'terms': 'ifoTermsModal'
+            };
+            const el = document.getElementById(map[type]);
+            if (el) el.style.display = 'flex';
+        }
+
+        function closeIfoModal() {
+            document.querySelectorAll('.policy-modal').forEach(m => m.style.display = 'none');
+        }
+
+        function showIfoModal(title, html) {
+            document.getElementById('ifoModalTitle').textContent = title;
+            document.getElementById('ifoModalBody').innerHTML = html;
+            document.getElementById('ifoInfoModal').style.display = 'flex';
+        }
+
+        function showIfoAbout() {
+            showIfoModal('ℹ️ О портале ifo',
+                `ifo — это <strong>информационный портал</strong>, объединяющий различные проекты, сервисы и сообщества.<br><br>
+                 📌 <strong>Ключевые направления:</strong><br>
+                 • 🛡️ Безопасность и защита от угроз<br>
+                 • 🎮 Игровые проекты и RP-серверы<br>
+                 • 📡 Информационные сервисы<br>
+                 • 💬 Сообщества и форумы<br><br>
+                 <span style="background: rgba(60,140,220,0.1); padding: 0.2rem 0.6rem; border-radius: 20px;">версия 5.1</span>
+                 <span style="background: rgba(60,140,220,0.1); padding: 0.2rem 0.6rem; border-radius: 20px;">kinetic</span>`
+            );
+        }
+
+        function showIfoHelp() {
+            showIfoModal('🛟 Техническая поддержка',
+                `Если у вас возникли проблемы или вопросы, вы можете обратиться в службу поддержки:<br><br>
+                 📧 <strong>drakon.karol@yandex.ru</strong><br>
+                 💬 Форум: <strong>visualvertex.forumes.ru</strong><br><br>
+                 ⏱ <strong>Время ответа:</strong> обычно в течение 24 часов.<br>
+                 📌 В письме укажите тему и описание проблемы.`
+            );
+        }
+
+        function showIfoTips() {
+            showIfoModal('💡 Советы по использованию',
+                `🔍 <strong>Поиск:</strong> Используйте поиск вверху страницы, чтобы быстро найти нужный проект или сервис.<br><br>
+                 🌓 <strong>Тема:</strong> Переключайте тёмную и светлую тему кнопкой в правом верхнем углу.<br><br>
+                 📌 <strong>Ссылки:</strong> Все карточки кликабельны и ведут на соответствующие ресурсы.<br><br>
+                 🔄 <strong>Обновления:</strong> Следите за новостями на форуме.`
+            );
+        }
+
+        function showIfoContacts() {
+            showIfoModal('📬 Контакты',
+                `📧 <strong>Email:</strong> drakon.karol@yandex.ru<br>
+                 🌐 <strong>Форум:</strong> visualvertex.forumes.ru<br>
+                 📌 <strong>ИП Александр.К.К</strong><br><br>
+                 📋 <strong>Реквизиты:</strong><br>
+                 ОГРНИП: 324770001234567<br>
+                 ИНН: 772512345678`
+            );
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // 5. ПОИСК ifo
+        // ============================================================
+        function searchIfo() {
+            const query = document.getElementById('ifoSearch').value.trim();
+            if (!query) {
+                showIfoModal('🔍 Поиск', 'Введите запрос для поиска.');
+                return;
+            }
+
+            const cards = document.querySelectorAll('.ifo-container .link-card');
+            const results = [];
+            cards.forEach(card => {
+                const title = card.querySelector('.link-title')?.textContent?.trim() || '';
+                const desc = card.querySelector('.link-desc')?.textContent?.trim() || '';
+                const meta = card.querySelector('.link-meta')?.textContent?.trim() || '';
+                const allText = (title + ' ' + desc + ' ' + meta).toLowerCase();
+                if (allText.includes(query.toLowerCase())) {
+                    const url = card.getAttribute('href') || '#';
+                    const tagEl = card.querySelector('.minitag');
+                    const tag = tagEl ? tagEl.textContent.trim() : '';
+                    results.push({ title, desc, url, tag });
+                }
+            });
+
+            if (results.length === 0) {
+                showIfoModal('🔍 Ничего не найдено',
+                    `По запросу «<strong>${query}</strong>» ничего не найдено.<br><br>
+                     💡 Попробуйте изменить запрос или использовать ключевые слова из названий проектов.`
+                );
+                return;
+            }
+
+            let html = `🔎 Найдено <strong>${results.length}</strong> результатов по запросу «<strong>${query}</strong>»:<br><br>`;
+            results.slice(0, 15).forEach(r => {
+                html += `<div class="search-result-item" onclick="window.open('${r.url}', '_blank')">
+                            <div class="s-title">${r.title}</div>
+                            <div class="s-desc">${r.desc || r.url} ${r.tag ? ' <span style="background:rgba(60,140,220,0.1);padding:0.1rem 0.5rem;border-radius:12px;">'+r.tag+'</span>' : ''}</div>
+                        </div>`;
+            });
+            if (results.length > 15) {
+                html += `<br>... и ещё ${results.length - 15} результатов.`;
+            }
+
+            document.getElementById('ifoSearchTitle').textContent = `🔍 Результаты поиска (${results.length})`;
+            document.getElementById('ifoSearchResults').innerHTML = html;
+            document.getElementById('ifoSearchModal').style.display = 'flex';
+        }
+
+        // ============================================================
+        // 6. MAX модалки
+        // ============================================================
+        function closeMaxModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const policyBtnMax = document.getElementById('policyButtonMax');
+            const copyrightBtnMax = document.getElementById('copyrightButtonMax');
+
+            if (policyBtnMax) {
+                policyBtnMax.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('policyModalMax').style.display = 'flex';
+                });
+            }
+
+            if (copyrightBtnMax) {
+                copyrightBtnMax.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.getElementById('copyrightModalMax').style.display = 'flex';
+                });
+            }
+
+            document.querySelectorAll('.max-container .faq-item').forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', function() {
+                        const parent = this.closest('.faq-item');
+                        if (parent) {
+                            parent.classList.toggle('active');
+                        }
+                    });
+                }
+            });
+
+            document.querySelectorAll('.policy-modal').forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        this.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // ============================================================
+        // 7. Telegram WebView
+        // ============================================================
+        const isTelegramWebView = window.Telegram !== undefined || 
+                                 window.TelegramWebView !== undefined ||
+                                 (window.navigator && window.navigator.userAgent.includes('Telegram'));
+
+        if (isTelegramWebView) {
+            document.body.classList.add('tg-webview');
+            if (window.Telegram && window.Telegram.WebView) {
+                window.Telegram.WebView.ready();
+            }
+        }
+
+        console.log('✅ Все улучшения добавлены (без ломания существующего кода):');
+        console.log('📱 Bottom Navigation Bar');
+        console.log('🎨 Анимированные частицы фона');
+        console.log('🥚 Пасхалка на аватаре (5 кликов)');
+        console.log('📱 Усиленная адаптивная типографика');
+        console.log('🛒 Кнопки маркетплейсов с подсказками');
+    </script>
+
+</body>
+</html>
