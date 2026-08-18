@@ -437,6 +437,95 @@
             margin-right: 4px;
         }
 
+        /* ===== НОВЫЙ СТИЛЬ: БЛОК ФАКТЫ С ОБВОДКОЙ ===== */
+        .facts-block {
+            background: rgba(0, 212, 255, 0.03);
+            border: 2px solid rgba(0, 212, 255, 0.12);
+            border-radius: clamp(1.2rem, 3vw, 2rem);
+            padding: clamp(1.2rem, 2.5vw, 1.8rem) clamp(1rem, 2.5vw, 2rem);
+            margin: 1.5rem 0 0.8rem;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.02), inset 0 0 30px rgba(0, 212, 255, 0.02);
+        }
+
+        .facts-block:hover {
+            border-color: rgba(0, 212, 255, 0.25);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.05), inset 0 0 40px rgba(0, 212, 255, 0.03);
+        }
+
+        .facts-block .block-title {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0.8rem;
+            color: #00d4ff;
+        }
+
+        .facts-block .block-title i {
+            color: #00d4ff;
+        }
+
+        .facts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem 1.5rem;
+            margin: 0.5rem 0 0;
+        }
+
+        @media (max-width: 400px) {
+            .facts-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+        }
+
+        .fact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.2s ease;
+        }
+
+        .fact-item:hover {
+            background: rgba(0, 212, 255, 0.04);
+            border-color: rgba(0, 212, 255, 0.08);
+            transform: translateX(3px);
+        }
+
+        .fact-item .fact-icon {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            width: 2rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .fact-item .fact-label {
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            color: #7b8aa8;
+            font-weight: 400;
+        }
+
+        .fact-item .fact-value {
+            font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+            color: #d6e6ff;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .facts-block .facts-corner {
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            opacity: 0.1;
+            color: #00d4ff;
+            pointer-events: none;
+        }
+
         /* ===== ОСТАЛЬНЫЕ СТИЛИ (без изменений) ===== */
         .grid-2col {
             display: grid;
@@ -2380,6 +2469,29 @@
         body.light .foreign-agent-badge .tooltip-fa { background: rgba(255, 255, 255, 0.95); color: #1a1f2e; border-color: rgba(0,0,0,0.1); }
         body.light .foreign-agent-badge .tooltip-fa::after { border-top-color: rgba(255, 255, 255, 0.95); }
 
+        /* ===== СВЕТЛАЯ ТЕМА ДЛЯ ФАКТОВ ===== */
+        body.light .facts-block {
+            background: rgba(0, 200, 255, 0.04);
+            border-color: rgba(0, 200, 255, 0.15);
+        }
+        body.light .facts-block:hover {
+            border-color: rgba(0, 200, 255, 0.3);
+        }
+        body.light .fact-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(0, 0, 0, 0.04);
+        }
+        body.light .fact-item:hover {
+            background: rgba(0, 200, 255, 0.06);
+            border-color: rgba(0, 200, 255, 0.1);
+        }
+        body.light .fact-item .fact-label {
+            color: #4a5a6a;
+        }
+        body.light .fact-item .fact-value {
+            color: #1a2a4a;
+        }
+
         /* ===== ДОПОЛНИТЕЛЬНЫЕ АДАПТИВЫ ===== */
         @media (max-width: 380px) {
             .bio-card { padding: 0.8rem; border-radius: 1.2rem; }
@@ -2590,15 +2702,34 @@
                             <span class="timeline-year">2023</span>
                             <span class="timeline-desc">Выпустил <strong>DragonCorp</strong> — создание сайта</span>
                         </div>
-                        <div style="margin: 1.5rem 0 0.8rem;">
-                            <div class="block-title" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.8rem;">
+
+                        <!-- ===== НОВЫЙ БЛОК: ФАКТЫ С ОБВОДКОЙ ===== -->
+                        <div class="facts-block">
+                            <div class="block-title">
                                 <i class="fas fa-chart-line"></i> Факты
+                                <span class="facts-corner">✦</span>
                             </div>
-                            <div class="stats-grid">
-                                <div class="stat-item"><span>🕹️ Игровой стаж</span> <strong>20 лет</strong></div>
-                                <div class="stat-item"><span>📁 Проектов</span> <strong>28</strong></div>
-                                <div class="stat-item"><span>🌍 Стран посещено</span> <strong>5</strong></div>
-                                <div class="stat-item"><span>☕ Кофе в день</span> <strong>≈ 10 чашек</strong></div>
+                            <div class="facts-grid">
+                                <div class="fact-item">
+                                    <span class="fact-icon">🕹️</span>
+                                    <span class="fact-label">Игровой стаж</span>
+                                    <span class="fact-value">20 лет</span>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon">📁</span>
+                                    <span class="fact-label">Проектов</span>
+                                    <span class="fact-value">28</span>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon">🌍</span>
+                                    <span class="fact-label">Стран посещено</span>
+                                    <span class="fact-value">5</span>
+                                </div>
+                                <div class="fact-item">
+                                    <span class="fact-icon">☕</span>
+                                    <span class="fact-label">Кофе в день</span>
+                                    <span class="fact-value">≈ 10 чашек</span>
+                                </div>
                             </div>
                         </div>
 
@@ -2629,7 +2760,6 @@
 
             <!-- ===== ВКЛАДКА 2: ДОНАТЫ ===== -->
             <div class="tab-content" id="tab-donate" role="tabpanel">
-                <!-- Содержимое вкладки Донаты (без изменений) -->
                 <div class="donate-container">
                     <div class="header">
                         <div class="avatar" aria-hidden="true">✍️</div>
@@ -2755,7 +2885,6 @@
 
             <!-- ===== ВКЛАДКА 3: ifo ===== -->
             <div class="tab-content" id="tab-ifo" role="tabpanel">
-                <!-- Содержимое вкладки ifo (без изменений) -->
                 <div class="ifo-container">
                     <div class="header-minimal">
                         <div class="logo-line">
@@ -2856,7 +2985,6 @@
 
             <!-- ===== ВКЛАДКА 4: MAX ===== -->
             <div class="tab-content" id="tab-max" role="tabpanel">
-                <!-- Содержимое вкладки MAX (без изменений) -->
                 <div class="max-container">
                     <div class="header">
                         <div class="header-icon">
@@ -3594,14 +3722,15 @@
             }
         }
 
-        console.log('✅ Все улучшения добавлены (без ломания существующего кода):');
+        console.log('✅ Все улучшения добавлены:');
         console.log('📱 Bottom Navigation Bar');
         console.log('🎨 Анимированные частицы фона');
         console.log('🥚 Пасхалка на аватаре (5 кликов)');
         console.log('📱 Усиленная адаптивная типографика');
         console.log('🛒 Кнопки маркетплейсов с подсказками');
         console.log('💑 Добавлен статус "Не женат, детей не имеет"');
-        console.log('🛡️ Добавлен статус "Не является иноагентом" с официальным юридическим обоснованием');
+        console.log('🛡️ Добавлен статус "Не является иноагентом"');
+        console.log('📊 Блок "Факты" выделен в отдельный стильный блок с обводкой');
     </script>
 
 </body>
