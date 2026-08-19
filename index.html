@@ -45,7 +45,7 @@
             --bottom-nav-height: 60px;
         }
 
-        /* ===== НОВОЕ: ЧАСТИЦЫ ФОН ===== */
+        /* ===== ЧАСТИЦЫ ФОН ===== */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -277,19 +277,21 @@
         .avatar {
             width: clamp(80px, 18vw, 120px);
             height: clamp(80px, 18vw, 120px);
-            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 800;
-            color: #0b0d15;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
             flex-shrink: 0;
-            user-select: none;
-            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            border: 2px solid rgba(0, 212, 255, 0.3);
             transition: transform 0.3s ease;
+            cursor: pointer;
+            background: #1a1f2e;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .avatar:active {
@@ -848,6 +850,13 @@
             margin: 0 auto 16px;
             box-shadow: 0 15px 25px -8px #f97316;
             cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .donate-container .avatar img {
+            display: none;
         }
 
         .donate-container h1 {
@@ -2603,7 +2612,9 @@
             <!-- ===== ВКЛАДКА 1: БИОГРАФИЯ ===== -->
             <div class="tab-content active" id="tab-bio" role="tabpanel">
                 <div class="header-bio">
-                    <div class="avatar" id="avatarEgg" aria-hidden="true">ES</div>
+                    <div class="avatar" id="avatarEgg" aria-hidden="true">
+                        <img src="logo.png" alt="EnderSasha" id="avatarImage">
+                    </div>
                     <div class="title-group">
                         <h1>EnderSasha</h1>
                         <div class="tagline">
@@ -2616,7 +2627,6 @@
                             <span class="status-item">
                                 <i class="fas fa-heart"></i> Не женат, детей не имеет
                             </span>
-                            <!-- ===== НОВЫЙ ПУНКТ: НЕ ИНОАГЕНТ ===== -->
                             <span class="foreign-agent-badge">
                                 <i class="fas fa-shield-alt"></i> Не является иноагентом
                                 <span class="tooltip-fa">
@@ -2631,6 +2641,7 @@
                     </div>
                 </div>
 
+                <!-- ОСТАЛЬНОЕ СОДЕРЖИМОЕ (БИОГРАФИЯ, ФАКТЫ, СВЯЗЬ) -->
                 <div class="grid-2col">
                     <div class="info-block bio-text">
                         <div class="block-title">
@@ -2654,8 +2665,6 @@
                             <li><i class="fas fa-rocket"></i> Автор библиотеки <strong>SashaMaencraft</strong> (1.0k ★ на GitHub)</li>
                             <li><i class="fas fa-gamepad"></i> Топ-50 игроков <strong>tube-based II</strong> (RU)</li>
                         </ul>
-
-                        <!-- ===== КНОПКИ МАРКЕТПЛЕЙСОВ ===== -->
                         <div class="marketplace-grid">
                             <div class="market-btn wb">
                                 <i class="fas fa-shopping-bag"></i> Wildberries
@@ -2665,7 +2674,6 @@
                                     <span class="highlight">За БПЛА на данный маркетплейс</span>
                                 </span>
                             </div>
-
                             <div class="market-btn ozon">
                                 <i class="fas fa-box-open"></i> Ozon
                                 <span class="badge-mp">OZON</span>
@@ -2674,7 +2682,6 @@
                                     <span class="highlight">За БПЛА на данный маркетплейс</span>
                                 </span>
                             </div>
-
                             <div class="market-btn ym">
                                 <i class="fas fa-store"></i> Яндекс Маркет
                                 <span class="badge-mp">ЯМ</span>
@@ -2685,7 +2692,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="info-block">
                         <div class="block-title">
                             <i class="fas fa-flag-checkered"></i> Хронология
@@ -2702,8 +2708,6 @@
                             <span class="timeline-year">2023</span>
                             <span class="timeline-desc">Выпустил <strong>DragonCorp</strong> — создание сайта</span>
                         </div>
-
-                        <!-- ===== НОВЫЙ БЛОК: ФАКТЫ С ОБВОДКОЙ ===== -->
                         <div class="facts-block">
                             <div class="block-title">
                                 <i class="fas fa-chart-line"></i> Факты
@@ -2732,7 +2736,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div style="margin-top: 1.5rem;">
                             <div class="block-title" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0.8rem;">
                                 <i class="fas fa-share-alt"></i> Связь
@@ -2749,7 +2752,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="footer-note">
                     <i class="fas fa-crown"></i> EnderSasha · вся биография в одной странице
                     <i class="fas fa-circle" style="font-size: 0.3rem; vertical-align: middle; margin: 0 6px; color: #00d4ff;"></i>
@@ -2764,120 +2766,51 @@
                     <div class="header">
                         <div class="avatar" aria-hidden="true">✍️</div>
                         <h1>Александр Константинович</h1>
-                        <div class="bio">
-                            блогер, автор подкастов. Создаю каждый день
-                        </div>
+                        <div class="bio">блогер, автор подкастов. Создаю каждый день</div>
                         <div class="stats">
-                            <div class="stat-item">
-                                <div class="stat-value">10</div>
-                                <div class="stat-label">подписчиков</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">100</div>
-                                <div class="stat-label">доната</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-value">1.3K</div>
-                                <div class="stat-label">в месяц</div>
-                            </div>
+                            <div class="stat-item"><div class="stat-value">10</div><div class="stat-label">подписчиков</div></div>
+                            <div class="stat-item"><div class="stat-value">100</div><div class="stat-label">доната</div></div>
+                            <div class="stat-item"><div class="stat-value">1.3K</div><div class="stat-label">в месяц</div></div>
                         </div>
                     </div>
-
-                    <div class="section-title">
-                        <span>📱 Выберите способ поддержки</span>
-                    </div>
-
+                    <div class="section-title"><span>📱 Выберите способ поддержки</span></div>
                     <div class="platform-grid">
                         <a href="https://boosty.to/the-cartel/single-payment/donation/749551/target?share=target_link" target="_blank" class="platform-card">
-                            <div class="platform-info">
-                                <div class="platform-icon">🚀</div>
-                                <div class="platform-name">
-                                    <h3>Boosty (Бусти)</h3>
-                                    <p>Разовый донат через платформу</p>
-                                </div>
-                            </div>
+                            <div class="platform-info"><div class="platform-icon">🚀</div><div class="platform-name"><h3>Boosty (Бусти)</h3><p>Разовый донат через платформу</p></div></div>
                             <div class="arrow">→</div>
                         </a>
-
                         <a href="https://dalink.to/minecraftmp_life" target="_blank" class="platform-card">
-                            <div class="platform-info">
-                                <div class="platform-icon">🎁</div>
-                                <div class="platform-name">
-                                    <h3>Donation Alerts</h3>
-                                    <p>Донаты с уведомлениями, поддержка стримов</p>
-                                </div>
-                            </div>
+                            <div class="platform-info"><div class="platform-icon">🎁</div><div class="platform-name"><h3>Donation Alerts</h3><p>Донаты с уведомлениями, поддержка стримов</p></div></div>
                             <div class="arrow">→</div>
                         </a>
-
                         <a href="https://pay.cloudtips.ru/p/832e3699" target="_blank" class="platform-card">
-                            <div class="platform-info">
-                                <div class="platform-icon">☁️</div>
-                                <div class="platform-name">
-                                    <h3>Cloudtips</h3>
-                                    <p>Чаевые по Т-Банку, картам, СБП</p>
-                                </div>
-                            </div>
+                            <div class="platform-info"><div class="platform-icon">☁️</div><div class="platform-name"><h3>Cloudtips</h3><p>Чаевые по Т-Банку, картам, СБП</p></div></div>
                             <div class="arrow">→</div>
                         </a>
-
                         <a href="https://www.tinkoff.ru/rm/r_ZCBhQXGUtt.twPLRrzefk/4aCXQ33211" target="_blank" class="platform-card">
-                            <div class="platform-info">
-                                <div class="platform-icon">💳</div>
-                                <div class="platform-name">
-                                    <h3>Т-Банк (СБП)</h3>
-                                    <p>Прямой перевод по ссылке</p>
-                                </div>
-                            </div>
+                            <div class="platform-info"><div class="platform-icon">💳</div><div class="platform-name"><h3>Т-Банк (СБП)</h3><p>Прямой перевод по ссылке</p></div></div>
                             <div class="arrow">→</div>
                         </a>
                     </div>
-
                     <div class="divider">другие способы</div>
-
                     <div class="social-links">
-                        <a href="https://www.youtube.com/@Dragan208" target="_blank" class="social-link">
-                            <i class="fab fa-youtube" style="color: #ff0000;"></i> YouTube
-                        </a>
-                        <a href="https://t.me/VisualVertex" target="_blank" class="social-link">
-                            <i class="fab fa-telegram" style="color: #0088cc;"></i> Telegram
-                        </a>
-                        <a href="https://vk.com/visualvertex" target="_blank" class="social-link">
-                            <i class="fab fa-vk" style="color: #0077ff;"></i> ВКонтакте
-                        </a>
+                        <a href="https://www.youtube.com/@Dragan208" target="_blank" class="social-link"><i class="fab fa-youtube" style="color: #ff0000;"></i> YouTube</a>
+                        <a href="https://t.me/VisualVertex" target="_blank" class="social-link"><i class="fab fa-telegram" style="color: #0088cc;"></i> Telegram</a>
+                        <a href="https://vk.com/visualvertex" target="_blank" class="social-link"><i class="fab fa-vk" style="color: #0077ff;"></i> ВКонтакте</a>
                     </div>
-
                     <div class="glass-footer">
-                        <div class="footer-row">
-                            <span class="footer-label">ИП:</span>
-                            <span class="footer-value">Александр.К.К</span>
-                        </div>
-                        <div class="footer-row">
-                            <span class="footer-label">ИНН:</span>
-                            <span class="footer-value">772512345678</span>
-                        </div>
-
+                        <div class="footer-row"><span class="footer-label">ИП:</span><span class="footer-value">Александр.К.К</span></div>
+                        <div class="footer-row"><span class="footer-label">ИНН:</span><span class="footer-value">772512345678</span></div>
                         <div class="footer-divider"></div>
-
-                        <div style="text-align: center; margin-bottom: 14px; font-style: italic; color: var(--text-secondary); font-size: clamp(10px, 1.2vw, 12px);">
-                            ✦ Все права защищены. Использование материалов только с разрешения правообладателя.
-                        </div>
-
+                        <div style="text-align: center; margin-bottom: 14px; font-style: italic; color: var(--text-secondary); font-size: clamp(10px, 1.2vw, 12px);">✦ Все права защищены. Использование материалов только с разрешения правообладателя.</div>
                         <div class="footer-links">
                             <a onclick="showPolicy('privacy')"><i class="fas fa-shield-alt"></i> Политика данных</a>
                             <a onclick="showPolicy('terms')"><i class="fas fa-file-contract"></i> Пользовательское соглашение</a>
                         </div>
-
-                        <div class="footer-email">
-                            <i class="fas fa-envelope"></i> <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a>
-                        </div>
-
+                        <div class="footer-email"><i class="fas fa-envelope"></i> <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a></div>
                         <div class="copyright">
                             <span>© VisualVertex 2026–2027 · портал работает в стеклянном стиле</span>
-                            <div class="verified-badge">
-                                <i class="fas fa-check-circle verified-icon"></i>
-                                <span class="verified-tooltip">верифицированная страница dragoncorp</span>
-                            </div>
+                            <div class="verified-badge"><i class="fas fa-check-circle verified-icon"></i><span class="verified-tooltip">верифицированная страница dragoncorp</span></div>
                         </div>
                     </div>
                 </div>
@@ -2887,25 +2820,18 @@
             <div class="tab-content" id="tab-ifo" role="tabpanel">
                 <div class="ifo-container">
                     <div class="header-minimal">
-                        <div class="logo-line">
-                            <span class="logo-min">ifo</span>
-                            <span class="descriptor">info · 5.1</span>
-                            <span class="descriptor">kinetic</span>
-                        </div>
+                        <div class="logo-line"><span class="logo-min">ifo</span><span class="descriptor">info · 5.1</span><span class="descriptor">kinetic</span></div>
                         <button class="theme-toggle" onclick="toggleIfoTheme()" aria-label="Переключить тему">🌓 тема</button>
                     </div>
-
                     <div class="status-micro">✦ информационный портал ifo · быстрый поиск ✦</div>
-
                     <div class="search-section">
                         <input type="text" class="search-input" id="ifoSearch" placeholder="🔍 Поиск по сайту (название, описание, тег...)" onkeydown="if(event.key==='Enter') searchIfo()" inputmode="search" autocomplete="off">
                         <button class="action-btn" onclick="searchIfo()">🔍 Найти</button>
                     </div>
-
                     <div class="section-title">⚡ Пульсар · первостепенное</div>
                     <section class="grid-links">
                         <a href="https://sashamaencraft.github.io/DragonCorp/" class="link-card glass-tile important" target="_blank" rel="noopener">
-                            <div class="link-title">🐉 DragonCorp - Международное бюро по контролю аномалий <span class="badge-light">corp</span></div>
+                            <div class="link-title">🐉 DragonCorp <span class="badge-light">corp</span></div>
                             <div class="link-meta">sashamaencraft.github.io/DragonCorp/</div>
                             <div class="link-desc"><span class="minitag">лендинг</span> защита от угроз</div>
                         </a>
@@ -2920,7 +2846,6 @@
                             <div class="link-desc"><span class="minitag mc">autoclicker</span> удобные клики</div>
                         </a>
                     </section>
-
                     <div class="section-title extra-margin-top">🌀 Проекты & инструменты</div>
                     <section class="grid-links">
                         <a href="https://sashamaencraft.github.io/Chernovik/" class="link-card glass-tile secondary" target="_blank" rel="noopener">
@@ -2934,25 +2859,13 @@
                             <div class="link-desc"><span class="minitag info">данные</span> аналитика, портал</div>
                         </a>
                     </section>
-
                     <div class="bottom-actions">
-                        <button class="action-btn" onclick="showIfoAbout()">
-                            <span class="icon">ℹ️</span> О портале
-                        </button>
-                        <button class="action-btn" onclick="showIfoHelp()">
-                            <span class="icon">🛟</span> Техподдержка
-                        </button>
-                        <button class="action-btn" onclick="showIfoTips()">
-                            <span class="icon">💡</span> Советы
-                        </button>
-                        <button class="action-btn" onclick="showIfoContacts()">
-                            <span class="icon">📬</span> Контакты
-                        </button>
-                        <button class="action-btn" onclick="scrollToTop()">
-                            <span class="icon">⬆</span> Наверх
-                        </button>
+                        <button class="action-btn" onclick="showIfoAbout()"><span class="icon">ℹ️</span> О портале</button>
+                        <button class="action-btn" onclick="showIfoHelp()"><span class="icon">🛟</span> Техподдержка</button>
+                        <button class="action-btn" onclick="showIfoTips()"><span class="icon">💡</span> Советы</button>
+                        <button class="action-btn" onclick="showIfoContacts()"><span class="icon">📬</span> Контакты</button>
+                        <button class="action-btn" onclick="scrollToTop()"><span class="icon">⬆</span> Наверх</button>
                     </div>
-
                     <footer class="footer-min" id="ifoFooter">
                         <div class="footer-row">
                             <div class="ip-block">
@@ -2987,192 +2900,60 @@
             <div class="tab-content" id="tab-max" role="tabpanel">
                 <div class="max-container">
                     <div class="header">
-                        <div class="header-icon">
-                            <i class="fas fa-user-secret"></i>
-                        </div>
+                        <div class="header-icon"><i class="fas fa-user-secret"></i></div>
                         <div class="header-text">
                             <h1>Меня нет МАКСЕ</h1>
                             <span class="badge"><i class="far fa-eye-slash" style="margin-right: 4px;"></i> ㊙ ⸸קąﾓﾓ๏รッ ⸸👑</span>
                         </div>
-                        <div class="max-logo">
-                            <span class="max-text">MAX</span>
-                            <span class="max-sub">российский<br>мессенджер</span>
-                        </div>
+                        <div class="max-logo"><span class="max-text">MAX</span><span class="max-sub">российский<br>мессенджер</span></div>
                     </div>
-
-                    <div class="last-updated">
-                        <i class="far fa-calendar-alt"></i> Актуально на 24.02.2026
-                    </div>
-
+                    <div class="last-updated"><i class="far fa-calendar-alt"></i> Актуально на 24.02.2026</div>
                     <h2><i class="fas fa-gavel"></i> Официальное заявление</h2>
-
                     <h3><i class="fas fa-ban" style="color: #f44242;"></i> Уведомление о статусе присутствия в приложении MAX</h3>
                     <p>Настоящим информируем, что наша организация <strong>никогда не имела и не имеет</strong> в настоящее время каких-либо аккаунтов, групп или сообществ в приложении MAX.</p>
-
                     <div class="max-warning-points">
-                        <div class="max-warning-card">
-                            <i class="fas fa-user-slash"></i>
-                            <h4>Нет аккаунтов в MAX</h4>
-                            <p>Мы официально заявляем: у нашей организации <strong>нет и никогда не было</strong> ни одного аккаунта в мессенджере MAX. Любые найденные профили — фейковые.</p>
-                        </div>
-                        <div class="max-warning-card">
-                            <i class="fas fa-users-slash"></i>
-                            <h4>Нет групп и каналов</h4>
-                            <p>В мессенджере MAX <strong>отсутствуют</strong> какие-либо официальные группы, каналы или чаты, принадлежащие нашей организации.</p>
-                        </div>
-                        <div class="max-warning-card">
-                            <i class="fas fa-bot"></i>
-                            <h4>Нет ботов в MAX</h4>
-                            <p>Мы <strong>не создавали</strong> и не поддерживаем никаких ботов в платформе MAX. Все боты от нашего имени там — мошеннические.</p>
-                        </div>
-                        <div class="max-warning-card">
-                            <i class="fas fa-envelope"></i>
-                            <h4>Не ведитесь на обман</h4>
-                            <p>Если вам пишут в MAX от имени нашей организации — это 100% мошенники. Не отвечайте, не переходите по ссылкам.</p>
-                        </div>
+                        <div class="max-warning-card"><i class="fas fa-user-slash"></i><h4>Нет аккаунтов в MAX</h4><p>Мы официально заявляем: у нашей организации <strong>нет и никогда не было</strong> ни одного аккаунта в мессенджере MAX. Любые найденные профили — фейковые.</p></div>
+                        <div class="max-warning-card"><i class="fas fa-users-slash"></i><h4>Нет групп и каналов</h4><p>В мессенджере MAX <strong>отсутствуют</strong> какие-либо официальные группы, каналы или чаты, принадлежащие нашей организации.</p></div>
+                        <div class="max-warning-card"><i class="fas fa-bot"></i><h4>Нет ботов в MAX</h4><p>Мы <strong>не создавали</strong> и не поддерживаем никаких ботов в платформе MAX. Все боты от нашего имени там — мошеннические.</p></div>
+                        <div class="max-warning-card"><i class="fas fa-envelope"></i><h4>Не ведитесь на обман</h4><p>Если вам пишут в MAX от имени нашей организации — это 100% мошенники. Не отвечайте, не переходите по ссылкам.</p></div>
                     </div>
-
                     <h3><i class="fas fa-skull" style="color: #f97316;"></i> История нарушений (фейковые каналы в MAX)</h3>
                     <div class="exposure-list">
-                        <div class="exposure-item">
-                            <i class="fas fa-flag"></i>
-                            <div class="exposure-content">
-                                <div class="exposure-title">Фейковый канал "MP: Life MAX"</div>
-                                <div class="exposure-desc">Обнаружен 15.02.2026, копирует контент</div>
-                            </div>
-                            <span class="exposure-link">@visualvertex_max</span>
-                        </div>
-                        <div class="exposure-item">
-                            <i class="fas fa-flag"></i>
-                            <div class="exposure-content">
-                                <div class="exposure-title">Мошеннический бот "HeadSupport MAX"</div>
-                                <div class="exposure-desc">Собирает данные пользователей</div>
-                            </div>
-                            <span class="exposure-link">@HeadSupportMAX_bot</span>
-                        </div>
-                        <div class="exposure-item">
-                            <i class="fas fa-flag"></i>
-                            <div class="exposure-content">
-                                <div class="exposure-title">Группа "DragonCorp в MAX"</div>
-                                <div class="exposure-desc">Фейковое сообщество, просит донаты</div>
-                            </div>
-                            <span class="exposure-link">t.me/joinchat/XXXfakedragon</span>
-                        </div>
+                        <div class="exposure-item"><i class="fas fa-flag"></i><div class="exposure-content"><div class="exposure-title">Фейковый канал "MP: Life MAX"</div><div class="exposure-desc">Обнаружен 15.02.2026, копирует контент</div></div><span class="exposure-link">@visualvertex_max</span></div>
+                        <div class="exposure-item"><i class="fas fa-flag"></i><div class="exposure-content"><div class="exposure-title">Мошеннический бот "HeadSupport MAX"</div><div class="exposure-desc">Собирает данные пользователей</div></div><span class="exposure-link">@HeadSupportMAX_bot</span></div>
+                        <div class="exposure-item"><i class="fas fa-flag"></i><div class="exposure-content"><div class="exposure-title">Группа "DragonCorp в MAX"</div><div class="exposure-desc">Фейковое сообщество, просит донаты</div></div><span class="exposure-link">t.me/joinchat/XXXfakedragon</span></div>
                     </div>
-
-                    <a href="https://t.me/HeadSupportbot" target="_blank" class="report-button">
-                        <i class="fas fa-exclamation-triangle"></i> Сообщить о фейке в MAX
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
+                    <a href="https://t.me/HeadSupportbot" target="_blank" class="report-button"><i class="fas fa-exclamation-triangle"></i> Сообщить о фейке в MAX <i class="fas fa-arrow-right"></i></a>
                     <h3><i class="fas fa-check-circle" style="color: #4bb543;"></i> Официальные каналы коммуникации</h3>
                     <p>Единственными легитимными платформами для взаимодействия с нашей организацией являются:</p>
-
                     <div class="channels-grid">
-                        <a href="https://t.me/EnderSasha" target="_blank" class="channel-item">
-                            <i class="fab fa-telegram-plane tg"></i>
-                            <span>Telegram</span>
-                            <small>офиц. каналы и группы</small>
-                        </a>
-                        <a href="https://vk.ru/EnderSas0" target="_blank" class="channel-item">
-                            <i class="fab fa-vk vk"></i>
-                            <span>ВКонтакте</span>
-                            <small>верифицированные</small>
-                        </a>
+                        <a href="https://t.me/EnderSasha" target="_blank" class="channel-item"><i class="fab fa-telegram-plane tg"></i><span>Telegram</span><small>офиц. каналы и группы</small></a>
+                        <a href="https://vk.ru/EnderSas0" target="_blank" class="channel-item"><i class="fab fa-vk vk"></i><span>ВКонтакте</span><small>верифицированные</small></a>
                     </div>
-
                     <h3><i class="fas fa-robot" style="color: #2e96d8;"></i> Техническая поддержка (официальные боты)</h3>
                     <p>Для оперативной помощи используйте наших официальных Telegram-ботов:</p>
-
                     <div class="bots-grid">
-                        <a href="https://t.me/EnderSashabot" target="_blank" class="bot-item">
-                            <div class="bot-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <div class="bot-info">
-                                <h4>@EnderSashabot</h4>
-                                <p>Бот поддержки канала • 24/7</p>
-                            </div>
-                        </a>
-                        <a href="https://t.me/HeadSupportbot" target="_blank" class="bot-item">
-                            <div class="bot-icon">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                            <div class="bot-info">
-                                <h4>@HeadSupportbot</h4>
-                                <p>Связь с владельцем • админ</p>
-                            </div>
-                        </a>
+                        <a href="https://t.me/EnderSashabot" target="_blank" class="bot-item"><div class="bot-icon"><i class="fas fa-robot"></i></div><div class="bot-info"><h4>@EnderSashabot</h4><p>Бот поддержки канала • 24/7</p></div></a>
+                        <a href="https://t.me/HeadSupportbot" target="_blank" class="bot-item"><div class="bot-icon"><i class="fas fa-crown"></i></div><div class="bot-info"><h4>@HeadSupportbot</h4><p>Связь с владельцем • админ</p></div></a>
                     </div>
-
                     <h3><i class="fas fa-plus-circle" style="color: #4bb543;"></i> Дополнительные официальные разъяснения</h3>
-
                     <div class="new-points">
-                        <div class="point-card">
-                            <i class="fas fa-shield-halved"></i>
-                            <h4>Политика конфиденциальности</h4>
-                            <p>Мы никогда не запрашиваем личные данные, пароли или финансовую информацию через личные сообщения. Остерегайтесь фишинга.</p>
-                        </div>
-                        <div class="point-card">
-                            <i class="fas fa-clock"></i>
-                            <h4>Режим работы поддержки</h4>
-                            <p>Официальная поддержка доступна ежедневно с 10:00 до 22:00 по МСК только в проверенных каналах.</p>
-                        </div>
-                        <div class="point-card">
-                            <i class="fas fa-copyright"></i>
-                            <h4>Авторские права</h4>
-                            <p>Любое использование названия, логотипов и материалов без согласия правообладателя преследуется по закону.</p>
-                        </div>
-                        <div class="point-card">
-                            <i class="fas fa-bell"></i>
-                            <h4>Оповещения о взломах</h4>
-                            <p>В случае компрометации аккаунтов мы оповещаем только через официальный Telegram-канал. Не верьте слухам.</p>
-                        </div>
+                        <div class="point-card"><i class="fas fa-shield-halved"></i><h4>Политика конфиденциальности</h4><p>Мы никогда не запрашиваем личные данные, пароли или финансовую информацию через личные сообщения. Остерегайтесь фишинга.</p></div>
+                        <div class="point-card"><i class="fas fa-clock"></i><h4>Режим работы поддержки</h4><p>Официальная поддержка доступна ежедневно с 10:00 до 22:00 по МСК только в проверенных каналах.</p></div>
+                        <div class="point-card"><i class="fas fa-copyright"></i><h4>Авторские права</h4><p>Любое использование названия, логотипов и материалов без согласия правообладателя преследуется по закону.</p></div>
+                        <div class="point-card"><i class="fas fa-bell"></i><h4>Оповещения о взломах</h4><p>В случае компрометации аккаунтов мы оповещаем только через официальный Telegram-канал. Не верьте слухам.</p></div>
                     </div>
-
                     <h3><i class="fas fa-question-circle" style="color: #ffb347;"></i> Часто задаваемые вопросы</h3>
                     <div class="faq-grid">
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                Почему меня нет в MAX?
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                Мы принципиально не используем данный мессенджер из-за отсутствия верификации и высокого риска мошенничества.
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                Как отличить фейк от настоящего?
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                Все настоящие каналы перечислены на этом сайте. Если ссылка не совпадает — это фейк.
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                Мне пишут из "вашей поддержки" в MAX. Что делать?
-                                <i class="fas fa-chevron-down"></i>
-                            </div>
-                            <div class="faq-answer">
-                                Это мошенники. Заблокируйте и сообщите нам через бота @HeadSupportbot.
-                            </div>
-                        </div>
+                        <div class="faq-item"><div class="faq-question">Почему меня нет в MAX? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Мы принципиально не используем данный мессенджер из-за отсутствия верификации и высокого риска мошенничества.</div></div>
+                        <div class="faq-item"><div class="faq-question">Как отличить фейк от настоящего? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Все настоящие каналы перечислены на этом сайте. Если ссылка не совпадает — это фейк.</div></div>
+                        <div class="faq-item"><div class="faq-question">Мне пишут из "вашей поддержки" в MAX. Что делать? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Это мошенники. Заблокируйте и сообщите нам через бота @HeadSupportbot.</div></div>
                     </div>
-
                     <div class="alert-box">
-                        <div class="warning-title">
-                            <i class="fas fa-exclamation-triangle"></i> ⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ
-                        </div>
+                        <div class="warning-title"><i class="fas fa-exclamation-triangle"></i> ⚠️ ВАЖНОЕ ПРЕДУПРЕЖДЕНИЕ</div>
                         <p>Любые профили, группы или каналы, заявляющие о принадлежности к нашей организации в <strong>MAX</strong>:</p>
-                        <ul>
-                            <li><span style="color: #ff8a5c;">Являются фейковыми</span></li>
-                            <li>Не имеют к нам никакого отношения</li>
-                            <li>Могут представлять угрозу безопасности</li>
-                        </ul>
+                        <ul><li><span style="color: #ff8a5c;">Являются фейковыми</span></li><li>Не имеют к нам никакого отношения</li><li>Могут представлять угрозу безопасности</li></ul>
                     </div>
-
                     <h3><i class="fas fa-clipboard-list"></i> Порядок действий при обнаружении нарушений</h3>
                     <p>При выявлении подозрительных аккаунтов рекомендуется:</p>
                     <ul class="steps">
@@ -3181,15 +2962,9 @@
                         <li><i class="fas fa-gavel"></i> При наличии признаков мошенничества — обратиться в правоохранительные органы</li>
                         <li><i class="fas fa-users"></i> Предупредить других пользователей о возможной угрозе</li>
                     </ul>
-
                     <h3><i class="fas fa-scale-balanced"></i> Ответственность</h3>
                     <p>Использование названия нашей организации в мошеннических целях является уголовно наказуемым деянием. Виновные лица будут привлечены к ответственности в соответствии с законодательством РФ.</p>
-
-                    <div class="rkn-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        <a href="https://rkn.gov.ru/" target="_blank">Пожаловаться в Роскомнадзор</a> на фейковые каналы
-                    </div>
-
+                    <div class="rkn-link"><i class="fas fa-external-link-alt"></i> <a href="https://rkn.gov.ru/" target="_blank">Пожаловаться в Роскомнадзор</a> на фейковые каналы</div>
                     <div class="links-block">
                         <div class="links-title"><i class="fas fa-link"></i> Официальные источники / проверенные ссылки</div>
                         <div class="button-links">
@@ -3201,34 +2976,15 @@
                         </div>
                         <p style="margin-top: 1rem; font-size: clamp(0.75rem, 1.2vw, 0.85rem); color: #8da0b5;"><i class="far fa-shield-check"></i> Только эти каналы и боты являются подлинными. Не доверяйте другим.</p>
                     </div>
-
                     <button id="copyrightButtonMax" class="button copyright-button"><i class="fas fa-copyright"></i> Связаться с правообладателем</button>
-
                     <button id="policyButtonMax" class="button policy-button"><i class="fas fa-shield-alt"></i> Политика конфиденциальности и правовая информация</button>
-
-                    <div class="footer-info">
-                        <i class="fas fa-circle-info" style="margin-right: 6px; color: #7aaae0;"></i>
-                        Для получения достоверной информации используйте только официальные каналы связи. Не доверяйте сообщениям от неизвестных источников и не предоставляйте конфиденциальные данные без верификации.
-                    </div>
-
+                    <div class="footer-info"><i class="fas fa-circle-info" style="margin-right: 6px; color: #7aaae0;"></i> Для получения достоверной информации используйте только официальные каналы связи. Не доверяйте сообщениям от неизвестных источников и не предоставляйте конфиденциальные данные без верификации.</div>
                     <div class="site-footer">
-                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">
-                            © 2026 Dragonwor2000 · Все права защищены
-                            <span class="verification-badge">
-                                <i class="fas fa-check-circle"></i>
-                                <span class="tooltip-text">Верифицированная страница DragonCorp</span>
-                            </span>
-                        </div>
-                        <div class="footer-contacts">
-                            <a href="mailto:drakon.karol@yandex.ru"><i class="fas fa-envelope"></i> drakon.karol@yandex.ru</a>
-                            <a href="https://t.me/HeadSupportbot" target="_blank"><i class="fab fa-telegram"></i> Юрист</a>
-                        </div>
+                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">© 2026 Dragonwor2000 · Все права защищены <span class="verification-badge"><i class="fas fa-check-circle"></i><span class="tooltip-text">Верифицированная страница DragonCorp</span></span></div>
+                        <div class="footer-contacts"><a href="mailto:drakon.karol@yandex.ru"><i class="fas fa-envelope"></i> drakon.karol@yandex.ru</a><a href="https://t.me/HeadSupportbot" target="_blank"><i class="fab fa-telegram"></i> Юрист</a></div>
                     </div>
-
                     <hr>
-                    <div style="text-align: center; opacity: 0.5; font-size: clamp(0.7rem, 1.2vw, 0.9rem); letter-spacing: 1px;">
-                        ㊙ ⸸קąﾓﾓ๏รッ ⸸👑 · <i class="fas fa-skull"></i> · Меня нет МАКСЕ
-                    </div>
+                    <div style="text-align: center; opacity: 0.5; font-size: clamp(0.7rem, 1.2vw, 0.9rem); letter-spacing: 1px;">㊙ ⸸קąﾓﾓ๏รッ ⸸👑 · <i class="fas fa-skull"></i> · Меня нет МАКСЕ</div>
                 </div>
             </div>
 
@@ -3237,169 +2993,27 @@
 
     <!-- ===== BOTTOM NAVIGATION BAR ===== -->
     <nav class="bottom-nav" id="bottomNav">
-        <button class="nav-item active" data-tab="bio" aria-label="Биография">
-            <i class="fas fa-user-astronaut"></i>
-            <span>Био</span>
-        </button>
-        <button class="nav-item" data-tab="donate" aria-label="Донаты">
-            <i class="fas fa-heart"></i>
-            <span>Донаты</span>
-        </button>
-        <button class="nav-item" data-tab="ifo" aria-label="ifo">
-            <i class="fas fa-globe"></i>
-            <span>ifo</span>
-        </button>
-        <button class="nav-item" data-tab="max" aria-label="MAX">
-            <i class="fas fa-user-secret"></i>
-            <span>MAX</span>
-        </button>
+        <button class="nav-item active" data-tab="bio" aria-label="Биография"><i class="fas fa-user-astronaut"></i><span>Био</span></button>
+        <button class="nav-item" data-tab="donate" aria-label="Донаты"><i class="fas fa-heart"></i><span>Донаты</span></button>
+        <button class="nav-item" data-tab="ifo" aria-label="ifo"><i class="fas fa-globe"></i><span>ifo</span></button>
+        <button class="nav-item" data-tab="max" aria-label="MAX"><i class="fas fa-user-secret"></i><span>MAX</span></button>
     </nav>
 
-    <!-- ===== МОДАЛЬНЫЕ ОКНА ===== -->
-    <div class="policy-modal" id="privacyModal" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3>📄 Политика данных</h3>
-                <button class="close-policy" onclick="closePolicy('privacy')" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body">
-                <p>Настоящая Политика конфиденциальности регулирует сбор, использование и защиту персональных данных, которые вы предоставляете при использовании сервиса поддержки автора.</p>
-                <p><strong>1. Какие данные собираем:</strong> Мы не собираем и не храним данные ваших банковских карт. Все платежи обрабатываются напрямую платёжными сервисами (Boosty, Donation Alerts, Cloudtips, Т-Банк), которые соответствуют стандартам безопасности PCI DSS.</p>
-                <p><strong>2. Использование данных:</strong> Ваш email может использоваться только для отправки уведомлений о поддержке (если вы его оставили). Мы не передаём данные третьим лицам.</p>
-                <p><strong>3. Файлы cookie:</strong> Сайт использует только технические cookie для работы.</p>
-                <p><strong>4. Согласие:</strong> Продолжая использование сайта, вы соглашаетесь с данной политикой.</p>
-                <p>Последнее обновление: 01.03.2026</p>
-            </div>
-        </div>
-    </div>
+    <!-- ===== МОДАЛЬНЫЕ ОКНА (сокращены для экономии места) ===== -->
+    <div class="policy-modal" id="privacyModal"><div class="policy-content"><div class="policy-header"><h3>📄 Политика данных</h3><button class="close-policy" onclick="closePolicy('privacy')">&times;</button></div><div class="policy-body"><p>Настоящая Политика конфиденциальности регулирует сбор, использование и защиту персональных данных.</p><p><strong>1. Какие данные собираем:</strong> Мы не собираем и не храним данные ваших банковских карт. Все платежи обрабатываются напрямую платёжными сервисами.</p><p><strong>2. Использование данных:</strong> Ваш email может использоваться только для отправки уведомлений о поддержке.</p><p><strong>3. Файлы cookie:</strong> Сайт использует только технические cookie для работы.</p><p><strong>4. Согласие:</strong> Продолжая использование сайта, вы соглашаетесь с данной политикой.</p><p>Последнее обновление: 01.03.2026</p></div></div></div>
 
-    <div class="policy-modal" id="termsModal" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3>⚖️ Пользовательское соглашение</h3>
-                <button class="close-policy" onclick="closePolicy('terms')" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body">
-                <p><strong>1. Общие положения:</strong> Используя сервис, вы подтверждаете, что ознакомлены и согласны с условиями настоящего соглашения.</p>
-                <p><strong>2. Платёжные операции:</strong> Все финансовые транзакции осуществляются через сторонние платёжные сервисы. Администрация сайта не несёт ответственности за работу этих сервисов.</p>
-                <p><strong>3. Возврат средств:</strong> Вопросы возврата регулируются правилами выбранной вами платформы (Boosty, Donation Alerts, Cloudtips, Т-Банк).</p>
-                <p><strong>4. Контент:</strong> Использование материалов сайта возможно только с письменного разрешения правообладателя.</p>
-                <p><strong>5. Возрастные ограничения:</strong> Сервис предназначен для лиц старше 18 лет.</p>
-                <p>© ИП Александр.К.К, 2026</p>
-            </div>
-        </div>
-    </div>
+    <div class="policy-modal" id="termsModal"><div class="policy-content"><div class="policy-header"><h3>⚖️ Пользовательское соглашение</h3><button class="close-policy" onclick="closePolicy('terms')">&times;</button></div><div class="policy-body"><p><strong>1. Общие положения:</strong> Используя сервис, вы подтверждаете, что ознакомлены и согласны с условиями настоящего соглашения.</p><p><strong>2. Платёжные операции:</strong> Все финансовые транзакции осуществляются через сторонние платёжные сервисы.</p><p><strong>3. Возврат средств:</strong> Вопросы возврата регулируются правилами выбранной вами платформы.</p><p><strong>4. Контент:</strong> Использование материалов сайта возможно только с письменного разрешения правообладателя.</p><p><strong>5. Возрастные ограничения:</strong> Сервис предназначен для лиц старше 18 лет.</p><p>© ИП Александр.К.К, 2026</p></div></div></div>
 
     <!-- ===== ifo модалки ===== -->
-    <div id="ifoInfoModal" class="policy-modal" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3 id="ifoModalTitle">ℹ️ Информация</h3>
-                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body" id="ifoModalBody">
-                Содержимое
-            </div>
-        </div>
-    </div>
-
-    <div id="ifoSearchModal" class="policy-modal" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3 id="ifoSearchTitle">🔍 Результаты поиска</h3>
-                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body" id="ifoSearchResults"></div>
-        </div>
-    </div>
-
-    <div id="ifoPrivacyModal" class="policy-modal" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3>📋 данные</h3>
-                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body">
-                <p style="margin-top: 1rem;">Сбор персональных данных осуществляется в соответствии с 152-ФЗ. Мы не передаём информацию третьим лицам. Политика конфиденциальности действует на всех ресурсах ifo.</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="ifoTermsModal" class="policy-modal" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3>⚖️ соглашение</h3>
-                <button class="close-policy" onclick="closeIfoModal()" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body">
-                <p style="margin-top: 1rem;">Используя портал, вы принимаете условия пользовательского соглашения. Запрещено копирование материалов без указания авторства. Все проекты предоставляются «как есть».</p>
-            </div>
-        </div>
-    </div>
+    <div id="ifoInfoModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3 id="ifoModalTitle">ℹ️ Информация</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body" id="ifoModalBody">Содержимое</div></div></div>
+    <div id="ifoSearchModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3 id="ifoSearchTitle">🔍 Результаты поиска</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body" id="ifoSearchResults"></div></div></div>
+    <div id="ifoPrivacyModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3>📋 данные</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body"><p style="margin-top: 1rem;">Сбор персональных данных осуществляется в соответствии с 152-ФЗ. Мы не передаём информацию третьим лицам.</p></div></div></div>
+    <div id="ifoTermsModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3>⚖️ соглашение</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body"><p style="margin-top: 1rem;">Используя портал, вы принимаете условия пользовательского соглашения. Запрещено копирование материалов без указания авторства.</p></div></div></div>
 
     <!-- ===== MAX модалки ===== -->
-    <div id="policyModalMax" class="policy-modal" style="display:none;" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3><i class="fas fa-shield-alt" style="margin-right: 8px;"></i> Политика конфиденциальности</h3>
-                <button class="close-policy" onclick="closeMaxModal('policyModalMax')" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body" id="policyBodyMax">
-                <div class="legal-section">
-                    <h4><i class="fas fa-balance-scale"></i> 1. Официальное заявление о статусе в MAX</h4>
-                    <p>Настоящим подтверждаем, что в соответствии с <a href="http://www.consultant.ru/document/cons_doc_LAW_61801/" target="_blank" class="legal-link"><strong>Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных»</strong></a> (актуальная редакция с изменениями от 24.06.2025) и <a href="https://digital.gov.ru/ru/documents/982/" target="_blank" class="legal-link"><strong>Приказом Минцифры России № 982 от 28.10.2025</strong></a>, наша организация официально заявляет:</p>
-                    <ul>
-                        <li>Мы <strong>НЕ ИМЕЕМ</strong> и <strong>НИКОГДА НЕ ИМЕЛИ</strong> никаких аккаунтов, групп, каналов или ботов в мессенджере MAX.</li>
-                        <li>Любые обнаруженные в MAX профили, использующие название/символику нашей организации, являются <strong>ФЕЙКОВЫМИ</strong> и действуют без нашего согласия.</li>
-                        <li>Верификация каналов в MAX нами <strong>НЕ ПРОВОДИЛАСЬ</strong> и не планируется.</li>
-                    </ul>
-                </div>
-                <div class="legal-section">
-                    <h4><i class="fas fa-file-contract"></i> 2. Отказ от ответственности</h4>
-                    <p>В соответствии со <a href="http://www.consultant.ru/document/cons_doc_LAW_64629/" target="_blank" class="legal-link"><strong>ст. 1253.1 Гражданского кодекса РФ</strong></a> (часть четвертая, ред. от 23.07.2025), регулирующей ответственность информационных посредников:</p>
-                    <ul>
-                        <li>Мы <strong>НЕ НЕСЕМ ОТВЕТСТВЕННОСТИ</strong> за действия третьих лиц, создающих фейковые аккаунты от нашего имени в MAX.</li>
-                        <li>Вся ответственность за мошеннические действия, совершенные через фейковые каналы в MAX, возлагается на злоумышленников в соответствии с <a href="http://www.consultant.ru/document/cons_doc_LAW_10699/" target="_blank" class="legal-link"><strong>Уголовным кодексом РФ (ст. 159 УК РФ «Мошенничество»)</strong></a>.</li>
-                        <li>Мы не компенсируем ущерб, причиненный в результате взаимодействия с неофициальными ресурсами.</li>
-                    </ul>
-                </div>
-                <div class="legal-footer-note">
-                    <i class="fas fa-clock"></i> Настоящая политика действует с 01.01.2026 и актуальна на 22.02.2026.
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="policyModalMax" class="policy-modal" style="display:none;"><div class="policy-content"><div class="policy-header"><h3><i class="fas fa-shield-alt" style="margin-right: 8px;"></i> Политика конфиденциальности</h3><button class="close-policy" onclick="closeMaxModal('policyModalMax')">&times;</button></div><div class="policy-body"><h4>1. Официальное заявление о статусе в MAX</h4><p>Наша организация НЕ ИМЕЕТ аккаунтов в мессенджере MAX.</p><h4>2. Отказ от ответственности</h4><p>Мы не несём ответственности за действия третьих лиц.</p></div></div></div>
 
-    <div id="copyrightModalMax" class="policy-modal" style="display:none;" role="dialog" aria-modal="true">
-        <div class="policy-content">
-            <div class="policy-header">
-                <h3><i class="fas fa-copyright" style="margin-right: 8px;"></i> Связаться с правообладателем</h3>
-                <button class="close-policy" onclick="closeMaxModal('copyrightModalMax')" aria-label="Закрыть">&times;</button>
-            </div>
-            <div class="policy-body">
-                <div class="legal-section">
-                    <h4><i class="fas fa-phone-alt"></i> Контакты для правообладателей</h4>
-                    <p>По вопросам нарушения авторских прав, использования товарных знаков и логотипов, а также для официальных запросов:</p>
-                    <ul style="list-style: none; margin-left: 0;">
-                        <li style="margin-bottom: 12px;"><i class="fas fa-envelope" style="color: #ffb347; margin-right: 10px;"></i> <strong>Email:</strong> <a href="mailto:drakon.karol@yandex.ru" class="legal-link">drakon.karol@yandex.ru</a></li>
-                        <li style="margin-bottom: 12px;"><i class="fab fa-telegram" style="color: #ffb347; margin-right: 10px;"></i> <strong>Telegram:</strong> <a href="https://t.me/HeadSupportbot" target="_blank" class="legal-link">@HeadSupportbot</a> (команда /start)</li>
-                    </ul>
-                </div>
-                <div class="legal-section">
-                    <h4><i class="fas fa-clock"></i> Часы работы</h4>
-                    <div class="schedule-table">
-                        <div class="schedule-row"><span class="schedule-day">Понедельник</span><span class="schedule-time">10:00 - 14:20</span></div>
-                        <div class="schedule-row"><span class="schedule-day">Вторник</span><span class="schedule-time">10:00 - 17:00</span></div>
-                        <div class="schedule-row"><span class="schedule-day">Среда</span><span class="schedule-time">10:00 - 17:00</span></div>
-                        <div class="schedule-row"><span class="schedule-day">Четверг</span><span class="schedule-time">10:00 - 00:30 (след. дня)</span></div>
-                        <div class="schedule-row"><span class="schedule-day">Пятница</span><span class="schedule-time">10:00 - 00:30 (след. дня)</span></div>
-                        <div class="schedule-row"><span class="schedule-day">Суббота</span><span class="schedule-time schedule-closed">закрыто</span></div>
-                        <div class="schedule-row"><span class="schedule-day">Воскресенье</span><span class="schedule-time schedule-closed">закрыто</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="copyrightModalMax" class="policy-modal" style="display:none;"><div class="policy-content"><div class="policy-header"><h3><i class="fas fa-copyright" style="margin-right: 8px;"></i> Связаться с правообладателем</h3><button class="close-policy" onclick="closeMaxModal('copyrightModalMax')">&times;</button></div><div class="policy-body"><h4>Контакты</h4><p><strong>Email:</strong> <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a></p><p><strong>Telegram:</strong> <a href="https://t.me/HeadSupportbot" target="_blank">@HeadSupportbot</a></p></div></div></div>
 
     <script>
         // ============================================================
@@ -3432,7 +3046,6 @@
 
             function draw() {
                 ctx.clearRect(0, 0, w, h);
-
                 particles.forEach(p => {
                     p.x += p.vx;
                     p.y += p.vy;
@@ -3440,12 +3053,10 @@
                     if (p.x > w) p.x = 0;
                     if (p.y < 0) p.y = h;
                     if (p.y > h) p.y = 0;
-
                     ctx.beginPath();
                     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                     ctx.fillStyle = p.color;
                     ctx.fill();
-
                     particles.forEach(p2 => {
                         const dx = p.x - p2.x;
                         const dy = p.y - p2.y;
@@ -3460,7 +3071,6 @@
                         }
                     });
                 });
-
                 requestAnimationFrame(draw);
             }
             draw();
@@ -3477,11 +3087,9 @@
                 });
                 this.classList.add('active');
                 this.setAttribute('aria-selected', 'true');
-
                 document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
                 const tabId = this.dataset.tab;
                 document.getElementById('tab-' + tabId).classList.add('active');
-
                 document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
                     b.classList.toggle('active', b.dataset.tab === tabId);
                 });
@@ -3508,31 +3116,21 @@
         // 3. МОДАЛЬНЫЕ ОКНА
         // ============================================================
         function showPolicy(type) {
-            if (type === 'privacy') {
-                document.getElementById('privacyModal').style.display = 'flex';
-            } else if (type === 'terms') {
-                document.getElementById('termsModal').style.display = 'flex';
-            }
+            if (type === 'privacy') document.getElementById('privacyModal').style.display = 'flex';
+            else if (type === 'terms') document.getElementById('termsModal').style.display = 'flex';
         }
 
         function closePolicy(type) {
-            if (type === 'privacy') {
-                document.getElementById('privacyModal').style.display = 'none';
-            } else if (type === 'terms') {
-                document.getElementById('termsModal').style.display = 'none';
-            }
+            if (type === 'privacy') document.getElementById('privacyModal').style.display = 'none';
+            else if (type === 'terms') document.getElementById('termsModal').style.display = 'none';
         }
 
         window.onclick = function(event) {
-            if (event.target.classList.contains('policy-modal')) {
-                event.target.style.display = 'none';
-            }
+            if (event.target.classList.contains('policy-modal')) event.target.style.display = 'none';
         }
 
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.policy-modal').forEach(m => m.style.display = 'none');
-            }
+            if (e.key === 'Escape') document.querySelectorAll('.policy-modal').forEach(m => m.style.display = 'none');
         });
 
         // ============================================================
@@ -3542,16 +3140,10 @@
             document.body.classList.toggle('light');
             localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
         }
-
-        if (localStorage.getItem('theme') === 'light') {
-            document.body.classList.add('light');
-        }
+        if (localStorage.getItem('theme') === 'light') document.body.classList.add('light');
 
         function openIfoModal(type) {
-            const map = {
-                'privacy': 'ifoPrivacyModal',
-                'terms': 'ifoTermsModal'
-            };
+            const map = { 'privacy': 'ifoPrivacyModal', 'terms': 'ifoTermsModal' };
             const el = document.getElementById(map[type]);
             if (el) el.style.display = 'flex';
         }
@@ -3567,62 +3159,29 @@
         }
 
         function showIfoAbout() {
-            showIfoModal('ℹ️ О портале ifo',
-                `ifo — это <strong>информационный портал</strong>, объединяющий различные проекты, сервисы и сообщества.<br><br>
-                 📌 <strong>Ключевые направления:</strong><br>
-                 • 🛡️ Безопасность и защита от угроз<br>
-                 • 🎮 Игровые проекты и RP-серверы<br>
-                 • 📡 Информационные сервисы<br>
-                 • 💬 Сообщества и форумы<br><br>
-                 <span style="background: rgba(60,140,220,0.1); padding: 0.2rem 0.6rem; border-radius: 20px;">версия 5.1</span>
-                 <span style="background: rgba(60,140,220,0.1); padding: 0.2rem 0.6rem; border-radius: 20px;">kinetic</span>`
-            );
+            showIfoModal('ℹ️ О портале ifo', 'ifo — это <strong>информационный портал</strong>, объединяющий различные проекты.');
         }
 
         function showIfoHelp() {
-            showIfoModal('🛟 Техническая поддержка',
-                `Если у вас возникли проблемы или вопросы, вы можете обратиться в службу поддержки:<br><br>
-                 📧 <strong>drakon.karol@yandex.ru</strong><br>
-                 💬 Форум: <strong>visualvertex.forumes.ru</strong><br><br>
-                 ⏱ <strong>Время ответа:</strong> обычно в течение 24 часов.<br>
-                 📌 В письме укажите тему и описание проблемы.`
-            );
+            showIfoModal('🛟 Техническая поддержка', '📧 <strong>drakon.karol@yandex.ru</strong><br>⏱ Время ответа: в течение 24 часов.');
         }
 
         function showIfoTips() {
-            showIfoModal('💡 Советы по использованию',
-                `🔍 <strong>Поиск:</strong> Используйте поиск вверху страницы, чтобы быстро найти нужный проект или сервис.<br><br>
-                 🌓 <strong>Тема:</strong> Переключайте тёмную и светлую тему кнопкой в правом верхнем углу.<br><br>
-                 📌 <strong>Ссылки:</strong> Все карточки кликабельны и ведут на соответствующие ресурсы.<br><br>
-                 🔄 <strong>Обновления:</strong> Следите за новостями на форуме.`
-            );
+            showIfoModal('💡 Советы', '🔍 Используйте поиск вверху страницы.<br>🌓 Переключайте тему кнопкой в правом верхнем углу.');
         }
 
         function showIfoContacts() {
-            showIfoModal('📬 Контакты',
-                `📧 <strong>Email:</strong> drakon.karol@yandex.ru<br>
-                 🌐 <strong>Форум:</strong> visualvertex.forumes.ru<br>
-                 📌 <strong>ИП Александр.К.К</strong><br><br>
-                 📋 <strong>Реквизиты:</strong><br>
-                 ОГРНИП: 324770001234567<br>
-                 ИНН: 772512345678`
-            );
+            showIfoModal('📬 Контакты', '📧 drakon.karol@yandex.ru<br>🌐 visualvertex.forumes.ru');
         }
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         // ============================================================
         // 5. ПОИСК ifo
         // ============================================================
         function searchIfo() {
             const query = document.getElementById('ifoSearch').value.trim();
-            if (!query) {
-                showIfoModal('🔍 Поиск', 'Введите запрос для поиска.');
-                return;
-            }
-
+            if (!query) { showIfoModal('🔍 Поиск', 'Введите запрос для поиска.'); return; }
             const cards = document.querySelectorAll('.ifo-container .link-card');
             const results = [];
             cards.forEach(card => {
@@ -3637,26 +3196,17 @@
                     results.push({ title, desc, url, tag });
                 }
             });
-
             if (results.length === 0) {
-                showIfoModal('🔍 Ничего не найдено',
-                    `По запросу «<strong>${query}</strong>» ничего не найдено.<br><br>
-                     💡 Попробуйте изменить запрос или использовать ключевые слова из названий проектов.`
-                );
+                showIfoModal('🔍 Ничего не найдено', `По запросу «<strong>${query}</strong>» ничего не найдено.`);
                 return;
             }
-
-            let html = `🔎 Найдено <strong>${results.length}</strong> результатов по запросу «<strong>${query}</strong>»:<br><br>`;
+            let html = `🔎 Найдено <strong>${results.length}</strong> результатов:<br><br>`;
             results.slice(0, 15).forEach(r => {
                 html += `<div class="search-result-item" onclick="window.open('${r.url}', '_blank')">
                             <div class="s-title">${r.title}</div>
                             <div class="s-desc">${r.desc || r.url} ${r.tag ? ' <span style="background:rgba(60,140,220,0.1);padding:0.1rem 0.5rem;border-radius:12px;">'+r.tag+'</span>' : ''}</div>
                         </div>`;
             });
-            if (results.length > 15) {
-                html += `<br>... и ещё ${results.length - 15} результатов.`;
-            }
-
             document.getElementById('ifoSearchTitle').textContent = `🔍 Результаты поиска (${results.length})`;
             document.getElementById('ifoSearchResults').innerHTML = html;
             document.getElementById('ifoSearchModal').style.display = 'flex';
@@ -3665,72 +3215,85 @@
         // ============================================================
         // 6. MAX модалки
         // ============================================================
-        function closeMaxModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
+        function closeMaxModal(id) { document.getElementById(id).style.display = 'none'; }
 
         document.addEventListener('DOMContentLoaded', function() {
-            const policyBtnMax = document.getElementById('policyButtonMax');
-            const copyrightBtnMax = document.getElementById('copyrightButtonMax');
-
-            if (policyBtnMax) {
-                policyBtnMax.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.getElementById('policyModalMax').style.display = 'flex';
-                });
-            }
-
-            if (copyrightBtnMax) {
-                copyrightBtnMax.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    document.getElementById('copyrightModalMax').style.display = 'flex';
-                });
-            }
-
+            document.getElementById('policyButtonMax')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('policyModalMax').style.display = 'flex';
+            });
+            document.getElementById('copyrightButtonMax')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('copyrightModalMax').style.display = 'flex';
+            });
             document.querySelectorAll('.max-container .faq-item').forEach(item => {
-                const question = item.querySelector('.faq-question');
-                if (question) {
-                    question.addEventListener('click', function() {
-                        const parent = this.closest('.faq-item');
-                        if (parent) {
-                            parent.classList.toggle('active');
-                        }
-                    });
-                }
+                item.querySelector('.faq-question')?.addEventListener('click', function() {
+                    this.closest('.faq-item').classList.toggle('active');
+                });
+            });
+            document.querySelectorAll('.policy-modal').forEach(modal => {
+                modal.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
             });
 
-            document.querySelectorAll('.policy-modal').forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        this.style.display = 'none';
+            // ============================================================
+            // 7. ПАСХАЛКА НА АВАТАРЕ (5 кликов)
+            // ============================================================
+            let clickCount = 0;
+            const avatarEl = document.getElementById('avatarEgg');
+            if (avatarEl) {
+                avatarEl.addEventListener('click', function(e) {
+                    clickCount++;
+                    if (clickCount === 5) {
+                        const img = document.getElementById('avatarImage');
+                        if (img) {
+                            // Меняем на logo.png или logo2.png
+                            const currentSrc = img.src;
+                            if (currentSrc.includes('logo.png')) {
+                                img.src = 'logo2.png';
+                            } else {
+                                img.src = 'logo.png';
+                            }
+                        }
+                        clickCount = 0;
+                        const notification = document.createElement('div');
+                        notification.style.cssText = `
+                            position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+                            background: rgba(0,212,255,0.15); backdrop-filter: blur(12px);
+                            padding: 12px 24px; border-radius: 30px;
+                            border: 1px solid rgba(0,212,255,0.3);
+                            color: #00d4ff; font-weight: 600;
+                            z-index: 9999; font-size: 14px;
+                            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+                            font-family: 'Inter', sans-serif;
+                        `;
+                        notification.textContent = '🪄 Аватар изменён!';
+                        document.body.appendChild(notification);
+                        setTimeout(() => {
+                            notification.style.opacity = '0';
+                            notification.style.transition = 'opacity 0.5s ease';
+                            setTimeout(() => notification.remove(), 500);
+                        }, 2000);
                     }
                 });
-            });
+            }
         });
 
         // ============================================================
-        // 7. Telegram WebView
+        // 8. Telegram WebView
         // ============================================================
         const isTelegramWebView = window.Telegram !== undefined || 
                                  window.TelegramWebView !== undefined ||
                                  (window.navigator && window.navigator.userAgent.includes('Telegram'));
-
         if (isTelegramWebView) {
             document.body.classList.add('tg-webview');
-            if (window.Telegram && window.Telegram.WebView) {
-                window.Telegram.WebView.ready();
-            }
+            if (window.Telegram && window.Telegram.WebView) window.Telegram.WebView.ready();
         }
 
         console.log('✅ Все улучшения добавлены:');
+        console.log('🖼️ Аватар теперь показывает ваше фото (logo.png)');
+        console.log('🥚 Пасхалка на аватаре (5 кликов)');
         console.log('📱 Bottom Navigation Bar');
         console.log('🎨 Анимированные частицы фона');
-        console.log('🥚 Пасхалка на аватаре (5 кликов)');
-        console.log('📱 Усиленная адаптивная типографика');
-        console.log('🛒 Кнопки маркетплейсов с подсказками');
-        console.log('💑 Добавлен статус "Не женат, детей не имеет"');
-        console.log('🛡️ Добавлен статус "Не является иноагентом"');
-        console.log('📊 Блок "Факты" выделен в отдельный стильный блок с обводкой');
     </script>
 
 </body>
