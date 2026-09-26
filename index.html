@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <meta name="telegram:channel" content="@EnderSasha">
     <meta name="telegram:bot" content="@EnderSashabot">
-    <title>EnderSasha · Биография + Донаты + ifo + MAX</title>
+    <title>EnderSasha · Биография + Донаты + ifo + MAX + Ламповое</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -2243,6 +2243,583 @@
                 transition-duration: 0.01ms !important;
             }
         }
+
+        /* ==================== СТИЛИ ДЛЯ БЛОКА «ЛАМПОВОЕ» ==================== */
+        .lamp-container {
+            padding: 4px 0;
+            width: 100%;
+            position: relative;
+        }
+
+        .lamp-particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.35;
+            border-radius: clamp(1.2rem, 3vw, 2rem);
+        }
+
+        .lamp-hero {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: clamp(1.5rem, 5vw, 3rem) clamp(0.8rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+            border-radius: clamp(1.2rem, 3vw, 2rem);
+            background: rgba(15, 15, 26, 0.4);
+            border: 1px solid rgba(245, 215, 110, 0.12);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .lamp-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(245, 215, 110, 0.04) 0%, transparent 60%);
+            animation: pulseGradient 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        .lamp-hero h1 {
+            font-size: clamp(2.2rem, 8vw, 5rem);
+            font-weight: 800;
+            letter-spacing: 5px;
+            background: linear-gradient(45deg, #f5d76e, #ffb347, #f5d76e);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: lampShine 3s infinite;
+            margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 30px rgba(245, 215, 110, 0.35));
+        }
+
+        @keyframes lampShine {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .lamp-hero p {
+            font-size: clamp(0.9rem, 2vw, 1.15rem);
+            color: #b0b8c8;
+            margin-bottom: 1.2rem;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .lamp-ip-box {
+            background: rgba(245, 215, 110, 0.08);
+            border: 2px solid #f5d76e;
+            padding: clamp(0.8rem, 2.5vw, 1.2rem) clamp(1rem, 4vw, 2.5rem);
+            border-radius: 15px;
+            margin: 0 auto 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 30px rgba(245, 215, 110, 0.2);
+            max-width: 420px;
+            position: relative;
+            z-index: 1;
+            touch-action: manipulation;
+        }
+
+        .lamp-ip-box:hover {
+            background: rgba(245, 215, 110, 0.16);
+            box-shadow: 0 0 50px rgba(245, 215, 110, 0.45);
+            transform: scale(1.03);
+        }
+
+        .lamp-ip-box:active { transform: scale(0.98); }
+
+        .lamp-ip-box .lamp-label {
+            font-size: clamp(0.65rem, 1.3vw, 0.8rem);
+            color: #9aa8b8;
+            margin-bottom: 0.25rem;
+        }
+
+        .lamp-ip-box .lamp-ip {
+            font-size: clamp(1.1rem, 3.5vw, 1.8rem);
+            color: #f5d76e;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(245, 215, 110, 0.6);
+            word-break: break-all;
+        }
+
+        .lamp-buttons {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .lamp-btn {
+            padding: clamp(0.6rem, 2vw, 0.85rem) clamp(1.2rem, 4vw, 2rem);
+            border: none;
+            border-radius: 10px;
+            font-size: clamp(0.85rem, 1.8vw, 1rem);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            min-height: 44px;
+            touch-action: manipulation;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .lamp-btn-primary {
+            background: linear-gradient(45deg, #f5d76e, #ffb347);
+            color: #0f0f1a;
+            box-shadow: 0 0 30px rgba(245, 215, 110, 0.4);
+        }
+
+        .lamp-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(245, 215, 110, 0.8);
+        }
+
+        .lamp-btn-secondary {
+            background: transparent;
+            color: #f5d76e;
+            border: 2px solid #f5d76e;
+        }
+
+        .lamp-btn-secondary:hover {
+            background: #f5d76e;
+            color: #0f0f1a;
+            box-shadow: 0 0 40px #f5d76e;
+        }
+
+        .lamp-section-title {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: #f5d76e;
+            margin: clamp(1.2rem, 3vw, 2rem) 0 clamp(1rem, 2.5vw, 1.5rem);
+            text-shadow: 0 0 20px rgba(245, 215, 110, 0.4);
+            letter-spacing: 3px;
+        }
+
+        .lamp-cards {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(0.8rem, 2vw, 1.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .lamp-card {
+            background: rgba(30, 30, 50, 0.6);
+            border: 1px solid rgba(245, 215, 110, 0.25);
+            border-radius: 15px;
+            padding: clamp(1.2rem, 3vw, 2rem) clamp(0.8rem, 2vw, 1.5rem);
+            text-align: center;
+            transition: 0.4s;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .lamp-card:hover {
+            transform: translateY(-8px);
+            border-color: #f5d76e;
+            box-shadow: 0 15px 40px rgba(245, 215, 110, 0.3);
+        }
+
+        .lamp-card .lamp-icon {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 0.8rem;
+            filter: drop-shadow(0 0 10px rgba(245, 215, 110, 0.7));
+        }
+
+        .lamp-card h3 {
+            color: #f5d76e;
+            font-size: clamp(1rem, 2.2vw, 1.3rem);
+            margin-bottom: 0.6rem;
+        }
+
+        .lamp-card p {
+            color: #a8b4c8;
+            line-height: 1.6;
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+        }
+
+        .lamp-stats {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: clamp(0.8rem, 2vw, 1.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .lamp-stat {
+            text-align: center;
+            padding: clamp(1rem, 2.5vw, 1.8rem);
+            background: rgba(30, 30, 50, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(245, 215, 110, 0.25);
+        }
+
+        .lamp-stat .lamp-number {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: #f5d76e;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(245, 215, 110, 0.6);
+        }
+
+        .lamp-stat .lamp-label {
+            color: #9aa8b8;
+            margin-top: 0.4rem;
+            font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+        }
+
+        .lamp-admin-cards {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 380px));
+            gap: clamp(0.8rem, 2vw, 1.5rem);
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .lamp-admin-card {
+            background: linear-gradient(135deg, rgba(30, 30, 50, 0.95), rgba(50, 30, 60, 0.95));
+            border: 2px solid #f5d76e;
+            border-radius: 25px;
+            padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.8rem);
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(245, 215, 110, 0.25);
+        }
+
+        .lamp-admin-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 60px rgba(245, 215, 110, 0.6);
+        }
+
+        .lamp-admin-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #f5d76e, #ffb347, #f5d76e);
+            background-size: 200% 100%;
+            animation: lampShine 3s infinite;
+        }
+
+        .lamp-admin-avatar {
+            width: clamp(80px, 18vw, 120px);
+            height: clamp(80px, 18vw, 120px);
+            margin: 0 auto 1rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5d76e, #ffb347);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            box-shadow: 0 0 30px rgba(245, 215, 110, 0.5);
+            border: 3px solid rgba(245, 215, 110, 0.4);
+            transition: 0.4s;
+        }
+
+        .lamp-admin-card:hover .lamp-admin-avatar {
+            transform: scale(1.08) rotate(4deg);
+            box-shadow: 0 0 50px rgba(245, 215, 110, 0.9);
+        }
+
+        .lamp-admin-role {
+            display: inline-block;
+            background: linear-gradient(45deg, #f5d76e, #ffb347);
+            color: #0f0f1a;
+            padding: 0.3rem 1.2rem;
+            border-radius: 20px;
+            font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 0 20px rgba(245, 215, 110, 0.5);
+        }
+
+        .lamp-admin-nick {
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            color: #f5d76e;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 0 15px rgba(245, 215, 110, 0.7);
+            letter-spacing: 1px;
+        }
+
+        .lamp-admin-desc {
+            color: #a8b4c8;
+            font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+            line-height: 1.6;
+        }
+
+        .lamp-donate-cards {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 360px));
+            gap: clamp(0.8rem, 2vw, 1.5rem);
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .lamp-donate-card {
+            background: linear-gradient(135deg, rgba(30, 30, 50, 0.9), rgba(50, 30, 60, 0.9));
+            border: 2px solid #f5d76e;
+            border-radius: 20px;
+            padding: clamp(1.5rem, 3vw, 2.5rem) clamp(1rem, 2vw, 1.8rem);
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(245, 215, 110, 0.25);
+        }
+
+        .lamp-donate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 60px rgba(245, 215, 110, 0.55);
+        }
+
+        .lamp-donate-card .lamp-rank {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: #f5d76e;
+            margin-bottom: 0.4rem;
+            font-weight: 800;
+        }
+
+        .lamp-donate-card .lamp-price {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            color: #ffffff;
+            margin: 0.8rem 0;
+            font-weight: 800;
+        }
+
+        .lamp-donate-card .lamp-price span {
+            font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+            color: #9aa8b8;
+        }
+
+        .lamp-donate-card ul {
+            list-style: none;
+            margin: 1rem 0 1.2rem;
+            text-align: left;
+        }
+
+        .lamp-donate-card li {
+            padding: 0.4rem 0;
+            color: #a8b4c8;
+            border-bottom: 1px solid rgba(245, 215, 110, 0.1);
+            font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+        }
+
+        .lamp-donate-card li::before {
+            content: '✦ ';
+            color: #f5d76e;
+        }
+
+        .lamp-footer-note {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: clamp(0.8rem, 2vw, 1.2rem);
+            margin-top: 1rem;
+            font-size: clamp(0.7rem, 1.3vw, 0.85rem);
+            color: #5a6f8a;
+            border-top: 1px solid rgba(245, 215, 110, 0.1);
+            letter-spacing: 0.3px;
+            line-height: 1.8;
+        }
+
+        .lamp-copy-toast {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            background: #f5d76e;
+            color: #0f0f1a;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: 0 0 30px rgba(245, 215, 110, 0.8);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: 0.4s;
+            z-index: 99999;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        .lamp-copy-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .lamp-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 99998;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.4s ease;
+            padding: 16px;
+        }
+
+        .lamp-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lamp-modal {
+            background: linear-gradient(135deg, rgba(30, 30, 50, 0.98), rgba(50, 30, 60, 0.98));
+            border: 2px solid #f5d76e;
+            border-radius: 25px;
+            padding: clamp(1.5rem, 4vw, 3rem) clamp(1.2rem, 3vw, 2.5rem);
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 60px rgba(245, 215, 110, 0.4);
+            transform: scale(0.7) rotateX(20deg);
+            transition: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
+        }
+
+        .lamp-modal-overlay.show .lamp-modal {
+            transform: scale(1) rotateX(0deg);
+        }
+
+        .lamp-modal::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(245, 215, 110, 0.12) 90deg,
+                transparent 180deg,
+                rgba(245, 215, 110, 0.12) 270deg,
+                transparent 360deg
+            );
+            animation: rotate 8s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .lamp-modal-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .lamp-modal .lamp-modal-icon {
+            font-size: clamp(3rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 0 25px rgba(245, 215, 110, 0.7));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .lamp-modal h2 {
+            font-size: clamp(1.3rem, 3.5vw, 2rem);
+            background: linear-gradient(45deg, #f5d76e, #ffb347, #f5d76e);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: lampShine 3s infinite;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            font-weight: 800;
+        }
+
+        .lamp-modal p {
+            color: #c0c8d8;
+            font-size: clamp(0.85rem, 1.8vw, 1.05rem);
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .lamp-modal .lamp-highlight {
+            color: #f5d76e;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(245, 215, 110, 0.7);
+        }
+
+        .lamp-modal .lamp-close-btn {
+            margin-top: 1.2rem;
+            padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.5rem, 5vw, 2.8rem);
+            background: linear-gradient(45deg, #f5d76e, #ffb347);
+            color: #0f0f1a;
+            border: none;
+            border-radius: 12px;
+            font-size: clamp(0.8rem, 1.6vw, 1rem);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 25px rgba(245, 215, 110, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .lamp-modal .lamp-close-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 50px rgba(245, 215, 110, 0.9);
+        }
+
+        @media (max-width: 480px) {
+            .lamp-admin-cards { grid-template-columns: 1fr; }
+            .lamp-donate-cards { grid-template-columns: 1fr; }
+            .lamp-cards { grid-template-columns: 1fr; }
+            .lamp-modal { padding: 1.5rem 1.2rem; }
+        }
     </style>
 </head>
 <body>
@@ -2264,6 +2841,9 @@
                 </button>
                 <button class="tab-btn" data-tab="max" role="tab" aria-selected="false">
                     <i class="fas fa-user-secret"></i> <span>MAX</span>
+                </button>
+                <button class="tab-btn" data-tab="lampovoe" role="tab" aria-selected="false">
+                    <i class="fas fa-lantern"></i> <span>Ламповое</span>
                 </button>
             </div>
 
@@ -2651,6 +3231,97 @@
                 </div>
             </div>
 
+            <!-- ===== ВКЛАДКА 5: ЛАМПОВОЕ ===== -->
+            <div class="tab-content" id="tab-lampovoe" role="tabpanel">
+                <div class="lamp-container">
+                    <canvas id="lampParticlesCanvas" class="lamp-particles-canvas"></canvas>
+
+                    <div class="lamp-hero">
+                        <h1>ЛАМПОВОЕ</h1>
+                        <p>Уютный Minecraft сервер с ламповой атмосферой, дружным комьюнити и интересными режимами</p>
+
+                        <div class="lamp-ip-box" onclick="copyLampIP()">
+                            <div class="lamp-label">Нажми, чтобы скопировать IP</div>
+                            <div class="lamp-ip" id="lampServerIP">tube-based.mc-join.me</div>
+                        </div>
+
+                        <div class="lamp-buttons">
+                            <a href="#lamp-donate" class="lamp-btn lamp-btn-primary" onclick="event.preventDefault();document.getElementById('lamp-donate').scrollIntoView({behavior:'smooth'})">💎 Донат</a>
+                            <a href="#lamp-about" class="lamp-btn lamp-btn-secondary" onclick="event.preventDefault();document.getElementById('lamp-about').scrollIntoView({behavior:'smooth'})">📖 О сервере</a>
+                        </div>
+                    </div>
+
+                    <div id="lamp-about" class="lamp-section-title">О СЕРВЕРЕ</div>
+                    <div class="lamp-cards">
+                        <div class="lamp-card">
+                            <div class="lamp-icon">⚡</div>
+                            <h3>Без лагов</h3>
+                            <p>Мощное железо и оптимизация обеспечивают стабильные 20 TPS в любое время суток</p>
+                        </div>
+                        <div class="lamp-card">
+                            <div class="lamp-icon">🎮</div>
+                            <h3>Режим игры</h3>
+                            <p>Классическое выживание с друзьями — строй, исследуй и развивайся вместе с комьюнити</p>
+                        </div>
+                        <div class="lamp-card">
+                            <div class="lamp-icon">🛡️</div>
+                            <h3>Защита</h3>
+                            <p>Приваты территорий, античит и активная администрация защитят ваши постройки</p>
+                        </div>
+                        <div class="lamp-card">
+                            <div class="lamp-icon">💬</div>
+                            <h3>Комьюнити</h3>
+                            <p>Дружное сообщество игроков, Discord с голосовыми каналами и ивенты каждую неделю</p>
+                        </div>
+                    </div>
+
+                    <div class="lamp-stats">
+                        <div class="lamp-stat">
+                            <div class="lamp-number" data-lamp-target="24">0</div>
+                            <div class="lamp-label">Часа онлайн</div>
+                        </div>
+                        <div class="lamp-stat">
+                            <div class="lamp-number" data-lamp-target="99">0</div>
+                            <div class="lamp-label">% Аптайм</div>
+                        </div>
+                    </div>
+
+                    <div class="lamp-section-title">АДМИНИСТРАЦИЯ</div>
+                    <div class="lamp-admin-cards">
+                        <div class="lamp-admin-card">
+                            <div class="lamp-admin-avatar">👑</div>
+                            <div class="lamp-admin-role">Владелец</div>
+                            <div class="lamp-admin-nick">Dragon_Mira0</div>
+                            <p class="lamp-admin-desc">
+                                Основатель и владелец сервера "Ламповое". Следит за развитием проекта,
+                                общается с игроками и создаёт уютную атмосферу на сервере.
+                                Всегда готов помочь и выслушать предложения комьюнити ✨
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="lamp-donate" class="lamp-section-title">ДОНАТ ПРИВИЛЕГИЯ</div>
+                    <div class="lamp-donate-cards">
+                        <div class="lamp-donate-card">
+                            <div class="lamp-rank">💎 VIP</div>
+                            <div class="lamp-price">299 <span>₽</span></div>
+                            <ul>
+                                <li>10 точек /home</li>
+                                <li>Команда /fly</li>
+                                <li>Доступ к /ec</li>
+                            </ul>
+                            <button class="lamp-btn lamp-btn-primary" onclick="showLampComingSoon()">Купить</button>
+                        </div>
+                    </div>
+
+                    <div class="lamp-footer-note">
+                        ✨ ЛАМПОВОЕ · Лучший Minecraft сервер с ламповой атмосферой<br>
+                        <a href="https://t.me/orange_maple_cartel" target="_blank" rel="noopener noreferrer" style="color:#f5d76e;text-decoration:none;margin-top:0.4rem;display:inline-block;">Telegram</a><br>
+                        © 2026 Ламповое. Все права защищены. <div class="verified-badge"><i class="fas fa-check-circle verified-icon"></i><span class="verified-tooltip">верифицированная страница dragoncorp</span></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -2659,6 +3330,7 @@
         <button class="nav-item" data-tab="donate" aria-label="Донаты"><i class="fas fa-heart"></i><span>Донаты</span></button>
         <button class="nav-item" data-tab="ifo" aria-label="ifo"><i class="fas fa-globe"></i><span>ifo</span></button>
         <button class="nav-item" data-tab="max" aria-label="MAX"><i class="fas fa-user-secret"></i><span>MAX</span></button>
+        <button class="nav-item" data-tab="lampovoe" aria-label="Ламповое"><i class="fas fa-lantern"></i><span>Ламповое</span></button>
     </nav>
 
     <div class="policy-modal" id="privacyModal"><div class="policy-content"><div class="policy-header"><h3>📄 Политика данных</h3><button class="close-policy" onclick="closePolicy('privacy')">&times;</button></div><div class="policy-body"><p>Настоящая Политика конфиденциальности регулирует сбор, использование и защиту персональных данных.</p><p><strong>1. Какие данные собираем:</strong> Мы не собираем и не храним данные ваших банковских карт. Все платежи обрабатываются напрямую платёжными сервисами.</p><p><strong>2. Использование данных:</strong> Ваш email может использоваться только для отправки уведомлений о поддержке.</p><p><strong>3. Файлы cookie:</strong> Сайт использует только технические cookie для работы.</p><p><strong>4. Согласие:</strong> Продолжая использование сайта, вы соглашаетесь с данной политикой.</p><p>Последнее обновление: 01.03.2026</p></div></div></div>
@@ -2674,9 +3346,24 @@
 
     <div id="copyrightModalMax" class="policy-modal" style="display:none;"><div class="policy-content"><div class="policy-header"><h3><i class="fas fa-copyright" style="margin-right: 8px;"></i> Связаться с правообладателем</h3><button class="close-policy" onclick="closeMaxModal('copyrightModalMax')">&times;</button></div><div class="policy-body"><h4>Контакты</h4><p><strong>Email:</strong> <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a></p><p><strong>Telegram:</strong> <a href="https://t.me/HeadSupportbot" target="_blank" rel="noopener noreferrer">@HeadSupportbot</a></p></div></div></div>
 
+    <!-- Модальное окно «В разработке» для Лампового -->
+    <div class="lamp-modal-overlay" id="lampComingSoonModal">
+        <div class="lamp-modal">
+            <div class="lamp-modal-content">
+                <div class="lamp-modal-icon">🚧</div>
+                <h2>В РАЗРАБОТКЕ</h2>
+                <p>Извините, но данная <span class="lamp-highlight">функция</span> находится в разработке</p>
+                <p style="font-size: 0.85rem; color: #8899bb;">Совсем скоро вы сможете приобрести VIP статус 💎</p>
+                <button class="lamp-close-btn" onclick="closeLampComingSoon()">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="lamp-copy-toast" id="lampToast">IP скопирован! ✓</div>
+
     <script>
         // ============================================================
-        // 1. ЧАСТИЦЫ ФОНА
+        // 1. ЧАСТИЦЫ ФОНА (глобальные)
         // ============================================================
         (function initParticles() {
             const canvas = document.getElementById('particles-canvas');
@@ -2736,7 +3423,71 @@
         })();
 
         // ============================================================
-        // 2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+        // 2. ЧАСТИЦЫ ДЛЯ БЛОКА «ЛАМПОВОЕ» (золотые)
+        // ============================================================
+        (function initLampParticles() {
+            const canvas = document.getElementById('lampParticlesCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                const parent = canvas.parentElement;
+                w = canvas.width = parent.offsetWidth;
+                h = canvas.height = parent.offsetHeight;
+            }
+            window.addEventListener('resize', resize);
+            // Наблюдаем за изменением размера контейнера
+            if (window.ResizeObserver) {
+                new ResizeObserver(resize).observe(canvas.parentElement);
+            }
+            setTimeout(resize, 100);
+            resize();
+
+            const count = 40;
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.2,
+                    vy: (Math.random() - 0.5) * 0.2 - 0.1,
+                    r: Math.random() * 2.5 + 1,
+                    alpha: Math.random() * 0.6 + 0.3,
+                    pulse: Math.random() * Math.PI * 2
+                });
+            }
+
+            function draw() {
+                if (!canvas.parentElement || canvas.parentElement.offsetParent === null) {
+                    requestAnimationFrame(draw);
+                    return;
+                }
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.pulse += 0.02;
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+                    const glow = 0.5 + 0.5 * Math.sin(p.pulse);
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * (0.8 + 0.4 * glow), 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(245, 215, 110, ${p.alpha * (0.5 + 0.5 * glow)})`;
+                    ctx.shadowColor = 'rgba(245, 215, 110, 0.8)';
+                    ctx.shadowBlur = 12;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        // ============================================================
+        // 3. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
         // ============================================================
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -2752,6 +3503,16 @@
                 document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
                     b.classList.toggle('active', b.dataset.tab === tabId);
                 });
+                // Пересчёт размеров частиц при переключении на Ламповое
+                if (tabId === 'lampovoe') {
+                    setTimeout(() => {
+                        const canvas = document.getElementById('lampParticlesCanvas');
+                        if (canvas && canvas.parentElement) {
+                            canvas.width = canvas.parentElement.offsetWidth;
+                            canvas.height = canvas.parentElement.offsetHeight;
+                        }
+                    }, 100);
+                }
             });
         });
 
@@ -2768,11 +3529,20 @@
                 document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
                     b.classList.toggle('active', b.dataset.tab === tabId);
                 });
+                if (tabId === 'lampovoe') {
+                    setTimeout(() => {
+                        const canvas = document.getElementById('lampParticlesCanvas');
+                        if (canvas && canvas.parentElement) {
+                            canvas.width = canvas.parentElement.offsetWidth;
+                            canvas.height = canvas.parentElement.offsetHeight;
+                        }
+                    }, 100);
+                }
             });
         });
 
         // ============================================================
-        // 3. МОДАЛЬНЫЕ ОКНА
+        // 4. МОДАЛЬНЫЕ ОКНА (общие)
         // ============================================================
         function showPolicy(type) {
             if (type === 'privacy') document.getElementById('privacyModal').style.display = 'flex';
@@ -2793,7 +3563,7 @@
         });
 
         // ============================================================
-        // 4. ifo ФУНКЦИИ
+        // 5. ifo ФУНКЦИИ
         // ============================================================
         function toggleIfoTheme() {
             document.body.classList.toggle('light');
@@ -2836,7 +3606,7 @@
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         // ============================================================
-        // 5. ПОИСК ifo
+        // 6. ПОИСК ifo
         // ============================================================
         function searchIfo() {
             const query = document.getElementById('ifoSearch').value.trim();
@@ -2872,10 +3642,89 @@
         }
 
         // ============================================================
-        // 6. MAX модалки
+        // 7. MAX модалки
         // ============================================================
         function closeMaxModal(id) { document.getElementById(id).style.display = 'none'; }
 
+        // ============================================================
+        // 8. ЛАМПОВОЕ — ФУНКЦИИ
+        // ============================================================
+        function copyLampIP() {
+            const ip = document.getElementById('lampServerIP').innerText.trim();
+            navigator.clipboard.writeText(ip).then(() => {
+                const toast = document.getElementById('lampToast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            }).catch(() => {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = ip;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                const toast = document.getElementById('lampToast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        }
+
+        function showLampComingSoon() {
+            const modal = document.getElementById('lampComingSoonModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLampComingSoon() {
+            const modal = document.getElementById('lampComingSoonModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('lampComingSoonModal').addEventListener('click', function(e) {
+            if (e.target === this) closeLampComingSoon();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLampComingSoon();
+        });
+
+        // Анимация цифр для Лампового
+        function animateLampNumbers() {
+            document.querySelectorAll('.lamp-number[data-lamp-target]').forEach(num => {
+                if (num.dataset.animated === 'true') return;
+                num.dataset.animated = 'true';
+                const target = parseInt(num.dataset.lampTarget);
+                let current = 0;
+                const increment = target / 60;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    num.innerText = Math.floor(current) + (target === 99 ? '%' : '');
+                }, 25);
+            });
+        }
+
+        // Запуск анимации цифр при попадании в область видимости
+        const lampStatsSection = document.querySelector('.lamp-stats');
+        if (lampStatsSection && window.IntersectionObserver) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateLampNumbers();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            observer.observe(lampStatsSection);
+        }
+
+        // ============================================================
+        // 9. ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ
+        // ============================================================
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('policyButtonMax')?.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -2894,9 +3743,7 @@
                 modal.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
             });
 
-            // ============================================================
-            // 7. ПАСХАЛКА НА АВАТАРЕ (5 кликов)
-            // ============================================================
+            // Пасхалка на аватаре (5 кликов)
             let clickCount = 0;
             const avatarEl = document.getElementById('avatarEgg');
             if (avatarEl) {
@@ -2937,22 +3784,19 @@
         });
 
         // ============================================================
-        // 8. ПРИНУДИТЕЛЬНОЕ ОТКРЫТИЕ ВНЕШНИХ ССЫЛОК В TELEGRAM WEBVIEW
+        // 10. ПРИНУДИТЕЛЬНОЕ ОТКРЫТИЕ ВНЕШНИХ ССЫЛОК В TELEGRAM WEBVIEW
         // ============================================================
         (function forceExternalLinks() {
             function openExternal(url) {
                 if (!url) return;
-                // Telegram WebApp API (новый)
                 if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
                     window.Telegram.WebApp.openLink(url);
                     return true;
                 }
-                // Старый Telegram WebView Proxy
                 if (window.TelegramWebviewProxy && typeof window.TelegramWebviewProxy.postEvent === 'function') {
                     window.TelegramWebviewProxy.postEvent('openLink', JSON.stringify({ url: url }));
                     return true;
                 }
-                // Внешний браузер через window.open
                 if (window.open) {
                     window.open(url, '_blank', 'noopener,noreferrer');
                     return true;
@@ -2960,15 +3804,12 @@
                 return false;
             }
 
-            // Все ссылки с target="_blank" или внешним href
             document.querySelectorAll('a[href]').forEach(link => {
                 const href = link.getAttribute('href') || '';
                 if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
-                // Только внешние ссылки
                 if (!/^https?:\/\//i.test(href)) return;
 
                 link.addEventListener('click', function(e) {
-                    // Внутри Telegram — перехватываем и открываем через API
                     if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
                         e.preventDefault();
                         e.stopPropagation();
@@ -2978,13 +3819,12 @@
                         e.stopPropagation();
                         openExternal(href);
                     }
-                    // Вне Telegram — не мешаем обычному переходу
                 }, true);
             });
         })();
 
         // ============================================================
-        // 9. Telegram WebView
+        // 11. Telegram WebView
         // ============================================================
         const isTelegramWebView = window.Telegram !== undefined || 
                                  window.TelegramWebView !== undefined ||
@@ -2997,11 +3837,11 @@
         }
 
         console.log('✅ Все улучшения добавлены:');
+        console.log('✨ Добавлена вкладка «Ламповое» с Minecraft-сервером');
         console.log('🖼️ Аватар теперь показывает ваше фото (logo.png)');
         console.log('🥚 Пасхалка на аватаре (5 кликов)');
         console.log('📱 Bottom Navigation Bar');
         console.log('🎨 Анимированные частицы фона');
-        console.log('🎵 Добавлена ссылка на Я.Музыку в блок "Связь"');
         console.log('🔗 Принудительное открытие внешних ссылок в Telegram WebView');
     </script>
 
