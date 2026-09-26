@@ -116,10 +116,7 @@
             100% { transform: translate(10%, -10%) scale(1.2); opacity: 0.6; }
         }
 
-        .bio-card > * {
-            position: relative;
-            z-index: 1;
-        }
+        .bio-card > * { position: relative; z-index: 1; }
 
         .tabs-nav {
             display: flex;
@@ -1472,10 +1469,7 @@
             color: #ffffff;
         }
 
-        .max-container h2 i {
-            color: #f59f3c;
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-        }
+        .max-container h2 i { color: #f59f3c; font-size: clamp(1.2rem, 2.5vw, 1.8rem); }
 
         .max-container h3 {
             font-weight: 600;
@@ -2244,7 +2238,7 @@
             }
         }
 
-        /* ==================== СТИЛИ ДЛЯ БЛОКА «ЛАМПОВОЕ» ==================== */
+        /* ===== СТИЛИ БЛОКА «ЛАМПОВОЕ» ===== */
         .lamp-container {
             padding: 4px 0;
             width: 100%;
@@ -2578,6 +2572,71 @@
             line-height: 1.6;
         }
 
+        /* ---- Ссылки Лампового ---- */
+        .lamp-links-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: clamp(0.8rem, 2vw, 1.2rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .lamp-link-card {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: clamp(0.8rem, 2vw, 1.1rem) clamp(1rem, 2.5vw, 1.4rem);
+            background: rgba(30, 30, 50, 0.55);
+            border: 1px solid rgba(245, 215, 110, 0.3);
+            border-radius: 16px;
+            text-decoration: none;
+            color: #e0e8f0;
+            transition: 0.3s;
+            min-height: 64px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            touch-action: manipulation;
+        }
+
+        .lamp-link-card:hover {
+            background: rgba(245, 215, 110, 0.1);
+            border-color: #f5d76e;
+            box-shadow: 0 10px 30px rgba(245, 215, 110, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .lamp-link-card:active { transform: scale(0.97); }
+
+        .lamp-link-icon {
+            width: 44px;
+            height: 44px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #f5d76e, #ffb347);
+            color: #0f0f1a;
+            box-shadow: 0 0 20px rgba(245, 215, 110, 0.45);
+        }
+
+        .lamp-link-text { display: flex; flex-direction: column; line-height: 1.3; min-width: 0; }
+
+        .lamp-link-text .lamp-link-title {
+            font-weight: 700;
+            font-size: clamp(0.9rem, 1.6vw, 1rem);
+            color: #f5d76e;
+            text-shadow: 0 0 10px rgba(245, 215, 110, 0.4);
+        }
+
+        .lamp-link-text .lamp-link-sub {
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+            color: #8899bb;
+            word-break: break-all;
+        }
+
         .lamp-donate-cards {
             position: relative;
             z-index: 1;
@@ -2637,10 +2696,7 @@
             font-size: clamp(0.8rem, 1.4vw, 0.95rem);
         }
 
-        .lamp-donate-card li::before {
-            content: '✦ ';
-            color: #f5d76e;
-        }
+        .lamp-donate-card li::before { content: '✦ '; color: #f5d76e; }
 
         .lamp-footer-note {
             position: relative;
@@ -2674,17 +2730,12 @@
             pointer-events: none;
         }
 
-        .lamp-copy-toast.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .lamp-copy-toast.show { opacity: 1; transform: translateY(0); }
 
         .lamp-modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
@@ -2698,10 +2749,7 @@
             padding: 16px;
         }
 
-        .lamp-modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        .lamp-modal-overlay.show { opacity: 1; visibility: visible; }
 
         .lamp-modal {
             background: linear-gradient(135deg, rgba(30, 30, 50, 0.98), rgba(50, 30, 60, 0.98));
@@ -2718,17 +2766,13 @@
             overflow: hidden;
         }
 
-        .lamp-modal-overlay.show .lamp-modal {
-            transform: scale(1) rotateX(0deg);
-        }
+        .lamp-modal-overlay.show .lamp-modal { transform: scale(1) rotateX(0deg); }
 
         .lamp-modal::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: conic-gradient(
                 from 0deg,
                 transparent 0deg,
@@ -2746,10 +2790,7 @@
             to { transform: rotate(360deg); }
         }
 
-        .lamp-modal-content {
-            position: relative;
-            z-index: 1;
-        }
+        .lamp-modal-content { position: relative; z-index: 1; }
 
         .lamp-modal .lamp-modal-icon {
             font-size: clamp(3rem, 8vw, 5rem);
@@ -2818,6 +2859,7 @@
             .lamp-admin-cards { grid-template-columns: 1fr; }
             .lamp-donate-cards { grid-template-columns: 1fr; }
             .lamp-cards { grid-template-columns: 1fr; }
+            .lamp-links-grid { grid-template-columns: 1fr; }
             .lamp-modal { padding: 1.5rem 1.2rem; }
         }
     </style>
@@ -2843,11 +2885,11 @@
                     <i class="fas fa-user-secret"></i> <span>MAX</span>
                 </button>
                 <button class="tab-btn" data-tab="lampovoe" role="tab" aria-selected="false">
-                    <i class="fas fa-lantern"></i> <span>Ламповое</span>
+                    <i class="fas fa-fire"></i> <span>Ламповое</span>
                 </button>
             </div>
 
-            <!-- ===== ВКЛАДКА 1: БИОГРАФИЯ ===== -->
+            <!-- ===================== ВКЛАДКА 1: БИОГРАФИЯ ===================== -->
             <div class="tab-content active" id="tab-bio" role="tabpanel">
                 <div class="header-bio">
                     <div class="avatar" id="avatarEgg" aria-hidden="true">
@@ -2993,12 +3035,12 @@
                 <div class="footer-note">
                     <i class="fas fa-crown"></i> EnderSasha · вся биография в одной странице
                     <i class="fas fa-circle" style="font-size: 0.3rem; vertical-align: middle; margin: 0 6px; color: #00d4ff;"></i>
-                    <i class="fas fa-code"></i> Сайт автора / 4-1
+                    <i class="fas fa-code"></i> Сайт автора
                     <i class="fas fa-check-circle verified-icon"></i>
                 </div>
             </div>
 
-            <!-- ===== ВКЛАДКА 2: ДОНАТЫ ===== -->
+            <!-- ===================== ВКЛАДКА 2: ДОНАТЫ ===================== -->
             <div class="tab-content" id="tab-donate" role="tabpanel">
                 <div class="donate-container">
                     <div class="header">
@@ -3054,7 +3096,7 @@
                 </div>
             </div>
 
-            <!-- ===== ВКЛАДКА 3: ifo ===== -->
+            <!-- ===================== ВКЛАДКА 3: ifo ===================== -->
             <div class="tab-content" id="tab-ifo" role="tabpanel">
                 <div class="ifo-container">
                     <div class="header-minimal">
@@ -3139,7 +3181,7 @@
                 </div>
             </div>
 
-            <!-- ===== ВКЛАДКА 4: MAX ===== -->
+            <!-- ===================== ВКЛАДКА 4: MAX ===================== -->
             <div class="tab-content" id="tab-max" role="tabpanel">
                 <div class="max-container">
                     <div class="header">
@@ -3231,11 +3273,12 @@
                 </div>
             </div>
 
-            <!-- ===== ВКЛАДКА 5: ЛАМПОВОЕ ===== -->
+            <!-- ===================== ВКЛАДКА 5: ЛАМПОВОЕ ===================== -->
             <div class="tab-content" id="tab-lampovoe" role="tabpanel">
                 <div class="lamp-container">
                     <canvas id="lampParticlesCanvas" class="lamp-particles-canvas"></canvas>
 
+                    <!-- Hero -->
                     <div class="lamp-hero">
                         <h1>ЛАМПОВОЕ</h1>
                         <p>Уютный Minecraft сервер с ламповой атмосферой, дружным комьюнити и интересными режимами</p>
@@ -3251,6 +3294,35 @@
                         </div>
                     </div>
 
+                    <!-- ССЫЛКИ · СОЦСЕТИ · САЙТ -->
+                    <div class="lamp-section-title">📎 ССЫЛКИ · СОЦСЕТИ · САЙТ</div>
+                    <div class="lamp-links-grid">
+                        <a href="https://t.me/orange_maple_cartel" class="lamp-link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="lamp-link-icon"><i class="fab fa-telegram-plane"></i></div>
+                            <div class="lamp-link-text">
+                                <span class="lamp-link-title">Telegram-канал</span>
+                                <span class="lamp-link-sub">@orange_maple_cartel</span>
+                            </div>
+                        </a>
+
+                        <a href="https://t.me/HeadSupportbot" class="lamp-link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="lamp-link-icon"><i class="fas fa-robot"></i></div>
+                            <div class="lamp-link-text">
+                                <span class="lamp-link-title">Узел · Telegram-бот</span>
+                                <span class="lamp-link-sub">@HeadSupportbot</span>
+                            </div>
+                        </a>
+
+                        <a href="https://sashamaencraft.github.io/Orange-maple/" class="lamp-link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="lamp-link-icon"><i class="fas fa-globe"></i></div>
+                            <div class="lamp-link-text">
+                                <span class="lamp-link-title">Веб-сайт</span>
+                                <span class="lamp-link-sub">Orange-maple</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- О сервере -->
                     <div id="lamp-about" class="lamp-section-title">О СЕРВЕРЕ</div>
                     <div class="lamp-cards">
                         <div class="lamp-card">
@@ -3275,6 +3347,7 @@
                         </div>
                     </div>
 
+                    <!-- Статистика -->
                     <div class="lamp-stats">
                         <div class="lamp-stat">
                             <div class="lamp-number" data-lamp-target="24">0</div>
@@ -3286,6 +3359,7 @@
                         </div>
                     </div>
 
+                    <!-- Администрация -->
                     <div class="lamp-section-title">АДМИНИСТРАЦИЯ</div>
                     <div class="lamp-admin-cards">
                         <div class="lamp-admin-card">
@@ -3300,6 +3374,7 @@
                         </div>
                     </div>
 
+                    <!-- Донат -->
                     <div id="lamp-donate" class="lamp-section-title">ДОНАТ ПРИВИЛЕГИЯ</div>
                     <div class="lamp-donate-cards">
                         <div class="lamp-donate-card">
@@ -3314,10 +3389,13 @@
                         </div>
                     </div>
 
+                    <!-- Футер -->
                     <div class="lamp-footer-note">
                         ✨ ЛАМПОВОЕ · Лучший Minecraft сервер с ламповой атмосферой<br>
-                        <a href="https://t.me/orange_maple_cartel" target="_blank" rel="noopener noreferrer" style="color:#f5d76e;text-decoration:none;margin-top:0.4rem;display:inline-block;">Telegram</a><br>
-                        © 2026 Ламповое. Все права защищены. <div class="verified-badge"><i class="fas fa-check-circle verified-icon"></i><span class="verified-tooltip">верифицированная страница dragoncorp</span></div>
+                        <a href="https://t.me/orange_maple_cartel" target="_blank" rel="noopener noreferrer" style="color:#f5d76e;text-decoration:none;margin-top:0.4rem;display:inline-block;">Telegram</a>
+                        ·
+                        <a href="https://sashamaencraft.github.io/Orange-maple/" target="_blank" rel="noopener noreferrer" style="color:#f5d76e;text-decoration:none;margin-top:0.4rem;display:inline-block;">Сайт</a><br>
+                        © 2026 Ламповое. Все права защищены. <i class="fas fa-check-circle verified-icon"></i>
                     </div>
                 </div>
             </div>
@@ -3330,7 +3408,7 @@
         <button class="nav-item" data-tab="donate" aria-label="Донаты"><i class="fas fa-heart"></i><span>Донаты</span></button>
         <button class="nav-item" data-tab="ifo" aria-label="ifo"><i class="fas fa-globe"></i><span>ifo</span></button>
         <button class="nav-item" data-tab="max" aria-label="MAX"><i class="fas fa-user-secret"></i><span>MAX</span></button>
-        <button class="nav-item" data-tab="lampovoe" aria-label="Ламповое"><i class="fas fa-lantern"></i><span>Ламповое</span></button>
+        <button class="nav-item" data-tab="lampovoe" aria-label="Ламповое"><i class="fas fa-fire"></i><span>Ламповое</span></button>
     </nav>
 
     <div class="policy-modal" id="privacyModal"><div class="policy-content"><div class="policy-header"><h3>📄 Политика данных</h3><button class="close-policy" onclick="closePolicy('privacy')">&times;</button></div><div class="policy-body"><p>Настоящая Политика конфиденциальности регулирует сбор, использование и защиту персональных данных.</p><p><strong>1. Какие данные собираем:</strong> Мы не собираем и не храним данные ваших банковских карт. Все платежи обрабатываются напрямую платёжными сервисами.</p><p><strong>2. Использование данных:</strong> Ваш email может использоваться только для отправки уведомлений о поддержке.</p><p><strong>3. Файлы cookie:</strong> Сайт использует только технические cookie для работы.</p><p><strong>4. Согласие:</strong> Продолжая использование сайта, вы соглашаетесь с данной политикой.</p><p>Последнее обновление: 01.03.2026</p></div></div></div>
@@ -3362,11 +3440,12 @@
     <div class="lamp-copy-toast" id="lampToast">IP скопирован! ✓</div>
 
     <script>
-        // ============================================================
-        // 1. ЧАСТИЦЫ ФОНА (глобальные)
-        // ============================================================
+        /* ============================================================
+           1. ГЛОБАЛЬНЫЕ ЧАСТИЦЫ ФОНА
+        ============================================================ */
         (function initParticles() {
             const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
             const ctx = canvas.getContext('2d');
             let particles = [];
             let w, h;
@@ -3422,34 +3501,32 @@
             draw();
         })();
 
-        // ============================================================
-        // 2. ЧАСТИЦЫ ДЛЯ БЛОКА «ЛАМПОВОЕ» (золотые)
-        // ============================================================
+        /* ============================================================
+           2. ЗОЛОТЫЕ ЧАСТИЦЫ ДЛЯ БЛОКА «ЛАМПОВОЕ»
+        ============================================================ */
         (function initLampParticles() {
             const canvas = document.getElementById('lampParticlesCanvas');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
             let particles = [];
-            let w, h;
+            let w = 0, h = 0;
 
             function resize() {
                 const parent = canvas.parentElement;
+                if (!parent) return;
                 w = canvas.width = parent.offsetWidth;
                 h = canvas.height = parent.offsetHeight;
             }
             window.addEventListener('resize', resize);
-            // Наблюдаем за изменением размера контейнера
-            if (window.ResizeObserver) {
-                new ResizeObserver(resize).observe(canvas.parentElement);
-            }
+            if (window.ResizeObserver) new ResizeObserver(resize).observe(canvas.parentElement);
             setTimeout(resize, 100);
             resize();
 
             const count = 40;
             for (let i = 0; i < count; i++) {
                 particles.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
+                    x: Math.random() * (w || 800),
+                    y: Math.random() * (h || 600),
                     vx: (Math.random() - 0.5) * 0.2,
                     vy: (Math.random() - 0.5) * 0.2 - 0.1,
                     r: Math.random() * 2.5 + 1,
@@ -3486,85 +3563,143 @@
             draw();
         })();
 
-        // ============================================================
-        // 3. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
-        // ============================================================
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.tab-btn').forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-selected', 'false');
-                });
-                this.classList.add('active');
-                this.setAttribute('aria-selected', 'true');
-                document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
-                const tabId = this.dataset.tab;
-                document.getElementById('tab-' + tabId).classList.add('active');
-                document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
-                    b.classList.toggle('active', b.dataset.tab === tabId);
-                });
-                // Пересчёт размеров частиц при переключении на Ламповое
-                if (tabId === 'lampovoe') {
-                    setTimeout(() => {
-                        const canvas = document.getElementById('lampParticlesCanvas');
-                        if (canvas && canvas.parentElement) {
-                            canvas.width = canvas.parentElement.offsetWidth;
-                            canvas.height = canvas.parentElement.offsetHeight;
-                        }
-                    }, 100);
-                }
+        /* ============================================================
+           3. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+        ============================================================ */
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.tab === tabId);
+                b.setAttribute('aria-selected', b.dataset.tab === tabId ? 'true' : 'false');
             });
+            document.querySelectorAll('.tab-content').forEach(tc => {
+                tc.classList.toggle('active', tc.id === 'tab-' + tabId);
+            });
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
+                b.classList.toggle('active', b.dataset.tab === tabId);
+            });
+            if (tabId === 'lampovoe') {
+                setTimeout(() => {
+                    const canvas = document.getElementById('lampParticlesCanvas');
+                    if (canvas && canvas.parentElement) {
+                        canvas.width = canvas.parentElement.offsetWidth;
+                        canvas.height = canvas.parentElement.offsetHeight;
+                    }
+                    animateLampNumbers();
+                }, 100);
+            }
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() { switchTab(this.dataset.tab); });
         });
 
         document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const tabId = this.dataset.tab;
-                document.querySelectorAll('.tab-btn').forEach(b => {
-                    b.classList.toggle('active', b.dataset.tab === tabId);
-                    b.setAttribute('aria-selected', b.dataset.tab === tabId ? 'true' : 'false');
+            btn.addEventListener('click', function() { switchTab(this.dataset.tab); });
+        });
+
+        /* ============================================================
+           4. ЛАМПОВОЕ — КОПИРОВАНИЕ IP
+        ============================================================ */
+        function copyLampIP() {
+            const ipEl = document.getElementById('lampServerIP');
+            if (!ipEl) return;
+            const ip = ipEl.innerText.trim();
+
+            const showToast = () => {
+                const toast = document.getElementById('lampToast');
+                if (!toast) return;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(ip).then(showToast).catch(() => {
+                    fallbackCopy(ip); showToast();
                 });
-                document.querySelectorAll('.tab-content').forEach(tc => {
-                    tc.classList.toggle('active', tc.id === 'tab-' + tabId);
+            } else {
+                fallbackCopy(ip); showToast();
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(textarea);
+        }
+
+        /* ============================================================
+           5. ЛАМПОВОЕ — МОДАЛКА «В РАЗРАБОТКЕ»
+        ============================================================ */
+        function showLampComingSoon() {
+            const modal = document.getElementById('lampComingSoonModal');
+            if (!modal) return;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLampComingSoon() {
+            const modal = document.getElementById('lampComingSoonModal');
+            if (!modal) return;
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const lampModal = document.getElementById('lampComingSoonModal');
+            if (lampModal) {
+                lampModal.addEventListener('click', function(e) {
+                    if (e.target === this) closeLampComingSoon();
                 });
-                document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
-                    b.classList.toggle('active', b.dataset.tab === tabId);
-                });
-                if (tabId === 'lampovoe') {
-                    setTimeout(() => {
-                        const canvas = document.getElementById('lampParticlesCanvas');
-                        if (canvas && canvas.parentElement) {
-                            canvas.width = canvas.parentElement.offsetWidth;
-                            canvas.height = canvas.parentElement.offsetHeight;
-                        }
-                    }, 100);
-                }
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLampComingSoon();
             });
         });
 
-        // ============================================================
-        // 4. МОДАЛЬНЫЕ ОКНА (общие)
-        // ============================================================
-        function showPolicy(type) {
-            if (type === 'privacy') document.getElementById('privacyModal').style.display = 'flex';
-            else if (type === 'terms') document.getElementById('termsModal').style.display = 'flex';
+        /* ============================================================
+           6. ЛАМПОВОЕ — АНИМАЦИЯ ЦИФР
+        ============================================================ */
+        function animateLampNumbers() {
+            document.querySelectorAll('.lamp-number[data-lamp-target]').forEach(num => {
+                if (num.dataset.animated === 'true') return;
+                num.dataset.animated = 'true';
+                const target = parseInt(num.dataset.lampTarget);
+                let current = 0;
+                const increment = target / 60;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    num.innerText = Math.floor(current) + (target === 99 ? '%' : '');
+                }, 25);
+            });
         }
 
-        function closePolicy(type) {
-            if (type === 'privacy') document.getElementById('privacyModal').style.display = 'none';
-            else if (type === 'terms') document.getElementById('termsModal').style.display = 'none';
-        }
-
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('policy-modal')) event.target.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+            const stats = document.querySelector('.lamp-stats');
+            if (stats && window.IntersectionObserver) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateLampNumbers();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.4 });
+                observer.observe(stats);
+            }
         });
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') document.querySelectorAll('.policy-modal').forEach(m => m.style.display = 'none');
-        });
-
-        // ============================================================
-        // 5. ifo ФУНКЦИИ
-        // ============================================================
+        /* ============================================================
+           7. ifo ФУНКЦИИ
+        ============================================================ */
         function toggleIfoTheme() {
             document.body.classList.toggle('light');
             localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
@@ -3605,9 +3740,6 @@
 
         function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-        // ============================================================
-        // 6. ПОИСК ifo
-        // ============================================================
         function searchIfo() {
             const query = document.getElementById('ifoSearch').value.trim();
             if (!query) { showIfoModal('🔍 Поиск', 'Введите запрос для поиска.'); return; }
@@ -3641,90 +3773,35 @@
             document.getElementById('ifoSearchModal').style.display = 'flex';
         }
 
-        // ============================================================
-        // 7. MAX модалки
-        // ============================================================
+        /* ============================================================
+           8. MAX модалки
+        ============================================================ */
         function closeMaxModal(id) { document.getElementById(id).style.display = 'none'; }
 
-        // ============================================================
-        // 8. ЛАМПОВОЕ — ФУНКЦИИ
-        // ============================================================
-        function copyLampIP() {
-            const ip = document.getElementById('lampServerIP').innerText.trim();
-            navigator.clipboard.writeText(ip).then(() => {
-                const toast = document.getElementById('lampToast');
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2000);
-            }).catch(() => {
-                // Fallback
-                const textarea = document.createElement('textarea');
-                textarea.value = ip;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                const toast = document.getElementById('lampToast');
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2000);
-            });
+        /* ============================================================
+           9. ПОЛИТИКИ
+        ============================================================ */
+        function showPolicy(type) {
+            if (type === 'privacy') document.getElementById('privacyModal').style.display = 'flex';
+            else if (type === 'terms') document.getElementById('termsModal').style.display = 'flex';
         }
 
-        function showLampComingSoon() {
-            const modal = document.getElementById('lampComingSoonModal');
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
+        function closePolicy(type) {
+            if (type === 'privacy') document.getElementById('privacyModal').style.display = 'none';
+            else if (type === 'terms') document.getElementById('termsModal').style.display = 'none';
         }
 
-        function closeLampComingSoon() {
-            const modal = document.getElementById('lampComingSoonModal');
-            modal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-
-        document.getElementById('lampComingSoonModal').addEventListener('click', function(e) {
-            if (e.target === this) closeLampComingSoon();
+        document.addEventListener('click', function(event) {
+            if (event.target.classList.contains('policy-modal')) event.target.style.display = 'none';
         });
 
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeLampComingSoon();
+            if (e.key === 'Escape') document.querySelectorAll('.policy-modal').forEach(m => m.style.display = 'none');
         });
 
-        // Анимация цифр для Лампового
-        function animateLampNumbers() {
-            document.querySelectorAll('.lamp-number[data-lamp-target]').forEach(num => {
-                if (num.dataset.animated === 'true') return;
-                num.dataset.animated = 'true';
-                const target = parseInt(num.dataset.lampTarget);
-                let current = 0;
-                const increment = target / 60;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    num.innerText = Math.floor(current) + (target === 99 ? '%' : '');
-                }, 25);
-            });
-        }
-
-        // Запуск анимации цифр при попадании в область видимости
-        const lampStatsSection = document.querySelector('.lamp-stats');
-        if (lampStatsSection && window.IntersectionObserver) {
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateLampNumbers();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            observer.observe(lampStatsSection);
-        }
-
-        // ============================================================
-        // 9. ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ
-        // ============================================================
+        /* ============================================================
+           10. ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ
+        ============================================================ */
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('policyButtonMax')?.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -3743,21 +3820,16 @@
                 modal.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
             });
 
-            // Пасхалка на аватаре (5 кликов)
+            // Пасхалка на аватаре
             let clickCount = 0;
             const avatarEl = document.getElementById('avatarEgg');
             if (avatarEl) {
-                avatarEl.addEventListener('click', function(e) {
+                avatarEl.addEventListener('click', function() {
                     clickCount++;
                     if (clickCount === 5) {
                         const img = document.getElementById('avatarImage');
                         if (img) {
-                            const currentSrc = img.src;
-                            if (currentSrc.includes('logo.png')) {
-                                img.src = 'logo2.png';
-                            } else {
-                                img.src = 'logo.png';
-                            }
+                            img.src = img.src.includes('logo.png') ? 'logo2.png' : 'logo.png';
                         }
                         clickCount = 0;
                         const notification = document.createElement('div');
@@ -3783,25 +3855,21 @@
             }
         });
 
-        // ============================================================
-        // 10. ПРИНУДИТЕЛЬНОЕ ОТКРЫТИЕ ВНЕШНИХ ССЫЛОК В TELEGRAM WEBVIEW
-        // ============================================================
+        /* ============================================================
+           11. ВНЕШНИЕ ССЫЛКИ В TELEGRAM WEBVIEW
+        ============================================================ */
         (function forceExternalLinks() {
             function openExternal(url) {
                 if (!url) return;
                 if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
                     window.Telegram.WebApp.openLink(url);
-                    return true;
+                    return;
                 }
                 if (window.TelegramWebviewProxy && typeof window.TelegramWebviewProxy.postEvent === 'function') {
                     window.TelegramWebviewProxy.postEvent('openLink', JSON.stringify({ url: url }));
-                    return true;
+                    return;
                 }
-                if (window.open) {
-                    window.open(url, '_blank', 'noopener,noreferrer');
-                    return true;
-                }
-                return false;
+                window.open(url, '_blank', 'noopener,noreferrer');
             }
 
             document.querySelectorAll('a[href]').forEach(link => {
@@ -3811,38 +3879,33 @@
 
                 link.addEventListener('click', function(e) {
                     if (window.Telegram && window.Telegram.WebApp && typeof window.Telegram.WebApp.openLink === 'function') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openExternal(href);
+                        e.preventDefault(); e.stopPropagation(); openExternal(href);
                     } else if (window.TelegramWebviewProxy) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        openExternal(href);
+                        e.preventDefault(); e.stopPropagation(); openExternal(href);
                     }
                 }, true);
             });
         })();
 
-        // ============================================================
-        // 11. Telegram WebView
-        // ============================================================
-        const isTelegramWebView = window.Telegram !== undefined || 
-                                 window.TelegramWebView !== undefined ||
-                                 (window.navigator && window.navigator.userAgent.includes('Telegram'));
-        if (isTelegramWebView) {
-            document.body.classList.add('tg-webview');
-            if (window.Telegram && window.Telegram.WebView && window.Telegram.WebView.ready) {
-                window.Telegram.WebView.ready();
+        /* ============================================================
+           12. TELEGRAM WEBVIEW
+        ============================================================ */
+        (function initTelegram() {
+            const isTg = window.Telegram !== undefined ||
+                         window.TelegramWebView !== undefined ||
+                         (window.navigator && window.navigator.userAgent.includes('Telegram'));
+            if (isTg) {
+                document.body.classList.add('tg-webview');
+                if (window.Telegram && window.Telegram.WebView && window.Telegram.WebView.ready) {
+                    window.Telegram.WebView.ready();
+                }
             }
-        }
+        })();
 
-        console.log('✅ Все улучшения добавлены:');
-        console.log('✨ Добавлена вкладка «Ламповое» с Minecraft-сервером');
-        console.log('🖼️ Аватар теперь показывает ваше фото (logo.png)');
-        console.log('🥚 Пасхалка на аватаре (5 кликов)');
-        console.log('📱 Bottom Navigation Bar');
-        console.log('🎨 Анимированные частицы фона');
-        console.log('🔗 Принудительное открытие внешних ссылок в Telegram WebView');
+        console.log('✅ Сайт EnderSasha загружен');
+        console.log('🔥 Вкладка «Ламповое» — иконка fa-fire');
+        console.log('📎 Ссылки: Telegram-канал, узел-бот, веб-сайт Orange-maple');
+        console.log('📦 ifo, MAX, Донаты, Политики — сохранены полностью');
     </script>
 
 </body>
