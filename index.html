@@ -304,6 +304,122 @@
 
         .status-item i { color: #ff6b6b; font-size: clamp(0.7rem, 1.2vw, 0.8rem); }
 
+        /* ===== VPN БЕЙДЖ + ТУЛТИП ===== */
+        .vpn-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(0, 255, 136, 0.08);
+            padding: 0.15rem 0.9rem;
+            border-radius: 40px;
+            font-size: clamp(0.7rem, 1.3vw, 0.8rem);
+            color: #7dffb0;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            white-space: nowrap;
+            cursor: help;
+            position: relative;
+            transition: background 0.3s, border-color 0.3s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .vpn-badge i { color: #00ff88; font-size: clamp(0.7rem, 1.2vw, 0.8rem); }
+
+        .vpn-badge:hover,
+        .vpn-badge:focus,
+        .vpn-badge.touched {
+            background: rgba(0, 255, 136, 0.16);
+            border-color: rgba(0, 255, 136, 0.45);
+        }
+
+        .vpn-badge .tooltip-vpn {
+            visibility: hidden;
+            opacity: 0;
+            width: min(300px, 80vw);
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: var(--text-primary);
+            text-align: left;
+            padding: 12px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            box-shadow: 0 8px 30px var(--shadow-color), 0 0 25px rgba(0, 255, 136, 0.12);
+            position: absolute;
+            z-index: 50;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(6px);
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            font-weight: 400;
+            font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+            line-height: 1.5;
+            pointer-events: none;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .vpn-badge .tooltip-vpn::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--card-bg);
+        }
+
+        .vpn-badge:hover .tooltip-vpn,
+        .vpn-badge:focus .tooltip-vpn,
+        .vpn-badge.touched .tooltip-vpn {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .vpn-badge .tooltip-vpn .vpn-title {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #00ff88;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: clamp(0.75rem, 1.3vw, 0.85rem);
+        }
+
+        .vpn-badge .tooltip-vpn .vpn-title i { color: #00ff88; }
+
+        .vpn-badge .tooltip-vpn .vpn-highlight {
+            color: #7dffb0;
+            font-weight: 600;
+        }
+
+        .vpn-badge .tooltip-vpn .vpn-warn {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .vpn-badge .tooltip-vpn .vpn-hr {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0,255,136,0.35), transparent);
+            margin: 8px 0;
+        }
+
+        .vpn-badge .tooltip-vpn .vpn-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.25);
+            padding: 2px 8px;
+            border-radius: 20px;
+            color: #7dffb0;
+            font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+            margin-top: 6px;
+        }
+
+        .vpn-badge .tooltip-vpn .vpn-status i { color: #00ff88; font-size: 0.7rem; }
+
+        /* ===== ИНОАГЕНТ БЕЙДЖ ===== */
         .foreign-agent-badge {
             display: inline-flex;
             align-items: center;
@@ -2110,6 +2226,14 @@
         body.light .market-btn .tooltip { background: rgba(255, 255, 255, 0.95); color: #1a1f2e; border-color: rgba(0,0,0,0.1); }
         body.light .market-btn .tooltip::after { border-top-color: rgba(255, 255, 255, 0.95); }
         body.light .status-item { background: rgba(255, 107, 107, 0.06); color: #d06060; border-color: rgba(255, 107, 107, 0.15); }
+        body.light .vpn-badge { background: rgba(0, 200, 100, 0.08); color: #0a8a4a; border-color: rgba(0, 200, 100, 0.2); }
+        body.light .vpn-badge i { color: #0a8a4a; }
+        body.light .vpn-badge .tooltip-vpn { background: rgba(255, 255, 255, 0.95); color: #1a1f2e; border-color: rgba(0, 200, 100, 0.3); }
+        body.light .vpn-badge .tooltip-vpn::after { border-top-color: rgba(255, 255, 255, 0.95); }
+        body.light .vpn-badge .tooltip-vpn .vpn-title { color: #0a8a4a; }
+        body.light .vpn-badge .tooltip-vpn .vpn-title i { color: #0a8a4a; }
+        body.light .vpn-badge .tooltip-vpn .vpn-highlight { color: #0a8a4a; }
+        body.light .vpn-badge .tooltip-vpn .vpn-status { color: #0a8a4a; }
         body.light .donate-container .bio { color: #3a4a5e; }
         body.light .donate-container .stat-label { color: #5a6a7a; }
         body.light .donate-container .platform-name p { color: #4a5a6a; }
@@ -2572,7 +2696,6 @@
             line-height: 1.6;
         }
 
-        /* ---- Ссылки Лампового ---- */
         .lamp-links-grid {
             position: relative;
             z-index: 1;
@@ -2917,6 +3040,18 @@
                                     <i class="fas fa-file-signature fa-icon"></i> Уведомление о статусе: <span class="highlight-fa-ok">не является иноагентом</span> (в соответствии с п. 1 ст. 6 Федерального закона от 14.07.2022 № 255-ФЗ). Документы о статусе — по запросу.
                                 </span>
                             </span>
+                            <!-- ===== VPN БЕЙДЖ ===== -->
+                            <span class="vpn-badge" tabindex="0" role="button" aria-label="Информация о VPN">
+                                <i class="fas fa-shield-halved"></i> VPN
+                                <span class="tooltip-vpn">
+                                    <div class="vpn-title"><i class="fas fa-shield-halved"></i> Требуется VPN</div>
+                                    <span class="vpn-highlight">GitHub-проект</span> стабильно работает <span class="vpn-warn">только через VPN</span>.<br>
+                                    <div class="vpn-hr"></div>
+                                    <i class="fas fa-globe"></i> Без VPN возможны перебои в загрузке и работе проекта.<br>
+                                    <div class="vpn-status"><i class="fas fa-check-circle"></i> Рекомендуется включить VPN перед использованием</div>
+                                </span>
+                            </span>
+                            <!-- ===== /VPN БЕЙДЖ ===== -->
                         </div>
                     </div>
                 </div>
@@ -3283,7 +3418,6 @@
                 <div class="lamp-container">
                     <canvas id="lampParticlesCanvas" class="lamp-particles-canvas"></canvas>
 
-                    <!-- Hero -->
                     <div class="lamp-hero">
                         <h1>ЛАМПОВОЕ</h1>
                         <p>Уютный Minecraft сервер с ламповой атмосферой, дружным комьюнити и интересными режимами</p>
@@ -3294,7 +3428,6 @@
                         </div>
                     </div>
 
-                    <!-- ССЫЛКИ · СОЦСЕТИ · САЙТ -->
                     <div class="lamp-section-title">📎 ССЫЛКИ · СОЦСЕТИ · САЙТ</div>
                     <div class="lamp-links-grid">
                         <a href="https://t.me/orange_maple_cartel" class="lamp-link-card" target="_blank" rel="noopener noreferrer">
@@ -3322,7 +3455,6 @@
                         </a>
                     </div>
 
-                    <!-- О сервере -->
                     <div id="lamp-about" class="lamp-section-title">О СЕРВЕРЕ</div>
                     <div class="lamp-cards">
                         <div class="lamp-card">
@@ -3347,7 +3479,6 @@
                         </div>
                     </div>
 
-                    <!-- Статистика -->
                     <div class="lamp-stats">
                         <div class="lamp-stat">
                             <div class="lamp-number" data-lamp-target="24">0</div>
@@ -3359,13 +3490,12 @@
                         </div>
                     </div>
 
-                    <!-- Администрация -->
                     <div class="lamp-section-title">АДМИНИСТРАЦИЯ</div>
                     <div class="lamp-admin-cards">
                         <div class="lamp-admin-card">
                             <div class="lamp-admin-avatar">👑</div>
                             <div class="lamp-admin-role">Владелец</div>
-                            <div class="lamp-admin-nick">Dragon_SashaYT</div>
+                            <div class="lamp-admin-nick">Dragon_Mira0</div>
                             <p class="lamp-admin-desc">
                                 Основатель и владелец сервера "Ламповое". Следит за развитием проекта,
                                 общается с игроками и создаёт уютную атмосферу на сервере.
@@ -3374,7 +3504,6 @@
                         </div>
                     </div>
 
-                    <!-- Донат -->
                     <div id="lamp-donate" class="lamp-section-title">ДОНАТ ПРИВИЛЕГИЯ</div>
                     <div class="lamp-donate-cards">
                         <div class="lamp-donate-card">
@@ -3389,7 +3518,6 @@
                         </div>
                     </div>
 
-                    <!-- Футер -->
                     <div class="lamp-footer-note">
                         ✨ ЛАМПОВОЕ · Лучший Minecraft сервер с ламповой атмосферой<br>
                         <a href="https://t.me/orange_maple_cartel" target="_blank" rel="noopener noreferrer" style="color:#f5d76e;text-decoration:none;margin-top:0.4rem;display:inline-block;">Telegram</a>
@@ -3424,7 +3552,6 @@
 
     <div id="copyrightModalMax" class="policy-modal" style="display:none;"><div class="policy-content"><div class="policy-header"><h3><i class="fas fa-copyright" style="margin-right: 8px;"></i> Связаться с правообладателем</h3><button class="close-policy" onclick="closeMaxModal('copyrightModalMax')">&times;</button></div><div class="policy-body"><h4>Контакты</h4><p><strong>Email:</strong> <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a></p><p><strong>Telegram:</strong> <a href="https://t.me/HeadSupportbot" target="_blank" rel="noopener noreferrer">@HeadSupportbot</a></p></div></div></div>
 
-    <!-- Модальное окно «В разработке» для Лампового -->
     <div class="lamp-modal-overlay" id="lampComingSoonModal">
         <div class="lamp-modal">
             <div class="lamp-modal-content">
@@ -3698,7 +3825,36 @@
         });
 
         /* ============================================================
-           7. ifo ФУНКЦИИ
+           7. VPN БЕЙДЖ — ТАП ДЛЯ МОБИЛЬНЫХ
+        ============================================================ */
+        document.addEventListener('DOMContentLoaded', function() {
+            const vpnBadge = document.querySelector('.vpn-badge');
+            if (!vpnBadge) return;
+
+            // Tap для мобильных: показываем тултип по тапу
+            vpnBadge.addEventListener('click', function(e) {
+                e.stopPropagation();
+                // На ПК hover уже работает, но tap тоже не помешает
+                this.classList.toggle('touched');
+            });
+
+            // Закрываем тултип при клике вне бейджа
+            document.addEventListener('click', function(e) {
+                if (!vpnBadge.contains(e.target)) {
+                    vpnBadge.classList.remove('touched');
+                }
+            });
+
+            // Закрываем по Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    vpnBadge.classList.remove('touched');
+                }
+            });
+        });
+
+        /* ============================================================
+           8. ifo ФУНКЦИИ
         ============================================================ */
         function toggleIfoTheme() {
             document.body.classList.toggle('light');
@@ -3774,12 +3930,12 @@
         }
 
         /* ============================================================
-           8. MAX модалки
+           9. MAX модалки
         ============================================================ */
         function closeMaxModal(id) { document.getElementById(id).style.display = 'none'; }
 
         /* ============================================================
-           9. ПОЛИТИКИ
+           10. ПОЛИТИКИ
         ============================================================ */
         function showPolicy(type) {
             if (type === 'privacy') document.getElementById('privacyModal').style.display = 'flex';
@@ -3800,7 +3956,7 @@
         });
 
         /* ============================================================
-           10. ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ
+           11. ИНИЦИАЛИЗАЦИЯ ПОСЛЕ ЗАГРУЗКИ
         ============================================================ */
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('policyButtonMax')?.addEventListener('click', function(e) {
@@ -3856,7 +4012,7 @@
         });
 
         /* ============================================================
-           11. ВНЕШНИЕ ССЫЛКИ В TELEGRAM WEBVIEW
+           12. ВНЕШНИЕ ССЫЛКИ В TELEGRAM WEBVIEW
         ============================================================ */
         (function forceExternalLinks() {
             function openExternal(url) {
@@ -3888,7 +4044,7 @@
         })();
 
         /* ============================================================
-           12. TELEGRAM WEBVIEW
+           13. TELEGRAM WEBVIEW
         ============================================================ */
         (function initTelegram() {
             const isTg = window.Telegram !== undefined ||
@@ -3907,6 +4063,7 @@
         console.log('📎 Ссылки: Telegram-канал, узел-бот, веб-сайт Orange-maple');
         console.log('📦 ifo, MAX, Донаты, Политики — сохранены полностью');
         console.log('🆕 GitBook Mod Big Update перенесён в «Проекты & инструменты»');
+        console.log('🛡️ VPN бейдж добавлен на вкладку «Биография»');
     </script>
 
 </body>
