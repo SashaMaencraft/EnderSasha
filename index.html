@@ -2362,6 +2362,131 @@
             }
         }
 
+        /* ===== ОСОБЫЙ СВЕТ ДЛЯ БИОГРАФИИ ===== */
+        .bio-glow-wrap {
+            position: relative;
+            border-radius: clamp(1.2rem, 3vw, 2rem);
+            padding: 2px;
+            margin: 0 0 0.5rem;
+            background: linear-gradient(135deg,
+                rgba(0, 212, 255, 0.55),
+                rgba(167, 139, 250, 0.45),
+                rgba(245, 215, 110, 0.55),
+                rgba(0, 212, 255, 0.55));
+            background-size: 300% 300%;
+            animation: bioBorderFlow 8s ease infinite;
+            box-shadow:
+                0 0 25px rgba(0, 212, 255, 0.25),
+                0 0 60px rgba(167, 139, 250, 0.15),
+                inset 0 0 30px rgba(245, 215, 110, 0.06);
+            overflow: hidden;
+        }
+
+        @keyframes bioBorderFlow {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bio-glow-wrap::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -60%;
+            width: 220%;
+            height: 220%;
+            background: conic-gradient(from 0deg,
+                transparent 0deg,
+                rgba(0, 212, 255, 0.18) 60deg,
+                transparent 120deg,
+                rgba(245, 215, 110, 0.18) 200deg,
+                transparent 260deg,
+                rgba(167, 139, 250, 0.18) 320deg,
+                transparent 360deg);
+            animation: bioRotate 10s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes bioRotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .bio-glow-inner {
+            position: relative;
+            z-index: 1;
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: calc(clamp(1.2rem, 3vw, 2rem) - 2px);
+            padding: clamp(1rem, 2.5vw, 1.8rem) clamp(1rem, 2.5vw, 2rem);
+            overflow: hidden;
+        }
+
+        .bio-glow-inner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -80%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(100deg,
+                transparent 0%,
+                rgba(0, 212, 255, 0.10) 40%,
+                rgba(255, 255, 255, 0.14) 50%,
+                rgba(245, 215, 110, 0.10) 60%,
+                transparent 100%);
+            transform: skewX(-18deg);
+            animation: bioLightSweep 5.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes bioLightSweep {
+            0%   { left: -80%; opacity: 0; }
+            15%  { opacity: 1; }
+            55%  { left: 120%; opacity: 1; }
+            70%  { left: 120%; opacity: 0; }
+            100% { left: 120%; opacity: 0; }
+        }
+
+        .bio-glow-inner .block-title {
+            color: #9be7ff;
+            border-bottom-color: rgba(0, 212, 255, 0.18);
+            text-shadow:
+                0 0 8px rgba(0, 212, 255, 0.55),
+                0 0 20px rgba(0, 212, 255, 0.25);
+        }
+
+        .bio-glow-inner .block-title i {
+            color: #00d4ff;
+            filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.7));
+        }
+
+        .bio-glow-inner .bio-text p strong {
+            color: #a7e8ff;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .bio-glow-inner .highlight-list li i {
+            filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.6));
+        }
+
+        @media (max-width: 768px) {
+            .bio-glow-wrap {
+                box-shadow:
+                    0 0 16px rgba(0, 212, 255, 0.22),
+                    0 0 40px rgba(167, 139, 250, 0.12);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bio-glow-wrap,
+            .bio-glow-wrap::before,
+            .bio-glow-inner::after {
+                animation: none !important;
+            }
+        }
+
         /* ===== СТИЛИ БЛОКА «ЛАМПОВОЕ» ===== */
         .lamp-container {
             padding: 4px 0;
@@ -3057,55 +3182,62 @@
                 </div>
 
                 <div class="grid-2col">
-                    <div class="info-block bio-text">
-                        <div class="block-title">
-                            <i class="fas fa-user-astronaut"></i> Биография
-                        </div>
-                        <p>
-                            <strong>EnderSasha</strong> (настоящее имя — Александр Канстантинович) родился в 2005 году
-                            в небольшом городе на снежнагорске. С раннего детства увлекался геймерством и
-                            стратегическими играми. В 14 лет создал свой первый мод для Minecraft.
-                        </p>
-                        <p>
-                            В 2026 году поступил в вуз, параллельно работая над <strong>OpenSource</strong>-проектами.
-                            Специализация — <strong>Go</strong>, <strong>React</strong> и облачные архитектуры.
-                            Активный участник CTF-соревнований и хакатонов.
-                        </p>
-                        <p>
-                            В свободное время — стримит игры, ведёт блог о игравом и мири. Мечтает запустить собственный фан-сообчество.
-                        </p>
-                        <ul class="highlight-list">
-                            <li><i class="fas fa-trophy"></i> 3-кратный победитель хакатона «Цифровой прорыв»</li>
-                            <li><i class="fas fa-rocket"></i> Автор библиотеки <strong>SashaMaencraft</strong> (1.0k ★ на GitHub)</li>
-                            <li><i class="fas fa-gamepad"></i> Топ-50 игроков <strong>tube-based II</strong> (RU)</li>
-                        </ul>
-                        <div class="marketplace-grid">
-                            <div class="market-btn wb">
-                                <i class="fas fa-shopping-bag"></i> Wildberries
-                                <span class="badge-mp">WB</span>
-                                <span class="tooltip">
-                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году уже меньше<br>
-                                    <span class="highlight">За БПЛА на данный маркетплейс</span>
-                                </span>
-                            </div>
-                            <div class="market-btn ozon">
-                                <i class="fas fa-box-open"></i> Ozon
-                                <span class="badge-mp">OZON</span>
-                                <span class="tooltip">
-                                    <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году заменяет Wildberries<br>
-                                    <span class="highlight">За БПЛА на данный маркетплейс</span>
-                                </span>
-                            </div>
-                            <div class="market-btn ym">
-                                <i class="fas fa-store"></i> Яндекс Маркет
-                                <span class="badge-mp">ЯМ</span>
-                                <span class="tooltip">
-                                    <i class="fas fa-calendar-alt"></i> Заказываю товары в 2026–2027 и по 2030 году<br>
-                                    <span class="highlight">Заказываю там, но не так часто</span>
-                                </span>
+                    <!-- ===== ОСОБЫЙ СВЕТ: БИОГРАФИЯ ===== -->
+                    <div class="bio-glow-wrap">
+                        <div class="bio-glow-inner">
+                            <div class="info-block bio-text" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+                                <div class="block-title">
+                                    <i class="fas fa-user-astronaut"></i> Биография
+                                </div>
+                                <p>
+                                    <strong>EnderSasha</strong> (настоящее имя — Александр Канстантинович) родился в 2005 году
+                                    в небольшом городе на снежнагорске. С раннего детства увлекался геймерством и
+                                    стратегическими играми. В 14 лет создал свой первый мод для Minecraft.
+                                </p>
+                                <p>
+                                    В 2026 году поступил в вуз, параллельно работая над <strong>OpenSource</strong>-проектами.
+                                    Специализация — <strong>Go</strong>, <strong>React</strong> и облачные архитектуры.
+                                    Активный участник CTF-соревнований и хакатонов.
+                                </p>
+                                <p>
+                                    В свободное время — стримит игры, ведёт блог о игравом и мири. Мечтает запустить собственный фан-сообчество.
+                                </p>
+                                <ul class="highlight-list">
+                                    <li><i class="fas fa-trophy"></i> 3-кратный победитель хакатона «Цифровой прорыв»</li>
+                                    <li><i class="fas fa-rocket"></i> Автор библиотеки <strong>SashaMaencraft</strong> (1.0k ★ на GitHub)</li>
+                                    <li><i class="fas fa-gamepad"></i> Топ-50 игроков <strong>tube-based II</strong> (RU)</li>
+                                </ul>
+                                <div class="marketplace-grid">
+                                    <div class="market-btn wb">
+                                        <i class="fas fa-shopping-bag"></i> Wildberries
+                                        <span class="badge-mp">WB</span>
+                                        <span class="tooltip">
+                                            <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году уже меньше<br>
+                                            <span class="highlight">За БПЛА на данный маркетплейс</span>
+                                        </span>
+                                    </div>
+                                    <div class="market-btn ozon">
+                                        <i class="fas fa-box-open"></i> Ozon
+                                        <span class="badge-mp">OZON</span>
+                                        <span class="tooltip">
+                                            <i class="fas fa-calendar-alt"></i> с 2026–2027 и по 2030 году заменяет Wildberries<br>
+                                            <span class="highlight">За БПЛА на данный маркетплейс</span>
+                                        </span>
+                                    </div>
+                                    <div class="market-btn ym">
+                                        <i class="fas fa-store"></i> Яндекс Маркет
+                                        <span class="badge-mp">ЯМ</span>
+                                        <span class="tooltip">
+                                            <i class="fas fa-calendar-alt"></i> Заказываю товары в 2026–2027 и по 2030 году<br>
+                                            <span class="highlight">Заказываю там, но не так часто</span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <!-- ===== /ОСОБЫЙ СВЕТ: БИОГРАФИЯ ===== -->
+
                     <div class="info-block">
                         <div class="block-title">
                             <i class="fas fa-flag-checkered"></i> Хронология
@@ -4067,6 +4199,7 @@
         console.log('📦 ifo, MAX, Донаты, Политики — сохранены полностью');
         console.log('🆕 GitBook Mod Big Update перенесён в «Проекты & инструменты»');
         console.log('🛡️ VPN бейдж добавлен на вкладку «Биография»');
+        console.log('✨ Биография теперь со свечением!');
     </script>
 
 </body>
