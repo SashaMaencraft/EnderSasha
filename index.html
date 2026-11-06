@@ -308,7 +308,7 @@
 
         .status-item i { color: #ff6b6b; font-size: clamp(0.7rem, 1.2vw, 0.8rem); }
 
-        /* ===== VPN БЕЙДЖ + ТУЛТИП ===== */
+        /* ===== VPN БЕЙДЖ + ТУЛТИП (ИСПРАВЛЕНО ДЛЯ МОБИЛЬНЫХ) ===== */
         .vpn-badge {
             display: inline-flex;
             align-items: center;
@@ -338,8 +338,9 @@
         .vpn-badge .tooltip-vpn {
             visibility: hidden;
             opacity: 0;
-            width: min(300px, 80vw);
-            background: var(--card-bg);
+            width: 300px;
+            max-width: calc(100vw - 32px);
+            background: #13161f; /* Непрозрачный фон для мобильных */
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: var(--text-primary);
@@ -349,7 +350,7 @@
             border: 1px solid rgba(0, 255, 136, 0.25);
             box-shadow: 0 8px 30px var(--shadow-color), 0 0 25px rgba(0, 255, 136, 0.12);
             position: absolute;
-            z-index: 50;
+            z-index: 999;
             bottom: calc(100% + 12px);
             left: 50%;
             transform: translateX(-50%) translateY(6px);
@@ -369,7 +370,7 @@
             left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
-            border-top-color: var(--card-bg);
+            border-top-color: #13161f;
         }
 
         .vpn-badge:hover .tooltip-vpn,
@@ -378,6 +379,22 @@
             visibility: visible;
             opacity: 1;
             transform: translateX(-50%) translateY(0);
+        }
+
+        /* На мобильных прижимаем тултип к левому краю бейджа, чтобы не вылезал */
+        @media (max-width: 768px) {
+            .vpn-badge .tooltip-vpn {
+                left: 0;
+                transform: translateX(-10%) translateY(6px);
+            }
+            .vpn-badge:hover .tooltip-vpn,
+            .vpn-badge:focus .tooltip-vpn,
+            .vpn-badge.touched .tooltip-vpn {
+                transform: translateX(-10%) translateY(0);
+            }
+            .vpn-badge .tooltip-vpn::after {
+                left: 20px;
+            }
         }
 
         .vpn-badge .tooltip-vpn .vpn-title {
@@ -391,16 +408,8 @@
         }
 
         .vpn-badge .tooltip-vpn .vpn-title i { color: #00ff88; }
-
-        .vpn-badge .tooltip-vpn .vpn-highlight {
-            color: #7dffb0;
-            font-weight: 600;
-        }
-
-        .vpn-badge .tooltip-vpn .vpn-warn {
-            color: #fbbf24;
-            font-weight: 600;
-        }
+        .vpn-badge .tooltip-vpn .vpn-highlight { color: #7dffb0; font-weight: 600; }
+        .vpn-badge .tooltip-vpn .vpn-warn { color: #fbbf24; font-weight: 600; }
 
         .vpn-badge .tooltip-vpn .vpn-hr {
             height: 1px;
@@ -423,7 +432,7 @@
 
         .vpn-badge .tooltip-vpn .vpn-status i { color: #00ff88; font-size: 0.7rem; }
 
-        /* ===== ИНОАГЕНТ БЕЙДЖ ===== */
+        /* ===== ИНОАГЕНТ БЕЙДЖ (ИСПРАВЛЕНО ДЛЯ МОБИЛЬНЫХ) ===== */
         .foreign-agent-badge {
             display: inline-flex;
             align-items: center;
@@ -445,7 +454,8 @@
             visibility: hidden;
             opacity: 0;
             width: 280px;
-            background: var(--card-bg);
+            max-width: calc(100vw - 32px);
+            background: #13161f; /* Непрозрачный фон для мобильных */
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: var(--text-primary);
@@ -455,7 +465,7 @@
             border: 1px solid var(--border-light);
             box-shadow: 0 8px 30px var(--shadow-color);
             position: absolute;
-            z-index: 10;
+            z-index: 999;
             bottom: calc(100% + 12px);
             left: 50%;
             transform: translateX(-50%) translateY(6px);
@@ -475,13 +485,29 @@
             left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
-            border-top-color: var(--card-bg);
+            border-top-color: #13161f;
         }
 
-        .foreign-agent-badge:hover .tooltip-fa {
+        .foreign-agent-badge:hover .tooltip-fa,
+        .foreign-agent-badge.touched .tooltip-fa {
             visibility: visible;
             opacity: 1;
             transform: translateX(-50%) translateY(0);
+        }
+
+        /* На мобильных прижимаем тултип к левому краю бейджа, чтобы не вылезал */
+        @media (max-width: 768px) {
+            .foreign-agent-badge .tooltip-fa {
+                left: 0;
+                transform: translateX(-10%) translateY(6px);
+            }
+            .foreign-agent-badge:hover .tooltip-fa,
+            .foreign-agent-badge.touched .tooltip-fa {
+                transform: translateX(-10%) translateY(0);
+            }
+            .foreign-agent-badge .tooltip-fa::after {
+                left: 20px;
+            }
         }
 
         .foreign-agent-badge .tooltip-fa .highlight-fa { color: #00d4ff; font-weight: 600; }
@@ -735,7 +761,8 @@
             visibility: hidden;
             opacity: 0;
             width: 260px;
-            background: var(--card-bg);
+            max-width: calc(100vw - 32px);
+            background: #13161f;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             color: var(--text-primary);
@@ -745,7 +772,7 @@
             border: 1px solid var(--border-light);
             box-shadow: 0 8px 30px var(--shadow-color);
             position: absolute;
-            z-index: 10;
+            z-index: 999;
             bottom: calc(100% + 12px);
             left: 50%;
             transform: translateX(-50%) translateY(6px);
@@ -765,13 +792,28 @@
             left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
-            border-top-color: var(--card-bg);
+            border-top-color: #13161f;
         }
 
-        .market-btn:hover .tooltip {
+        .market-btn:hover .tooltip,
+        .market-btn.touched .tooltip {
             visibility: visible;
             opacity: 1;
             transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .market-btn .tooltip {
+                left: 0;
+                transform: translateX(-10%) translateY(6px);
+            }
+            .market-btn:hover .tooltip,
+            .market-btn.touched .tooltip {
+                transform: translateX(-10%) translateY(0);
+            }
+            .market-btn .tooltip::after {
+                left: 20px;
+            }
         }
 
         .market-btn .tooltip i { color: #fbbf24; margin-right: 4px; }
@@ -2059,13 +2101,14 @@
             visibility: hidden;
             opacity: 0;
             width: 200px;
+            max-width: calc(100vw - 32px);
             background: #1e2f3f;
             color: #ecf3fa;
             text-align: center;
             border-radius: 20px;
             padding: 6px 12px;
             position: absolute;
-            z-index: 100;
+            z-index: 999;
             bottom: 160%;
             left: 50%;
             transform: translateX(-50%);
@@ -2095,10 +2138,25 @@
             filter: drop-shadow(0 1px 0 #4f7ab3);
         }
 
-        .max-container .verification-badge:hover .tooltip-text {
+        .max-container .verification-badge:hover .tooltip-text,
+        .max-container .verification-badge.touched .tooltip-text {
             visibility: visible;
             opacity: 1;
             bottom: 170%;
+        }
+
+        @media (max-width: 768px) {
+            .max-container .verification-badge .tooltip-text {
+                left: 0;
+                transform: translateX(-10%) translateY(6px);
+            }
+            .max-container .verification-badge:hover .tooltip-text,
+            .max-container .verification-badge.touched .tooltip-text {
+                transform: translateX(-10%) translateY(0);
+            }
+            .max-container .verification-badge .tooltip-text::after {
+                left: 20px;
+            }
         }
 
         .max-container .site-footer {
@@ -2532,7 +2590,7 @@
                             <span class="status-item">
                                 <i class="fas fa-heart"></i> Не женат, детей не имеет
                             </span>
-                            <span class="foreign-agent-badge">
+                            <span class="foreign-agent-badge" tabindex="0">
                                 <i class="fas fa-shield-alt"></i> Не является иноагентом
                                 <span class="tooltip-fa">
                                     <i class="fas fa-gavel fa-icon"></i> Официальное заявление в соответствии с <span class="highlight-fa">Федеральным законом от 14.07.2022 № 255-ФЗ</span> и <span class="highlight-fa">Приказом Минюста России от 01.12.2022 № 256</span>.<br><br>
@@ -2585,7 +2643,7 @@
                                     <li><i class="fas fa-gamepad"></i> Топ-50 игроков <strong>tube-based II</strong> (RU)</li>
                                 </ul>
                                 <div class="marketplace-grid">
-                                    <div class="market-btn wb">
+                                    <div class="market-btn wb" tabindex="0">
                                         <i class="fas fa-shopping-bag"></i> Wildberries
                                         <span class="badge-mp">WB</span>
                                         <span class="tooltip">
@@ -2593,7 +2651,7 @@
                                             <span class="highlight">За БПЛА на данный маркетплейс</span>
                                         </span>
                                     </div>
-                                    <div class="market-btn ozon">
+                                    <div class="market-btn ozon" tabindex="0">
                                         <i class="fas fa-box-open"></i> Ozon
                                         <span class="badge-mp">OZON</span>
                                         <span class="tooltip">
@@ -2601,7 +2659,7 @@
                                             <span class="highlight">За БПЛА на данный маркетплейс</span>
                                         </span>
                                     </div>
-                                    <div class="market-btn ym">
+                                    <div class="market-btn ym" tabindex="0">
                                         <i class="fas fa-store"></i> Яндекс Маркет
                                         <span class="badge-mp">ЯМ</span>
                                         <span class="tooltip">
@@ -2917,7 +2975,7 @@
                     <button id="policyButtonMax" class="button policy-button"><i class="fas fa-shield-alt"></i> Политика конфиденциальности и правовая информация</button>
                     <div class="footer-info"><i class="fas fa-circle-info" style="margin-right: 6px; color: #7aaae0;"></i> Для получения достоверной информации используйте только официальные каналы связи. Не доверяйте сообщениям от неизвестных источников и не предоставляйте конфиденциальные данные без верификации.</div>
                     <div class="site-footer">
-                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">© 2026 Dragonwor2000 · Все права защищены <span class="verification-badge"><i class="fas fa-check-circle"></i><span class="tooltip-text">Верифицированная страница DragonCorp</span></span></div>
+                        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 5px;">© 2026 Dragonwor2000 · Все права защищены <span class="verification-badge" tabindex="0"><i class="fas fa-check-circle"></i><span class="tooltip-text">Верифицированная страница DragonCorp</span></span></div>
                         <div class="footer-contacts"><a href="mailto:drakon.karol@yandex.ru"><i class="fas fa-envelope"></i> drakon.karol@yandex.ru</a><a href="https://t.me/HeadSupportbot" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> Юрист</a></div>
                     </div>
                     <hr>
@@ -3035,30 +3093,69 @@
         });
 
         /* ============================================================
-           3. VPN БЕЙДЖ — ТАП ДЛЯ МОБИЛЬНЫХ
+           3. ОБРАБОТКА ТУЛТИПОВ НА МОБИЛЬНЫХ (ТАП)
         ============================================================ */
         document.addEventListener('DOMContentLoaded', function() {
+            // VPN бейдж
             const vpnBadge = document.querySelector('.vpn-badge');
-            if (!vpnBadge) return;
+            if (vpnBadge) {
+                vpnBadge.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('touched');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!vpnBadge.contains(e.target)) vpnBadge.classList.remove('touched');
+                });
+            }
 
-            // Tap для мобильных: показываем тултип по тапу
-            vpnBadge.addEventListener('click', function(e) {
-                e.stopPropagation();
-                // На ПК hover уже работает, но tap тоже не помешает
-                this.classList.toggle('touched');
+            // Иноагент бейдж
+            const faBadge = document.querySelector('.foreign-agent-badge');
+            if (faBadge) {
+                faBadge.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('touched');
+                });
+                document.addEventListener('click', function(e) {
+                    if (!faBadge.contains(e.target)) faBadge.classList.remove('touched');
+                });
+            }
+
+            // Маркетплейсы
+            const marketBtns = document.querySelectorAll('.market-btn');
+            marketBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // Если это ссылка, не мешаем переходу, но для тапа на тултип
+                    if (this.querySelector('.tooltip')) {
+                        e.preventDefault(); // Предотвращаем переход при клике на тултип
+                        e.stopPropagation();
+                        this.classList.toggle('touched');
+                    }
+                });
             });
-
-            // Закрываем тултип при клике вне бейджа
             document.addEventListener('click', function(e) {
-                if (!vpnBadge.contains(e.target)) {
-                    vpnBadge.classList.remove('touched');
-                }
+                marketBtns.forEach(btn => {
+                    if (!btn.contains(e.target)) btn.classList.remove('touched');
+                });
             });
 
-            // Закрываем по Escape
+            // Верификация в MAX
+            const verBadges = document.querySelectorAll('.max-container .verification-badge');
+            verBadges.forEach(badge => {
+                badge.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    this.classList.toggle('touched');
+                });
+            });
+            document.addEventListener('click', function(e) {
+                verBadges.forEach(badge => {
+                    if (!badge.contains(e.target)) badge.classList.remove('touched');
+                });
+            });
+
+            // Глобальное закрытие по Escape
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    vpnBadge.classList.remove('touched');
+                    document.querySelectorAll('.touched').forEach(el => el.classList.remove('touched'));
                 }
             });
         });
@@ -3274,6 +3371,7 @@
         console.log('🆕 GitBook Mod Big Update перенесён в «Проекты & инструменты»');
         console.log('🛡️ VPN бейдж добавлен на вкладку «Биография»');
         console.log('✨ Биография теперь со свечением!');
+        console.log('📱 Тултипы адаптированы для мобильных экранов!');
     </script>
 
 </body>
