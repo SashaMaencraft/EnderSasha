@@ -158,9 +158,11 @@
             touch-action: manipulation;
             -webkit-touch-callout: none;
             user-select: none;
+            position: relative;
+            z-index: 1;
         }
 
-        .tab-btn i { font-size: clamp(12px, 1.8vw, 15px); }
+        .tab-btn i { font-size: clamp(12px, 1.8vw, 15px); transition: all 0.3s; }
         .tab-btn:active { transform: scale(0.95); }
 
         .tab-btn.active {
@@ -168,6 +170,57 @@
             color: #00d4ff;
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
             border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        /* ===== ОСОБЫЙ СВЕТ ДЛЯ КНОПКИ «ЛАМПОВОЕ» (ВЕРХНЯЯ ПАНЕЛЬ) ===== */
+        .tab-btn[data-tab="lampovoe"].active {
+            background: rgba(245, 215, 110, 0.08);
+            color: #f5d76e;
+            border: 1px solid rgba(245, 215, 110, 0.4);
+            box-shadow: 
+                0 0 20px rgba(245, 215, 110, 0.3),
+                inset 0 0 15px rgba(245, 215, 110, 0.1);
+            animation: lampTabPulse 3s ease-in-out infinite;
+        }
+
+        .tab-btn[data-tab="lampovoe"].active i {
+            color: #f5d76e;
+            filter: drop-shadow(0 0 8px rgba(245, 215, 110, 0.8));
+        }
+
+        .tab-btn[data-tab="lampovoe"].active::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 40px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(245, 215, 110, 0.4), 
+                rgba(255, 180, 50, 0.6), 
+                rgba(245, 215, 110, 0.4), 
+                transparent);
+            background-size: 200% 100%;
+            animation: lampBorderFlow 3s linear infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        @keyframes lampTabPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 20px rgba(245, 215, 110, 0.3),
+                    inset 0 0 15px rgba(245, 215, 110, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 35px rgba(245, 215, 110, 0.5),
+                    inset 0 0 25px rgba(245, 215, 110, 0.2);
+            }
+        }
+
+        @keyframes lampBorderFlow {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         .bottom-nav {
@@ -207,11 +260,59 @@
             transition: all 0.3s;
             touch-action: manipulation;
             flex: 1;
+            position: relative;
+            z-index: 1;
         }
 
-        .bottom-nav .nav-item i { font-size: clamp(18px, 3vw, 22px); }
+        .bottom-nav .nav-item i { font-size: clamp(18px, 3vw, 22px); transition: all 0.3s; }
         .bottom-nav .nav-item.active { color: #00d4ff; background: var(--tab-active); }
         .bottom-nav .nav-item:active { transform: scale(0.9); }
+
+        /* ===== ОСОБЫЙ СВЕТ ДЛЯ КНОПКИ «ЛАМПОВОЕ» (НИЖНЯЯ ПАНЕЛЬ НАВИГАЦИИ) ===== */
+        .bottom-nav .nav-item[data-tab="lampovoe"].active {
+            color: #f5d76e;
+            background: rgba(245, 215, 110, 0.08);
+            border: 1px solid rgba(245, 215, 110, 0.4);
+            box-shadow: 
+                0 0 20px rgba(245, 215, 110, 0.3),
+                inset 0 0 15px rgba(245, 215, 110, 0.1);
+            animation: lampBottomPulse 3s ease-in-out infinite;
+        }
+
+        .bottom-nav .nav-item[data-tab="lampovoe"].active i {
+            color: #f5d76e;
+            filter: drop-shadow(0 0 8px rgba(245, 215, 110, 0.8));
+        }
+
+        .bottom-nav .nav-item[data-tab="lampovoe"].active::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(245, 215, 110, 0.4), 
+                rgba(255, 180, 50, 0.6), 
+                rgba(245, 215, 110, 0.4), 
+                transparent);
+            background-size: 200% 100%;
+            animation: lampBorderFlow 3s linear infinite;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        @keyframes lampBottomPulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 20px rgba(245, 215, 110, 0.3),
+                    inset 0 0 15px rgba(245, 215, 110, 0.1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 35px rgba(245, 215, 110, 0.5),
+                    inset 0 0 25px rgba(245, 215, 110, 0.2);
+            }
+        }
 
         @media (max-width: 768px) {
             .bottom-nav { display: flex; }
@@ -3547,7 +3648,418 @@
                     <div style="text-align: center; opacity: 0.5; font-size: clamp(0.7rem, 1.2vw, 0.9rem); letter-spacing: 1px;">㊙ ⸸קąﾓﾓ๏รッ ⸸👑 · <i class="fas fa-skull"></i> · Меня нет МАКСЕ</div>
                 </div>
             </div>
+
+            <!-- ===================== ВКЛАДКА 5: ЛАМПОВОЕ ===================== -->
+            <div class="tab-content" id="tab-lampovoe" role="tabpanel">
+                <div class="lamp-container">
+                    <canvas id="lampParticlesCanvas" class="lamp-particles-canvas"></canvas>
+
+                    <div class="lamp-hero">
+                        <h1>ЛАМПОВОЕ</h1>
+                        <p>Уютный Minecraft сервер с ламповой атмосферой, дружным комьюнити и интересными режимами</p>
+
+                        <div class="lamp-ip-box" onclick="copyLampIP()">
+                            <div class="lamp-label">Нажми, чтобы скопировать IP</div>
+                            <div class="lamp-ip" id="lampServerIP">tube-based.mc-join.me</div>
+                        </div>
+                    </div>
+
+                    <div class="lamp-section-title">📎 ССЫЛКИ · СОЦСЕТИ · САЙТ</div>
+                    <div class="lamp-links-grid">
+                        <a href="https://t.me/orange_maple_cartel" class="lamp-link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="lamp-link-icon"><i class="fab fa-telegram-plane"></i></div>
+                            <div class="lamp-link-text">
+                                <span class="lamp-link-title">Telegram-канал</span>
+                                <span class="lamp-link-sub">@orange_maple_cartel</span>
+                            </div>
+                        </a>
+
+                        <a href="https://t.me/HeadSupportbot" class="lamp-link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="lamp-link-icon"><i class="fas fa-robot"></i></div>
+                            <div class="lamp-link-text">
+                                <span class="lamp-link-title">Узел · Telegram-бот</span>
+                                <span class="lamp-link-sub">@HeadSupportbot</span>
+                            </div>
+                        </a>
+
+                        <a href="https://sashamaencraft.github.io/Orange-maple/" class="lamp-link-card" target="_blank" rel="noopener noreferrer">
+                            <div class="lamp-link-icon"><i class="fas fa-globe"></i></div>
+                            <div class="lamp-link-text">
+                                <span class="lamp-link-title">Веб-сайт</span>
+                                <span class="lamp-link-sub">Orange-maple</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="lamp-about" class="lamp-section-title">О СЕРВЕРЕ</div>
+                    <div class="lamp-cards">
+                        <div class="lamp-card">
+                            <div class="lamp-icon">⚡</div>
+                            <h3>Без лагов</h3>
+                            <p>Мощное железо и оптимизация обеспечивают стабильные 20 TPS в любое время суток</p>
+                        </div>
+                        <div class="lamp-card">
+                            <div class="lamp-icon">🎮</div>
+                            <h3>Режим игры</h3>
+                            <p>Классическое выживание с друзьями — строй, исследуй и развивайся вместе с комьюнити</p>
+                        </div>
+                        <div class="lamp-card">
+                            <div class="lamp-icon">🛡️</div>
+                            <h3>Защита</h3>
+                            <p>Приваты территорий, античит и активная администрация защитят ваши постройки</p>
+                        </div>
+                        <div class="lamp-card">
+                            <div class="lamp-icon">💬</div>
+                            <h3>Комьюнити</h3>
+                            <p>Дружное сообщество игроков, Discord с голосовыми каналами и ивенты каждую неделю</p>
+                        </div>
+                    </div>
+
+                    <div class="lamp-stats">
+                        <div class="lamp-stat">
+                            <div class="lamp-number" data-lamp-target="24">0</div>
+                            <div class="lamp-label">Часа онлайн</div>
+                        </div>
+                        <div class="lamp-stat">
+                            <div class="lamp-number" data-lamp-target="99">0</div>
+                            <div class="lamp-label">% Аптайм</div>
+                        </div>
+                    </div>
+
+                    <div class="lamp-section-title">АДМИНИСТРАЦИЯ</div>
+                    <div class="lamp-admin-cards">
+                        <div class="lamp-admin-card">
+                            <div class="lamp-admin-avatar">👑</div>
+                            <div class="lamp-admin-role">Владелец</div>
+                            <div class="lamp-admin-nick">Dragon_Mira0</div>
+                            <p class="lamp-admin-desc">
+                                Основатель и владелец сервера "Ламповое". Следит за развитием проекта,
+                                общается с игроками и создаёт уютную атмосферу на сервере.
+                                Всегда готов помочь и выслушать предложения комьюнити ✨
+                            </p>
+                        </div>
+                    </div>
+
+                    <div id="lamp-donate" class="lamp-section-title">ДОНАТ ПРИВИЛЕГИЯ</div>
+                    <div class="lamp-donate-cards">
+                        <div class="lamp-donate-card">
+                            <div class="lamp-rank">💎 VIP</div>
+                            <div class="lamp-price">299 <span>₽</span></div>
+                            <ul>
+                                <li>10 точек /home</li>
+                                <li>Команда /fly</li>
+                                <li>Доступ к /ec</li>
+                            </ul>
+                            <button class="lamp-btn lamp-btn-primary" onclick="showLampComingSoon()">Купить</button>
+                        </div>
+                    </div>
+
+                    <div class="lamp-footer-note">
+                        ✨ ЛАМПОВОЕ · Лучший Minecraft сервер с ламповой атмосферой<br>
+                        <a href="https://t.me/orange_maple_cartel" target="_blank" rel="noopener noreferrer" style="color:#f5d76e;text-decoration:none;margin-top:0.4rem;display:inline-block;">Telegram</a>
+                        ·
+                        <a href="https://sashamaencraft.github.io/Orange-maple/" target="_blank" rel="noopener noreferrer" style="color:#f5d76e;text-decoration:none;margin-top:0.4rem;display:inline-block;">Сайт</a><br>
+                        © 2026 Ламповое. Все права защищены. <i class="fas fa-check-circle verified-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="bottom-nav" id="bottomNav">
+        <button class="nav-item active" data-tab="bio" aria-label="Биография"><i class="fas fa-user-astronaut"></i><span>Био</span></button>
+        <button class="nav-item" data-tab="donate" aria-label="Донаты"><i class="fas fa-heart"></i><span>Донаты</span></button>
+        <button class="nav-item" data-tab="ifo" aria-label="ifo"><i class="fas fa-globe"></i><span>ifo</span></button>
+        <button class="nav-item" data-tab="max" aria-label="MAX"><i class="fas fa-user-secret"></i><span>MAX</span></button>
+        <button class="nav-item" data-tab="lampovoe" aria-label="Ламповое"><i class="fas fa-fire"></i><span>Ламповое</span></button>
+    </nav>
+
+    <div class="policy-modal" id="privacyModal"><div class="policy-content"><div class="policy-header"><h3>📄 Политика данных</h3><button class="close-policy" onclick="closePolicy('privacy')">&times;</button></div><div class="policy-body"><p>Настоящая Политика конфиденциальности регулирует сбор, использование и защиту персональных данных.</p><p><strong>1. Какие данные собираем:</strong> Мы не собираем и не храним данные ваших банковских карт. Все платежи обрабатываются напрямую платёжными сервисами.</p><p><strong>2. Использование данных:</strong> Ваш email может использоваться только для отправки уведомлений о поддержке.</p><p><strong>3. Файлы cookie:</strong> Сайт использует только технические cookie для работы.</p><p><strong>4. Согласие:</strong> Продолжая использование сайта, вы соглашаетесь с данной политикой.</p><p>Последнее обновление: 01.03.2026</p></div></div></div>
+
+    <div class="policy-modal" id="termsModal"><div class="policy-content"><div class="policy-header"><h3>⚖️ Пользовательское соглашение</h3><button class="close-policy" onclick="closePolicy('terms')">&times;</button></div><div class="policy-body"><p><strong>1. Общие положения:</strong> Используя сервис, вы подтверждаете, что ознакомлены и согласны с условиями настоящего соглашения.</p><p><strong>2. Платёжные операции:</strong> Все финансовые транзакции осуществляются через сторонние платёжные сервисы.</p><p><strong>3. Возврат средств:</strong> Вопросы возврата регулируются правилами выбранной вами платформы.</p><p><strong>4. Контент:</strong> Использование материалов сайта возможно только с письменного разрешения правообладателя.</p><p><strong>5. Возрастные ограничения:</strong> Сервис предназначен для лиц старше 18 лет.</p><p>© ИП Александр.К.К, 2026</p></div></div></div>
+
+    <div id="ifoInfoModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3 id="ifoModalTitle">ℹ️ Информация</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body" id="ifoModalBody">Содержимое</div></div></div>
+    <div id="ifoSearchModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3 id="ifoSearchTitle">🔍 Результаты поиска</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body" id="ifoSearchResults"></div></div></div>
+    <div id="ifoPrivacyModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3>📋 данные</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body"><p style="margin-top: 1rem;">Сбор персональных данных осуществляется в соответствии с 152-ФЗ. Мы не передаём информацию третьим лицам.</p></div></div></div>
+    <div id="ifoTermsModal" class="policy-modal"><div class="policy-content"><div class="policy-header"><h3>⚖️ соглашение</h3><button class="close-policy" onclick="closeIfoModal()">&times;</button></div><div class="policy-body"><p style="margin-top: 1rem;">Используя портал, вы принимаете условия пользовательского соглашения. Запрещено копирование материалов без указания авторства.</p></div></div></div>
+
+    <div id="policyModalMax" class="policy-modal" style="display:none;"><div class="policy-content"><div class="policy-header"><h3><i class="fas fa-shield-alt" style="margin-right: 8px;"></i> Политика конфиденциальности</h3><button class="close-policy" onclick="closeMaxModal('policyModalMax')">&times;</button></div><div class="policy-body"><h4>1. Официальное заявление о статусе в MAX</h4><p>Наша организация НЕ ИМЕЕТ аккаунтов в мессенджере MAX.</p><h4>2. Отказ от ответственности</h4><p>Мы не несём ответственности за действия третьих лиц.</p></div></div></div>
+
+    <div id="copyrightModalMax" class="policy-modal" style="display:none;"><div class="policy-content"><div class="policy-header"><h3><i class="fas fa-copyright" style="margin-right: 8px;"></i> Связаться с правообладателем</h3><button class="close-policy" onclick="closeMaxModal('copyrightModalMax')">&times;</button></div><div class="policy-body"><h4>Контакты</h4><p><strong>Email:</strong> <a href="mailto:drakon.karol@yandex.ru">drakon.karol@yandex.ru</a></p><p><strong>Telegram:</strong> <a href="https://t.me/HeadSupportbot" target="_blank" rel="noopener noreferrer">@HeadSupportbot</a></p></div></div></div>
+
+    <div class="lamp-modal-overlay" id="lampComingSoonModal">
+        <div class="lamp-modal">
+            <div class="lamp-modal-content">
+                <div class="lamp-modal-icon">🚧</div>
+                <h2>В РАЗРАБОТКЕ</h2>
+                <p>Извините, но данная <span class="lamp-highlight">функция</span> находится в разработке</p>
+                <p style="font-size: 0.85rem; color: #8899bb;">Совсем скоро вы сможете приобрести VIP статус 💎</p>
+                <button class="lamp-close-btn" onclick="closeLampComingSoon()">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="lamp-copy-toast" id="lampToast">IP скопирован! ✓</div>
+
     <script>
+        /* ============================================================
+           1. ГЛОБАЛЬНЫЕ ЧАСТИЦЫ ФОНА
+        ============================================================ */
+        (function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w, h;
+
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+
+            const count = Math.min(60, Math.floor(window.innerWidth / 20));
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * w,
+                    y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
+                    r: Math.random() * 2 + 1,
+                    color: `hsla(${190 + Math.random() * 40}, 80%, 60%, ${0.3 + Math.random() * 0.4})`
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.fill();
+                    particles.forEach(p2 => {
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(0, 212, 255, ${0.05 * (1 - dist / 120)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    });
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        /* ============================================================
+           2. ЗОЛОТЫЕ ЧАСТИЦЫ ДЛЯ БЛОКА «ЛАМПОВОЕ»
+        ============================================================ */
+        (function initLampParticles() {
+            const canvas = document.getElementById('lampParticlesCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let w = 0, h = 0;
+
+            function resize() {
+                const parent = canvas.parentElement;
+                if (!parent) return;
+                w = canvas.width = parent.offsetWidth;
+                h = canvas.height = parent.offsetHeight;
+            }
+            window.addEventListener('resize', resize);
+            if (window.ResizeObserver) new ResizeObserver(resize).observe(canvas.parentElement);
+            setTimeout(resize, 100);
+            resize();
+
+            const count = 40;
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: Math.random() * (w || 800),
+                    y: Math.random() * (h || 600),
+                    vx: (Math.random() - 0.5) * 0.2,
+                    vy: (Math.random() - 0.5) * 0.2 - 0.1,
+                    r: Math.random() * 2.5 + 1,
+                    alpha: Math.random() * 0.6 + 0.3,
+                    pulse: Math.random() * Math.PI * 2
+                });
+            }
+
+            function draw() {
+                if (!canvas.parentElement || canvas.parentElement.offsetParent === null) {
+                    requestAnimationFrame(draw);
+                    return;
+                }
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.pulse += 0.02;
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+                    const glow = 0.5 + 0.5 * Math.sin(p.pulse);
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r * (0.8 + 0.4 * glow), 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(245, 215, 110, ${p.alpha * (0.5 + 0.5 * glow)})`;
+                    ctx.shadowColor = 'rgba(245, 215, 110, 0.8)';
+                    ctx.shadowBlur = 12;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                });
+                requestAnimationFrame(draw);
+            }
+            draw();
+        })();
+
+        /* ============================================================
+           3. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+        ============================================================ */
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.tab === tabId);
+                b.setAttribute('aria-selected', b.dataset.tab === tabId ? 'true' : 'false');
+            });
+            document.querySelectorAll('.tab-content').forEach(tc => {
+                tc.classList.toggle('active', tc.id === 'tab-' + tabId);
+            });
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(b => {
+                b.classList.toggle('active', b.dataset.tab === tabId);
+            });
+            if (tabId === 'lampovoe') {
+                setTimeout(() => {
+                    const canvas = document.getElementById('lampParticlesCanvas');
+                    if (canvas && canvas.parentElement) {
+                        canvas.width = canvas.parentElement.offsetWidth;
+                        canvas.height = canvas.parentElement.offsetHeight;
+                    }
+                    animateLampNumbers();
+                }, 100);
+            }
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() { switchTab(this.dataset.tab); });
+        });
+
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(btn => {
+            btn.addEventListener('click', function() { switchTab(this.dataset.tab); });
+        });
+
+        /* ============================================================
+           4. ЛАМПОВОЕ — КОПИРОВАНИЕ IP
+        ============================================================ */
+        function copyLampIP() {
+            const ipEl = document.getElementById('lampServerIP');
+            if (!ipEl) return;
+            const ip = ipEl.innerText.trim();
+
+            const showToast = () => {
+                const toast = document.getElementById('lampToast');
+                if (!toast) return;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(ip).then(showToast).catch(() => {
+                    fallbackCopy(ip); showToast();
+                });
+            } else {
+                fallbackCopy(ip); showToast();
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(textarea);
+        }
+
+        /* ============================================================
+           5. ЛАМПОВОЕ — МОДАЛКА «В РАЗРАБОТКЕ»
+        ============================================================ */
+        function showLampComingSoon() {
+            const modal = document.getElementById('lampComingSoonModal');
+            if (!modal) return;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLampComingSoon() {
+            const modal = document.getElementById('lampComingSoonModal');
+            if (!modal) return;
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const lampModal = document.getElementById('lampComingSoonModal');
+            if (lampModal) {
+                lampModal.addEventListener('click', function(e) {
+                    if (e.target === this) closeLampComingSoon();
+                });
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLampComingSoon();
+            });
+        });
+
+        /* ============================================================
+           6. ЛАМПОВОЕ — АНИМАЦИЯ ЦИФР
+        ============================================================ */
+        function animateLampNumbers() {
+            document.querySelectorAll('.lamp-number[data-lamp-target]').forEach(num => {
+                if (num.dataset.animated === 'true') return;
+                num.dataset.animated = 'true';
+                const target = parseInt(num.dataset.lampTarget);
+                let current = 0;
+                const increment = target / 60;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    num.innerText = Math.floor(current) + (target === 99 ? '%' : '');
+                }, 25);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const stats = document.querySelector('.lamp-stats');
+            if (stats && window.IntersectionObserver) {
+                const observer = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateLampNumbers();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.4 });
+                observer.observe(stats);
+            }
+        });
+
         /* ============================================================
            7. VPN БЕЙДЖ — ТАП ДЛЯ МОБИЛЬНЫХ
         ============================================================ */
@@ -3789,6 +4301,7 @@
         console.log('🆕 GitBook Mod Big Update перенесён в «Проекты & инструменты»');
         console.log('🛡️ VPN бейдж добавлен на вкладку «Биография»');
         console.log('✨ Биография теперь со свечением!');
+        console.log('🔥 Кнопка «Ламповое» (верхняя и нижняя) теперь светится как лампа!');
     </script>
 
 </body>
